@@ -12,20 +12,26 @@ import RxRelay
 class SearchViewModel {
     
     private var disposeBag = DisposeBag()
-    var searchText = BehaviorRelay<String>(value: "")
-    var searchRequestAPI = PublishSubject<String>()
+    let searchText = BehaviorRelay<String>(value: "")
+    let requestKeyword = PublishSubject<String>()
     
     let observableEmitter = PublishSubject<Observable<Int>>()
     
     private var response: Observable<SYResponse>?
-    let recentResearhTerms = SYCoreDataManager.shared.loadData(request: RecentSearchEntity.fetchRequest())
+    lazy var recentSearchHistory: Observable<[RecentSearchEntity]> = {
+        return Observable.create { emitter in
+            let items = SYCoreDataManager.shared.loadData(request: RecentSearchEntity.fetchRequest())
+            emitter.onNext(items)
+            return Disposables.create()
+        }
+        
+    }()
     
     init() {
         bindings()
     }
     
     private func bindings() {
-        
         searchText
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { keyword in
@@ -33,7 +39,7 @@ class SearchViewModel {
 
             }).disposed(by: disposeBag)
         
-        searchRequestAPI
+        requestKeyword
             .asObservable()
             .do(onNext: { searchTextValue in
                 SYCoreDataManager.shared.save(searchTextValue)
