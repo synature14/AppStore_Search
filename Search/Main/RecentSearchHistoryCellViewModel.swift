@@ -20,14 +20,13 @@ class RecentSearchHistoryCellViewModel {
     
     private func bindings() {
         deleteHistorySubject
-            .asObservable()
-            .map { word in
-                return SYCoreDataManager.shared.delete(word ?? "",
-                                                       request: RecentSearchEntity.fetchRequest())
+            .flatMapLatest { word in
+                SYCoreDataManager.shared.delete(word,
+                                                request: RecentSearchEntity.fetchRequest())
             }
-            .subscribe(onNext: {
+            .subscribe(onNext: { _ in
                 // tableView deleteRow
-                
+                print("Delete Success! --> tableView Row should be removed")
             }, onError: { error in
                 print("[error] \(error.localizedDescription)")
             })
