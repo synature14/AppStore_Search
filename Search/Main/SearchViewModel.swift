@@ -15,17 +15,9 @@ class SearchViewModel {
     let searchText = BehaviorRelay<String>(value: "")
     let requestKeyword = PublishSubject<String>()
     
-    let observableEmitter = PublishSubject<Observable<Int>>()
+//    let observableEmitter = PublishSubject<Observable<Int>>()
     
     private var response: Observable<SYResponse>?
-    lazy var recentSearchHistory: Observable<[RecentSearchEntity]> = {
-        return Observable.create { emitter in
-            let items = SYCoreDataManager.shared.loadData(request: RecentSearchEntity.fetchRequest())
-            emitter.onNext(items)
-            return Disposables.create()
-        }
-        
-    }()
     
     init() {
         bindings()
@@ -50,4 +42,12 @@ class SearchViewModel {
             }).disposed(by: disposeBag)
     }
     
+    func recentSearchHistory() -> Observable<[RecentSearchEntity]> {
+        return Observable.create { emitter in
+            let items = SYCoreDataManager.shared.loadData(request: RecentSearchEntity.fetchRequest())
+            print("=== recentSearchHistory emit====")
+            emitter.onNext(items)
+            return Disposables.create()
+        }
+    }
 }

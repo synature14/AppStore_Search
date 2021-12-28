@@ -11,3 +11,9 @@ enum SYError: Error {
     case invalidURL(String)
     case serverError
 }
+
+enum SYCoreDataError: Error {
+    case invalidContext
+    case fetchFail
+    case commonError(String)
+}

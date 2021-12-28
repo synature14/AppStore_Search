@@ -61,9 +61,9 @@ private extension MainViewController {
             .disposed(by: disposeBag)
         
         tableView.register(UINib(nibName: RecentSearchHistoryCell.name, bundle: nil),
-                                       forCellReuseIdentifier: RecentSearchHistoryCell.name)
+                           forCellReuseIdentifier: RecentSearchHistoryCell.name)
         
-        searchVM.recentSearchHistory
+        searchVM.recentSearchHistory()
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items) { (tableView, indexPathRow, recentSearchEntity) in
                 let indexPath = IndexPath(item: indexPathRow, section: 0)

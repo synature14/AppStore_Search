@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreData
+import RxSwift
 
 protocol InAppDataHandler {
     func save(_ word: String)
@@ -64,24 +65,30 @@ class SYCoreDataManager: InAppDataHandler {
 
     
     // 삭제
-    func delete<T: NSManagedObject>(_ word: String, request: NSFetchRequest<T>) -> Bool {
-        guard let context = self.context else {
-            return false
-        }
-        
-        do {
-            let targetObject = try context.fetch(request)
-            if targetObject.isEmpty {
-                return false
+    func delete<T: NSManagedObject>(_ word: String, request: NSFetchRequest<T>) -> Observable<Any> {
+        return Observable.create { emitter in
+            guard let context = self.context else {
+                emitter.onError(SYCoreDataError.invalidContext)
+                return Disposables.create()
             }
             
-            context.delete(targetObject.first!)
-            try context.save()
-            return true
+            do {
+                let targetObject = try context.fetch(request)
+                if targetObject.isEmpty {
+                    emitter.onError(SYCoreDataError.fetchFail)
+                }
+                
+                context.delete(targetObject.first!)
+                try context.save()
+                emitter.onNext(())
+                emitter.onCompleted()
+                
+            } catch {
+                print(error.localizedDescription)
+                emitter.onError(SYCoreDataError.commonError(error.localizedDescription))
+            }
             
-        } catch {
-            print(error.localizedDescription)
-            return false
+            return Disposables.create()
         }
     }
 }
