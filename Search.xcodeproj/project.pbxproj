@@ -27,6 +27,8 @@
 		98949DAC277C87F200C29734 /* NoResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DAA277C87F200C29734 /* NoResultsCell.xib */; };
 		98949DAF277C8C2900C29734 /* SearchingResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DAD277C8C2900C29734 /* SearchingResultCell.swift */; };
 		98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DAE277C8C2900C29734 /* SearchingResultCell.xib */; };
+		98949DB3277C935700C29734 /* ResultInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DB1277C935700C29734 /* ResultInfoCell.swift */; };
+		98949DB4277C935700C29734 /* ResultInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DB2277C935700C29734 /* ResultInfoCell.xib */; };
 		9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */; };
 		9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */; };
 		FF080207192534A34A370806 /* Pods_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */; };
@@ -57,6 +59,8 @@
 		98949DAA277C87F200C29734 /* NoResultsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoResultsCell.xib; sourceTree = "<group>"; };
 		98949DAD277C8C2900C29734 /* SearchingResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResultCell.swift; sourceTree = "<group>"; };
 		98949DAE277C8C2900C29734 /* SearchingResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchingResultCell.xib; sourceTree = "<group>"; };
+		98949DB1277C935700C29734 /* ResultInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInfoCell.swift; sourceTree = "<group>"; };
+		98949DB2277C935700C29734 /* ResultInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultInfoCell.xib; sourceTree = "<group>"; };
 		9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHistoryCell.swift; sourceTree = "<group>"; };
 		9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchHistoryCell.xib; sourceTree = "<group>"; };
 		EC1B6C6D0A28ECCE31A39B3F /* Pods-Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.release.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				98949DAA277C87F200C29734 /* NoResultsCell.xib */,
 				98949DAD277C8C2900C29734 /* SearchingResultCell.swift */,
 				98949DAE277C8C2900C29734 /* SearchingResultCell.xib */,
+				98949DB1277C935700C29734 /* ResultInfoCell.swift */,
+				98949DB2277C935700C29734 /* ResultInfoCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98949DB4277C935700C29734 /* ResultInfoCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
 				98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */,
 				9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */,
@@ -298,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */,
+				98949DB3277C935700C29734 /* ResultInfoCell.swift in Sources */,
 				982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */,
 				37F4AD56277AEA7000941E21 /* SearchResult.swift in Sources */,
 				37F4AD52277AE2DD00941E21 /* NetworkManager.swift in Sources */,

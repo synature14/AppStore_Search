@@ -53,8 +53,6 @@ private extension MainViewController {
                 self?.searchVM.requestKeyword.onNext(text)
             })
             .disposed(by: disposeBag)
-        
-        
     }
     
     func setTableView() {
@@ -68,6 +66,8 @@ private extension MainViewController {
                            forCellReuseIdentifier: SearchingResultCell.name)
         tableView.register(UINib(nibName: NoResultsCell.name, bundle: nil),
                            forCellReuseIdentifier: NoResultsCell.name)
+        tableView.register(UINib(nibName: ResultInfoCell.name, bundle: nil),
+                           forCellReuseIdentifier: ResultInfoCell.name)
         
         searchVM.updatedCellVMs
             .observeOn(MainScheduler.instance)
