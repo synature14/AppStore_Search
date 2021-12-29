@@ -9,8 +9,6 @@ import Foundation
 import RxSwift
 import RxRelay
 
-
-
 class SearchViewModel {
     enum SearchFilter {
         case all
@@ -20,7 +18,7 @@ class SearchViewModel {
     private var disposeBag = DisposeBag()
     let searchText = BehaviorRelay<String>(value: "")
     let requestKeyword = PublishSubject<String>()
-    var updatedCellVMs = PublishSubject<[SearchHistoryCellType]>()
+    var updatedCellVMs = BehaviorRelay<[SearchHistoryCellType]>(value: [])     // tableView reload 시키는 주체
 
     private var response: Observable<SYResponse>?
     
@@ -32,25 +30,30 @@ class SearchViewModel {
         // 검토!
         searchText
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { text in
+            .subscribe(onNext: { [weak self] text in
                 print("#####  searchText - \(text)  ####")
                 // [RecentSearchCellViewModel] 갱신해서 tableView.reload해야함
-                self.recentSearchHistory(.keyword(text))
+                self?.searchHistory(.keyword(text))
             })
             .disposed(by: disposeBag)
                 
         requestKeyword
-            .asObservable()
             .do(onNext: { searchTextValue in
                 SYCoreDataManager.shared.save(searchTextValue)
             })
             .flatMapLatest { NetworkManager.request(search: $0) }   // emit될 Observable 여러개일 수 있음. 이전에 만든 observable은 무시하고 가장 최근의 Observable을 따름
-            .subscribe(onNext: { result in
-                print("[resultCount] = \(result.resultCount)")
+            .map { $0.results }
+            .subscribe(onNext: { [weak self] results in
+                let cellTypeArr  = results
+                    .map { ResultCellViewModel($0) }
+                    .map { SearchHistoryCellType.resultInfoCell($0) }
+                self?.updatedCellVMs.accept(cellTypeArr)
             }).disposed(by: disposeBag)
+            
     }
     
-    func recentSearchHistory(_ filter: SearchFilter) {
+    // Core Data에 저장된 기록 조회
+    func searchHistory(_ filter: SearchFilter) {
         switch filter {
         case .all:
             let cellVMs = SYCoreDataManager.shared
@@ -59,7 +62,7 @@ class SearchViewModel {
                 .map { SearchHistoryCellType.allResultsCell($0) }
             print("=== recentSearchHistory emit====")
             
-            updatedCellVMs.onNext(cellVMs)
+            updatedCellVMs.accept(cellVMs)
             
         case .keyword(let word):
             let cellVMs = SYCoreDataManager.shared
@@ -68,7 +71,7 @@ class SearchViewModel {
                 .map { SearchHistoryCellType.searchResultsCell($0) }
             print("==== keyword: \(word) searched =====")
             
-            cellVMs.count > 0 ? updatedCellVMs.onNext(cellVMs) : updatedCellVMs.onNext([.noResultsCell])
+            cellVMs.count > 0 ? updatedCellVMs.accept(cellVMs) : updatedCellVMs.accept([.noResultsCell])
         }
     }
 }

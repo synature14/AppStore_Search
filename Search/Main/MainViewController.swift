@@ -11,8 +11,8 @@ import RxCocoa
 
 class MainViewController: UIViewController {
     let searchController = UISearchController()
-    private let searchVM = SearchViewModel()
     
+    private let searchVM = SearchViewModel()
     private var disposeBag = DisposeBag()
     
  
@@ -68,6 +68,12 @@ private extension MainViewController {
                            forCellReuseIdentifier: NoResultsCell.name)
         tableView.register(UINib(nibName: ResultInfoCell.name, bundle: nil),
                            forCellReuseIdentifier: ResultInfoCell.name)
+       
+        tableView.rx.itemSelected
+            .subscribe(onNext: { indexPath in
+                print("\(indexPath.item) is Selected...!")
+            })
+            .disposed(by: disposeBag)
         
         searchVM.updatedCellVMs
             .observeOn(MainScheduler.instance)
@@ -87,6 +93,12 @@ private extension MainViewController {
                         return cell
                     }
                     
+                case .resultInfoCell(let cellVM):
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: ResultInfoCell.name, for: indexPath) as? ResultInfoCell {
+                        cell.setData(cellVM)
+                        return cell
+                    }
+                    
                 case .noResultsCell:
                     if let cell = tableView.dequeueReusableCell(withIdentifier: NoResultsCell.name, for: indexPath) as? NoResultsCell {
                         return cell
@@ -97,17 +109,13 @@ private extension MainViewController {
             }
             .disposed(by: disposeBag)
         
-        searchVM.recentSearchHistory(.all)
+        searchVM.searchHistory(.all)
     }
 }
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("[selected] \(indexPath.row)")
+        return searchVM.updatedCellVMs.value[indexPath.row].cellHeight
     }
 }
 
