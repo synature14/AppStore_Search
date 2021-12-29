@@ -53,6 +53,8 @@ private extension MainViewController {
                 self?.searchVM.requestKeyword.onNext(text)
             })
             .disposed(by: disposeBag)
+        
+        
     }
     
     func setTableView() {
@@ -62,23 +64,41 @@ private extension MainViewController {
         
         tableView.register(UINib(nibName: RecentSearchHistoryCell.name, bundle: nil),
                            forCellReuseIdentifier: RecentSearchHistoryCell.name)
+        tableView.register(UINib(nibName: SearchingResultCell.name, bundle: nil),
+                           forCellReuseIdentifier: SearchingResultCell.name)
+        tableView.register(UINib(nibName: NoResultsCell.name, bundle: nil),
+                           forCellReuseIdentifier: NoResultsCell.name)
         
-        searchVM.recentSearchHistory()
+        searchVM.updatedCellVMs
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items) { (tableView, indexPathRow, recentSearchEntity) in
+            .bind(to: tableView.rx.items) { (tableView, indexPathRow, cellType) in
                 let indexPath = IndexPath(item: indexPathRow, section: 0)
                 
-                if let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchHistoryCell.name, for: indexPath) as? RecentSearchHistoryCell {
-                    cell.setLabel(recentSearchEntity.word ?? "")
-                    return cell
+                switch cellType {
+                case .allResultsCell(let cellVM):
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchHistoryCell.name, for: indexPath) as? RecentSearchHistoryCell {
+                        cell.setData(cellVM)
+                        return cell
+                    }
+                    
+                case .searchResultsCell(let cellVM):
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: SearchingResultCell.name, for: indexPath) as? SearchingResultCell {
+                        cell.setData(cellVM)
+                        return cell
+                    }
+                    
+                case .noResultsCell:
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: NoResultsCell.name, for: indexPath) as? NoResultsCell {
+                        return cell
+                    }
                 }
                 
                 return UITableViewCell()
             }
             .disposed(by: disposeBag)
-            
+        
+        searchVM.recentSearchHistory(.all)
     }
-    
 }
 
 extension MainViewController: UITableViewDelegate {

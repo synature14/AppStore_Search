@@ -52,7 +52,7 @@ struct SearchResult: Decodable {
     let averageUserRating: Double        // 소수점 둘째자리에서 반올림
     
     enum CodingKeys: String, CodingKey {
-        case iconImage = "artworkUrl60"
+        case iconImage = "artworkUrl100"
         case screenshotUrls, ipadScreenshotUrls
         case trackName
         case version, releaseNotes, description

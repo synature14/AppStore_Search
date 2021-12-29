@@ -15,7 +15,7 @@ class RecentSearchHistoryCell: UITableViewCell {
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     
-    private let cellVM = RecentSearchHistoryCellViewModel()
+    private var cellVM: RecentSearchHistoryCellViewModel?
     private var disposeBag = DisposeBag()
     
     deinit {
@@ -31,24 +31,20 @@ class RecentSearchHistoryCell: UITableViewCell {
         wordLabel.text = ""
     }
     
-    func setLabel(_ word: String) {
-        wordLabel.text = word
+    func setData(_ vm: RecentSearchHistoryCellViewModel) {
+        self.cellVM = vm
+        wordLabel.text = vm.item.word
         setBindings()
     }
     
-    func setBindings() {
+    private func setBindings() {
         deleteButton.rx.tap
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 let word = self.wordLabel.text ?? ""
-                self.cellVM.deleteHistorySubject.onNext(word)
+                self.cellVM?.deleteHistorySubject.onNext(word)
             })
             .disposed(by: disposeBag)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
 }

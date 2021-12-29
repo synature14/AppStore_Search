@@ -22,6 +22,11 @@
 		37F4AD54277AE7CB00941E21 /* SYError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F4AD53277AE7CA00941E21 /* SYError.swift */; };
 		37F4AD56277AEA7000941E21 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F4AD55277AEA7000941E21 /* SearchResult.swift */; };
 		982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982525D2277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift */; };
+		98949DA7277C6B9200C29734 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DA6277C6B9200C29734 /* Common.swift */; };
+		98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DA9277C87F200C29734 /* NoResultsCell.swift */; };
+		98949DAC277C87F200C29734 /* NoResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DAA277C87F200C29734 /* NoResultsCell.xib */; };
+		98949DAF277C8C2900C29734 /* SearchingResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DAD277C8C2900C29734 /* SearchingResultCell.swift */; };
+		98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DAE277C8C2900C29734 /* SearchingResultCell.xib */; };
 		9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */; };
 		9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */; };
 		FF080207192534A34A370806 /* Pods_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */; };
@@ -47,6 +52,11 @@
 		676E5203FF58DC7D432EE436 /* Pods-Search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.debug.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.debug.xcconfig"; sourceTree = "<group>"; };
 		7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		982525D2277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHistoryCellViewModel.swift; sourceTree = "<group>"; };
+		98949DA6277C6B9200C29734 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		98949DA9277C87F200C29734 /* NoResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsCell.swift; sourceTree = "<group>"; };
+		98949DAA277C87F200C29734 /* NoResultsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoResultsCell.xib; sourceTree = "<group>"; };
+		98949DAD277C8C2900C29734 /* SearchingResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResultCell.swift; sourceTree = "<group>"; };
+		98949DAE277C8C2900C29734 /* SearchingResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchingResultCell.xib; sourceTree = "<group>"; };
 		9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHistoryCell.swift; sourceTree = "<group>"; };
 		9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchHistoryCell.xib; sourceTree = "<group>"; };
 		EC1B6C6D0A28ECCE31A39B3F /* Pods-Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.release.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +95,7 @@
 		37F4AD2B277AD16700941E21 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				98949DA6277C6B9200C29734 /* Common.swift */,
 				9898CBE8277B3D0600D89E60 /* Main */,
 				37F4AD57277AEA8500941E21 /* Model */,
 				37F4AD50277AE28C00941E21 /* Network */,
@@ -135,15 +146,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		98949DA8277C87DA00C29734 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */,
+				9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */,
+				982525D2277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift */,
+				98949DA9277C87F200C29734 /* NoResultsCell.swift */,
+				98949DAA277C87F200C29734 /* NoResultsCell.xib */,
+				98949DAD277C8C2900C29734 /* SearchingResultCell.swift */,
+				98949DAE277C8C2900C29734 /* SearchingResultCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		9898CBE8277B3D0600D89E60 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				37F4AD32277AD16700941E21 /* Main.storyboard */,
 				37F4AD30277AD16700941E21 /* MainViewController.swift */,
 				37F4AD4E277AE09900941E21 /* SearchViewModel.swift */,
-				9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */,
-				9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */,
-				982525D2277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift */,
+				98949DA8277C87DA00C29734 /* Cells */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -217,8 +240,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
+				98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */,
 				9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */,
 				37F4AD36277AD16A00941E21 /* Assets.xcassets in Resources */,
+				98949DAC277C87F200C29734 /* NoResultsCell.xib in Resources */,
 				37F4AD34277AD16700941E21 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,12 +297,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */,
 				982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */,
 				37F4AD56277AEA7000941E21 /* SearchResult.swift in Sources */,
 				37F4AD52277AE2DD00941E21 /* NetworkManager.swift in Sources */,
 				37F4AD31277AD16700941E21 /* MainViewController.swift in Sources */,
 				37F4AD2D277AD16700941E21 /* AppDelegate.swift in Sources */,
 				37F4AD4F277AE09900941E21 /* SearchViewModel.swift in Sources */,
+				98949DAF277C8C2900C29734 /* SearchingResultCell.swift in Sources */,
+				98949DA7277C6B9200C29734 /* Common.swift in Sources */,
 				37F4AD42277AD65F00941E21 /* RecentSearchWordModel.xcdatamodeld in Sources */,
 				37F4AD49277AD75600941E21 /* RecentSearchEntity+CoreDataClass.swift in Sources */,
 				37F4AD4A277AD75600941E21 /* RecentSearchEntity+CoreDataProperties.swift in Sources */,

@@ -9,14 +9,19 @@ import Foundation
 import RxSwift
 import RxRelay
 
+
+
 class SearchViewModel {
+    enum SearchFilter {
+        case all
+        case keyword(String)
+    }
     
     private var disposeBag = DisposeBag()
     let searchText = BehaviorRelay<String>(value: "")
     let requestKeyword = PublishSubject<String>()
-    
-//    let observableEmitter = PublishSubject<Observable<Int>>()
-    
+    var updatedCellVMs = PublishSubject<[SearchHistoryCellType]>()
+
     private var response: Observable<SYResponse>?
     
     init() {
@@ -24,13 +29,16 @@ class SearchViewModel {
     }
     
     private func bindings() {
+        // 검토!
         searchText
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { keyword in
-                print("[search] \(keyword)")
-
-            }).disposed(by: disposeBag)
-        
+            .subscribe(onNext: { text in
+                print("#####  searchText - \(text)  ####")
+                // [RecentSearchCellViewModel] 갱신해서 tableView.reload해야함
+                self.recentSearchHistory(.keyword(text))
+            })
+            .disposed(by: disposeBag)
+                
         requestKeyword
             .asObservable()
             .do(onNext: { searchTextValue in
@@ -42,12 +50,25 @@ class SearchViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func recentSearchHistory() -> Observable<[RecentSearchEntity]> {
-        return Observable.create { emitter in
-            let items = SYCoreDataManager.shared.loadData(request: RecentSearchEntity.fetchRequest())
+    func recentSearchHistory(_ filter: SearchFilter) {
+        switch filter {
+        case .all:
+            let cellVMs = SYCoreDataManager.shared
+                .loadData(request: RecentSearchEntity.fetchRequest())
+                .map { RecentSearchHistoryCellViewModel($0) }
+                .map { SearchHistoryCellType.allResultsCell($0) }
             print("=== recentSearchHistory emit====")
-            emitter.onNext(items)
-            return Disposables.create()
+            
+            updatedCellVMs.onNext(cellVMs)
+            
+        case .keyword(let word):
+            let cellVMs = SYCoreDataManager.shared
+                .find(word)
+                .map { RecentSearchHistoryCellViewModel($0) }
+                .map { SearchHistoryCellType.searchResultsCell($0) }
+            print("==== keyword: \(word) searched =====")
+            
+            cellVMs.count > 0 ? updatedCellVMs.onNext(cellVMs) : updatedCellVMs.onNext([.noResultsCell])
         }
     }
 }

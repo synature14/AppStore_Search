@@ -91,4 +91,27 @@ class SYCoreDataManager: InAppDataHandler {
             return Disposables.create()
         }
     }
+    
+    func find(_ keyword: String) -> [RecentSearchEntity] {
+        let recentSearchHistory = self.loadData(request: RecentSearchEntity.fetchRequest())
+        let secondaryResults = recentSearchHistory
+            .filter { entity in
+                let word = entity.word ?? ""
+                return !word.hasPrefix(keyword)
+            }
+            .filter { entity in
+                let word = entity.word ?? ""
+                return word.contains(keyword)
+            }
+        
+        var primaryResults = recentSearchHistory
+            .filter { entity in
+                let word = entity.word ?? ""
+                return word.hasPrefix(keyword)
+            }
+        
+        primaryResults.append(contentsOf: secondaryResults)
+        
+        return primaryResults
+    }
 }
