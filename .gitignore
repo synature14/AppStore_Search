@@ -71,7 +71,7 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
 
-Carthage/Build/
+iCarthage/Build/
 
 # Accio dependency management
 Dependencies/
@@ -110,5 +110,6 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+*.xcuserstate
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,cocoapods
