@@ -23,12 +23,15 @@ class ImageCache {
         }
         
         do {
-            let imageFromDisk = try DiskStorage.shared.value(at: imageFilePath)
-            return imageFromDisk
+            if let imageFromDisk = try DiskStorage.shared.value(at: imageFilePath) {
+                return imageFromDisk
+            }
             
         } catch {
             throw SYStorageError.diskError(reason: "Can't find Image")
         }
+        
+        return nil
     }
     
     // 2. 쓰기 (disk & memory)
@@ -36,7 +39,7 @@ class ImageCache {
         guard let compressedData = image.jpegData(compressionQuality: 0.7) else { return }
         MemoryStorage.shared.store(imageFilePath, data: compressedData)
         do {
-            try DiskStorage.shared.store(data: compressedData)
+            try DiskStorage.shared.store(at: imageFilePath, data: compressedData)
         } catch {
             throw SYStorageError.diskError(reason: "data writeError")
         }
@@ -68,9 +71,16 @@ class ImageManager {
         return Observable.of(imageFilePath)
             .compactMap { URL(string: $0) }
             .map { URLRequest(url: $0) }
-            .flatMapLatest { request -> Observable<Data> in
+            .flatMap { request -> Observable<Data> in
                 return URLSession.shared.rx.data(request: request)
             }
             .compactMap { UIImage(data: $0) }
+            .do(onNext: { [weak self] image in
+                do {
+                    try self?.imageCache.write(key: imageFilePath, image: image)
+                } catch {
+                    print(SYStorageError.writeError)
+                }
+            })
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 enum SYStorageError: Error {
     case memoryError(reason: String)
     case diskError(reason: String)
+    case writeError
 }
 
 class MemoryStorage {

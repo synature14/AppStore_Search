@@ -41,19 +41,15 @@ class DiskStorage {
     }
     
     // 저장
-    func store(data: Data) throws {
-        guard let directoryURL = self.directoryURL else {
-            return
+    func store(at fileURL: String, data: Data) throws {
+        let path = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+        guard let cacheDirectory = path?.appendingPathComponent(fileURL) else {
+            throw SYStorageError.diskError(reason: "Fail to Make path")
         }
-        
-        do {
-            try data.write(to: directoryURL)
-        } catch {
-            throw SYStorageError.diskError(reason: "cannotCreateCacheFile")
-        }
-        
+
         maybeCachedCheckingQueue.async {
-            self.maybeCached?.insert(directoryURL.lastPathComponent)
+            self.fileManager.createFile(atPath: fileURL, contents: data)
+            self.maybeCached?.insert(cacheDirectory.lastPathComponent)
         }
     }
     

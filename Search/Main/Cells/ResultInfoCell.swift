@@ -65,11 +65,11 @@ class ResultInfoCell: UITableViewCell {
         // MARK: kingFisher 내부 로직 문서 보기
         // Core Data 써서 image caching 하기. LRU or 다른 알고리즘
         let urls = vm.screenShotUrls
-        screenShotImageView.loadImage(urls[0])
-        screenShotImageView01.loadImage(urls[1])
+        screenShotImageView.loadImage(urls[0], self.disposeBag)
+        screenShotImageView01.loadImage(urls[1], self.disposeBag)
         
         if urls.count == 3 {
-            screenShotImageView02.loadImage(urls[2])
+            screenShotImageView02.loadImage(urls[2], self.disposeBag)
         }
     }
 
