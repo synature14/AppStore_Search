@@ -33,6 +33,10 @@
 		98949DB8277CA09200C29734 /* ResultCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DB7277CA09200C29734 /* ResultCellViewModel.swift */; };
 		9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */; };
 		9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */; };
+		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
+		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
+		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
+		98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7573277DF6160042D1E6 /* ImageCache.swift */; };
 		FF080207192534A34A370806 /* Pods_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +71,10 @@
 		98949DB7277CA09200C29734 /* ResultCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCellViewModel.swift; sourceTree = "<group>"; };
 		9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHistoryCell.swift; sourceTree = "<group>"; };
 		9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchHistoryCell.xib; sourceTree = "<group>"; };
+		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
+		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
+		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		98AE7573277DF6160042D1E6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		EC1B6C6D0A28ECCE31A39B3F /* Pods-Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.release.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +111,7 @@
 		37F4AD2B277AD16700941E21 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				98949DB5277C9C7B00C29734 /* UIView+Ext.swift */,
+				98AE7563277DCFB00042D1E6 /* Extensions */,
 				98949DA6277C6B9200C29734 /* Common.swift */,
 				9898CBE8277B3D0600D89E60 /* Main */,
 				37F4AD57277AEA8500941E21 /* Model */,
@@ -181,6 +189,18 @@
 				98949DA8277C87DA00C29734 /* Cells */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		98AE7563277DCFB00042D1E6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				98949DB5277C9C7B00C29734 /* UIView+Ext.swift */,
+				98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */,
+				98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */,
+				98AE7571277DE1950042D1E6 /* DiskStorage.swift */,
+				98AE7573277DF6160042D1E6 /* ImageCache.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C424824C211388BA5ECA4B0D /* Frameworks */ = {
@@ -325,8 +345,12 @@
 				37F4AD4A277AD75600941E21 /* RecentSearchEntity+CoreDataProperties.swift in Sources */,
 				37F4AD2F277AD16700941E21 /* SceneDelegate.swift in Sources */,
 				98949DB8277CA09200C29734 /* ResultCellViewModel.swift in Sources */,
+				98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */,
+				98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */,
+				98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */,
 				98949DB6277C9C7B00C29734 /* UIView+Ext.swift in Sources */,
 				9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */,
+				98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */,
 				37F4AD54277AE7CB00941E21 /* SYError.swift in Sources */,
 				37F4AD4D277AD84700941E21 /* SYCoreDataManager.swift in Sources */,
 			);

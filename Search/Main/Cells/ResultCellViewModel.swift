@@ -33,7 +33,7 @@ class ResultCellViewModel {
 //
 //        let urlStrings = searchResult.screenshotUrls[0..<count]
 //
-//        return Observable.from(urlStrings)
+//        return Observable.of(urlStrings)
 //            .map { URL(string: $0)! }
 //            .map { URLRequest(url: $0) }
 ////            .asObservable()
