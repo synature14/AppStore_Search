@@ -9,18 +9,16 @@ import Foundation
 import UIKit
 
 class DiskStorage {
-    let fileManager = FileManager.default
+    static let shared = DiskStorage()
     
-    let metaChangingQueue: DispatchQueue
-    let maybeCachedCheckingQueue = DispatchQueue(label: "maybeCachedCheckingQueue")
-    var maybeCached: Set<String>?
-    let directoryURL: URL?
+    private let metaChangingQueue: DispatchQueue        // 파일의 메타정보 관리
+    private let maybeCachedCheckingQueue = DispatchQueue(label: "maybeCachedCheckingQueue")    // FileManager.default는 싱글턴. thread unsafe함. directory 찾고 저장할때 thread safe를 보장하기 위해 사용
+    private var maybeCached: Set<String>?
+    private var directoryURL: URL?
     
-    init(imageURL: String) {
-        let path = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
-        let cacheDirectory = path?.appendingPathComponent(imageURL)
-        self.directoryURL = cacheDirectory
-        
+    private let fileManager = FileManager.default
+    
+    init() {
         metaChangingQueue = DispatchQueue(label: "DiskStorage")
         setupCacheCheck()
     }
@@ -57,26 +55,31 @@ class DiskStorage {
         maybeCachedCheckingQueue.async {
             self.maybeCached?.insert(directoryURL.lastPathComponent)
         }
-        print("===== [complete] write Data =====")
     }
     
     // 조회
-    func value(at fileURL: URL) throws -> UIImage? {
-        let fileMaybeCached = maybeCachedCheckingQueue.sync {
-            return maybeCached?.contains(fileURL.lastPathComponent) ?? true
+    func value(at fileURL: String) throws -> UIImage? {
+        let path = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+        guard let cacheDirectory = path?.appendingPathComponent(fileURL) else {
+            throw SYStorageError.diskError(reason: "Fail to Make path")
         }
+        self.directoryURL = cacheDirectory
         
+        let fileMaybeCached = maybeCachedCheckingQueue.sync {
+            return maybeCached?.contains(cacheDirectory.lastPathComponent) ?? true
+        }
+
         guard fileMaybeCached else {
             return nil
         }
         
-        guard fileManager.fileExists(atPath: fileURL.path) else {
+        guard fileManager.fileExists(atPath: cacheDirectory.path) else {
             return nil
         }
         
         do {
-            let data = try Data(contentsOf: fileURL)
-            let image = try UIImage(data: data)
+            let data = try Data(contentsOf: cacheDirectory)
+            let image = UIImage(data: data)
             metaChangingQueue.async {
                 // 파일 메타 데이터 업데이트
             }

@@ -14,16 +14,25 @@ enum SYStorageError: Error {
 }
 
 class MemoryStorage {
-    let cache = NSCache<NSString, UIImage>()
+    static let shared = MemoryStorage()
+    private let cache = NSCache<NSString, NSData>()
     
     // 조회
     func read(_ key: String) -> UIImage? {
-        return cache.object(forKey: key as NSString)
+        if let data = cache.object(forKey: key as NSString) {
+            return UIImage(data: data as Data)
+        }
+        return nil
     }
     
     // 저장
-    func store(_ key: String, image: UIImage) {
-        cache.setObject(image, forKey: key as NSString)
+    func store(_ key: String, data: Data) {
+        let nsData = NSData(data: data)
+        cache.setObject(nsData, forKey: key as NSString)
+    }
+    
+    func remove(_ key: String) {
+        cache.removeObject(forKey: key as NSString)
     }
 }
 

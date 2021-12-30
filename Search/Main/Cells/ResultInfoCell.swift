@@ -64,19 +64,13 @@ class ResultInfoCell: UITableViewCell {
         
         // MARK: kingFisher 내부 로직 문서 보기
         // Core Data 써서 image caching 하기. LRU or 다른 알고리즘
+        let urls = vm.screenShotUrls
+        screenShotImageView.loadImage(urls[0])
+        screenShotImageView01.loadImage(urls[1])
         
-//        vm.screenShotImage
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [weak self] images in
-//                images
-//
-//                self?.screenShotImageView.image = images[0]
-//                self?.screenShotImageView01.image = images[1]
-//                self?.screenShotImageView02.image = images[2]
-//            })
-//            .disposed(by: disposeBag)
-        
-        
+        if urls.count == 3 {
+            screenShotImageView02.loadImage(urls[2])
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
