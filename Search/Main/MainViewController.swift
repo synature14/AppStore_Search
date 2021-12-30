@@ -50,7 +50,7 @@ private extension MainViewController {
         searchController.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 guard let text = self?.searchController.searchBar.text else { return }
-                self?.searchVM.requestKeyword.onNext(text)
+                self?.searchVM.search(text)
             })
             .disposed(by: disposeBag)
     }

@@ -8,6 +8,7 @@
 import Foundation
 
 enum SYError: Error {
+    case null
     case invalidURL(String)
     case serverError
 }

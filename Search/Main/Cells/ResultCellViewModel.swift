@@ -21,17 +21,28 @@ class ResultCellViewModel {
             .map { UIImage(data: $0) }
     }()
     
-    lazy var screenShotImage: Observable<UIImage?> = {
-        let urlStrings = searchResult?.screenshotUrls[0..<3] ?? []
-
-        return Observable.from(urlStrings)
-            .map { URL(string: $0)! }
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-                return URLSession.shared.rx.data(request: request)
-            }
-            .map { UIImage(data: $0) }
-    }()
+//    lazy var screenShotImage: Observable<[UIImage?]> = {
+//        guard let searchResult = self.searchResult else {
+//            return Observable.error(SYError.null)
+//        }
+//
+//        var count = searchResult.screenshotUrls.count
+//        if count > 3 {
+//            count = 3
+//        }
+//
+//        let urlStrings = searchResult.screenshotUrls[0..<count]
+//
+//        return Observable.from(urlStrings)
+//            .map { URL(string: $0)! }
+//            .map { URLRequest(url: $0) }
+////            .asObservable()
+//            .flatMapLatest { request -> Observable<Data> in
+//                return URLSession.shared.rx.data(request: request)
+//            }
+//        // 순서 보장이 안됨...
+////            .map { UIImage(data: $0) }
+//    }()
     
     init(_ searchResult: SearchResult) {
         self.searchResult = searchResult

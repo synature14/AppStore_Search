@@ -16,6 +16,7 @@ class SearchViewModel {
     }
     
     private var disposeBag = DisposeBag()
+    private var requestKeywordDisposeBag = DisposeBag()
     let searchText = BehaviorRelay<String>(value: "")
     let requestKeyword = PublishSubject<String>()
     var updatedCellVMs = BehaviorRelay<[SearchHistoryCellType]>(value: [])     // tableView reload 시키는 주체
@@ -37,6 +38,11 @@ class SearchViewModel {
             })
             .disposed(by: disposeBag)
                 
+        
+        bindRequestKeyword()
+    }
+    
+    private func bindRequestKeyword() {
         requestKeyword
             .do(onNext: { searchTextValue in
                 SYCoreDataManager.shared.save(searchTextValue)
@@ -48,8 +54,7 @@ class SearchViewModel {
                     .map { ResultCellViewModel($0) }
                     .map { SearchHistoryCellType.resultInfoCell($0) }
                 self?.updatedCellVMs.accept(cellTypeArr)
-            }).disposed(by: disposeBag)
-            
+            }).disposed(by: requestKeywordDisposeBag)
     }
     
     // Core Data에 저장된 기록 조회
@@ -73,5 +78,11 @@ class SearchViewModel {
             
             cellVMs.count > 0 ? updatedCellVMs.accept(cellVMs) : updatedCellVMs.accept([.noResultsCell])
         }
+    }
+    
+    func search(_ text: String) {
+        self.requestKeywordDisposeBag = DisposeBag()    // 이전에 서칭해서 생성된 stream을 삭제
+        bindRequestKeyword()        // 다시 바인딩
+        requestKeyword.onNext(text)
     }
 }

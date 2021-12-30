@@ -62,22 +62,19 @@ class ResultInfoCell: UITableViewCell {
             .bind(to: self.appIconImageView.rx.image)
             .disposed(by: disposeBag)
         
-        vm.screenShotImage
-            .observeOn(MainScheduler.instance)
-            .enumerated()
-            .subscribe(onNext: { [weak self] (index, image) in
-                switch index {
-                case 0:
-                    self?.screenShotImageView.image = image
-                case 1:
-                    self?.screenShotImageView01.image = image
-                case 2:
-                    self?.screenShotImageView02.image = image
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
+        // MARK: kingFisher 내부 로직 문서 보기
+        // Core Data 써서 image caching 하기. LRU or 다른 알고리즘
+        
+//        vm.screenShotImage
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] images in
+//                images
+//
+//                self?.screenShotImageView.image = images[0]
+//                self?.screenShotImageView01.image = images[1]
+//                self?.screenShotImageView02.image = images[2]
+//            })
+//            .disposed(by: disposeBag)
         
         
     }
