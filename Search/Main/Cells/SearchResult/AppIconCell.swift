@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class AppIconViewModel: TableCellRepresentable {
+class AppIconCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         AppIconCell.self
     }
@@ -25,8 +25,8 @@ class AppIconViewModel: TableCellRepresentable {
     }
     
     lazy var appIconImage: Observable<UIImage?> = {
-        return Observable.of(searchResult.iconImage ?? "")
-            .map { URL(string: $0)! }
+        return Observable.of(searchResult.iconImage)
+            .compactMap { URL(string: $0) }
             .map { URLRequest(url: $0) }
             .flatMap { request -> Observable<Data> in
               return URLSession.shared.rx.data(request: request)
@@ -55,7 +55,7 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
     }
     
     func bindCellVM(_ viewModel: TableCellRepresentable?) {
-        guard let vm = viewModel as? AppIconViewModel else {
+        guard let vm = viewModel as? AppIconCellViewModel else {
             return
         }
         let result = vm.searchResult

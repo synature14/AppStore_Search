@@ -60,7 +60,7 @@ private extension MainViewController {
         tableView.delegate = self
         
         tableView.register(cells: [
-            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandScapeScreenShotCell.self, AppIconCell.self
+            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self
         ])
 
         tableView.rx.itemSelected
@@ -71,10 +71,9 @@ private extension MainViewController {
         
         viewModel.updatedCellVMs
             .observeOn(MainScheduler.instance)
-            .do(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] cellVMs in
                 self?.tableView.reloadData()
-            })
-//                .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         viewModel.searchHistory(.all)
     }
@@ -95,10 +94,42 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //        return searchVM.updatedCellVMs.value[indexPath.row]
+        let sections = viewModel.sections[indexPath.section]
+        let cellVM = sections[indexPath.row]
         
+        switch cellVM {
+        case _ as AppIconCellViewModel:
+            return 50.0
+            
+        case let portaitCellVM as PortaitCellViewModel:
+            let imageHeight = portaitCellVM.imageSize.height
+            
+            return scaledPortraitHeight(padding: 20*2,
+                                     originImageHeight: imageHeight) + 50.0
+            
+        case let landscapeCellVM as LandscapeCellViewModel:
+            return scaledLandscapeHeight(padding: 20*2,
+                                     originImageHeight: landscapeCellVM.imageSize.height) + 10.0
+            
+        default:
+            return 0.0
+        }
     }
                 
+}
+
+private extension MainViewController {
+    func scaledLandscapeHeight(padding leadingTrailing: CGFloat, originImageHeight: CGFloat) -> CGFloat {
+        let resizedWidth = UIScreen.main.bounds.width - leadingTrailing
+        let imageViewScaledHeight = originImageHeight * resizedWidth / resizedWidth
+        return imageViewScaledHeight
+    }
+    
+    func scaledPortraitHeight(padding leadingTrailing: CGFloat, originImageHeight: CGFloat) -> CGFloat {
+        let eachImageViewWidth = CGFloat(UIScreen.main.bounds.width - leadingTrailing / 3)
+        let imageViewScaledHeight = originImageHeight * eachImageViewWidth / eachImageViewWidth
+        return imageViewScaledHeight
+    }
 }
 
 

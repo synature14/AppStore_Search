@@ -9,20 +9,21 @@ import UIKit
 import RxSwift
 import RxRelay
 
-class PortaitViewModel: TableCellRepresentable {
+class PortaitCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         PortaitScreenShotCell.self
     }
     
     private var searchResult: SearchResult?
-    let firstScreenShot = BehaviorRelay<UIImage?>(value: nil)
-    let scaledImageHeight = BehaviorRelay<CGFloat>(value: 0)
+    let imageSize: CGSize
+    var screenShotTrailingConstraint: CGFloat = 0.0
     
     lazy var screenShotUrls: [String] = {
         guard let searchResult = self.searchResult else {
             return []
         }
 
+        // MARK: 깜짝 놀랐쥬?? 임시 코드 ~
         var count = searchResult.screenshotUrls.count
         if count > 3 {
             count = 3
@@ -33,8 +34,9 @@ class PortaitViewModel: TableCellRepresentable {
     
     private var disposeBag = DisposeBag()
     
-    init(_ result: SearchResult) {
+    init(_ result: SearchResult, imageSize: CGSize) {
         self.searchResult = result
+        self.imageSize = imageSize
         bindings()
     }
     
@@ -43,14 +45,6 @@ class PortaitViewModel: TableCellRepresentable {
     }
     
     func bindings() {
-        guard let result = self.searchResult else {
-            return
-        }
-        UIUtility.shared.loadImage(result.screenshotUrls[0])
-            .subscribe(onNext: { image in
-                self.firstScreenShot.accept(image)
-            })
-            .disposed(by: disposeBag)
     }
 }
 
@@ -59,7 +53,7 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
     private let screenShotImageViewWidth: CGFloat = (UIScreen.main.bounds.width - 40.0 - 5.0*2) / 3
     
     private var disposeBag = DisposeBag()
-    private var vm: PortaitViewModel?
+    private var vm: PortaitCellViewModel?
     
     // screenShotImageView의 width 사이즈
     private var landscapeImageViewWidth: CGFloat = 0.0
@@ -87,7 +81,7 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
     }
     
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
-        guard let cellVM = cellVM as? PortaitViewModel else { return }
+        guard let cellVM = cellVM as? PortaitCellViewModel else { return }
         self.vm = cellVM
         bindings()
     }
@@ -107,17 +101,6 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
         if urls.count == 3 {
             self.screenShotImageView02.loadImage(urls[2], self.disposeBag)
         }
-        
-        vm.firstScreenShot
-            .subscribe(onNext: { [weak self] image in
-                guard let image = image, let self = self else {
-                    return
-                }
-                
-                let scaledHeight = image.scaledImageHeight(of: self.portraitImageViewWidth)
-                vm.scaledImageHeight.accept(scaledHeight)
-
-            }).disposed(by: disposeBag)
     }
     
 }

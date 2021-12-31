@@ -92,27 +92,8 @@ struct SearchResult: Decodable {
 }
 
 struct DisplayResult {
-    private var disposeBag = DisposeBag()
-    
     var result: SearchResult
-    private(set) var imageMode: Observable<UIImage.ImageMode>
-    
-    init(_ result: SearchResult) {
-        self.result = result
-        
-        let url = URL(string: result.screenshotUrls[0])!
-        
-        let image = Observable.of(url)
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-                return URLSession.shared.rx.data(request: request)
-            }
-            .map { UIImage(data: $0) }
-        
-        imageMode = image.compactMap { image in
-            return image?.imageMode()
-        }
-    }
+    var isLandScape: Bool
 }
 
 //struct InfoData: Decodable {

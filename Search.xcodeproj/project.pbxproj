@@ -27,8 +27,8 @@
 		983DB446277EE4BD004CC8CA /* CellRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB445277EE4BD004CC8CA /* CellRepresentable.swift */; };
 		983DB44A277EE715004CC8CA /* AppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB448277EE715004CC8CA /* AppIconCell.swift */; };
 		983DB44B277EE715004CC8CA /* AppIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983DB449277EE715004CC8CA /* AppIconCell.xib */; };
-		983DB44E277EE8E7004CC8CA /* LandScapeScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB44C277EE8E7004CC8CA /* LandScapeScreenShotCell.swift */; };
-		983DB44F277EE8E7004CC8CA /* LandScapeScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983DB44D277EE8E7004CC8CA /* LandScapeScreenShotCell.xib */; };
+		983DB44E277EE8E7004CC8CA /* LandscapeScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB44C277EE8E7004CC8CA /* LandscapeScreenShotCell.swift */; };
+		983DB44F277EE8E7004CC8CA /* LandscapeScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983DB44D277EE8E7004CC8CA /* LandscapeScreenShotCell.xib */; };
 		983DB451277EF045004CC8CA /* SearchingResultCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB450277EF045004CC8CA /* SearchingResultCellViewModel.swift */; };
 		983DB453277EF0D5004CC8CA /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */; };
 		983DB455277EF146004CC8CA /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB454277EF146004CC8CA /* NSObject+Ext.swift */; };
@@ -75,8 +75,8 @@
 		983DB445277EE4BD004CC8CA /* CellRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRepresentable.swift; sourceTree = "<group>"; };
 		983DB448277EE715004CC8CA /* AppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconCell.swift; sourceTree = "<group>"; };
 		983DB449277EE715004CC8CA /* AppIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppIconCell.xib; sourceTree = "<group>"; };
-		983DB44C277EE8E7004CC8CA /* LandScapeScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandScapeScreenShotCell.swift; sourceTree = "<group>"; };
-		983DB44D277EE8E7004CC8CA /* LandScapeScreenShotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandScapeScreenShotCell.xib; sourceTree = "<group>"; };
+		983DB44C277EE8E7004CC8CA /* LandscapeScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeScreenShotCell.swift; sourceTree = "<group>"; };
+		983DB44D277EE8E7004CC8CA /* LandscapeScreenShotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandscapeScreenShotCell.xib; sourceTree = "<group>"; };
 		983DB450277EF045004CC8CA /* SearchingResultCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResultCellViewModel.swift; sourceTree = "<group>"; };
 		983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		983DB454277EF146004CC8CA /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 				983DB449277EE715004CC8CA /* AppIconCell.xib */,
 				98949DB1277C935700C29734 /* PortaitScreenShotCell.swift */,
 				98949DB2277C935700C29734 /* PortaitScreenShotCell.xib */,
-				983DB44C277EE8E7004CC8CA /* LandScapeScreenShotCell.swift */,
-				983DB44D277EE8E7004CC8CA /* LandScapeScreenShotCell.xib */,
+				983DB44C277EE8E7004CC8CA /* LandscapeScreenShotCell.swift */,
+				983DB44D277EE8E7004CC8CA /* LandscapeScreenShotCell.xib */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				983DB44F277EE8E7004CC8CA /* LandScapeScreenShotCell.xib in Resources */,
+				983DB44F277EE8E7004CC8CA /* LandscapeScreenShotCell.xib in Resources */,
 				98949DB4277C935700C29734 /* PortaitScreenShotCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
 				983DB44B277EE715004CC8CA /* AppIconCell.xib in Resources */,
@@ -384,7 +384,7 @@
 				982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */,
 				983DB444277ECFA0004CC8CA /* UIUtility.swift in Sources */,
 				37F4AD56277AEA7000941E21 /* SearchResult.swift in Sources */,
-				983DB44E277EE8E7004CC8CA /* LandScapeScreenShotCell.swift in Sources */,
+				983DB44E277EE8E7004CC8CA /* LandscapeScreenShotCell.swift in Sources */,
 				37F4AD52277AE2DD00941E21 /* NetworkManager.swift in Sources */,
 				983DB44A277EE715004CC8CA /* AppIconCell.swift in Sources */,
 				37F4AD31277AD16700941E21 /* MainViewController.swift in Sources */,

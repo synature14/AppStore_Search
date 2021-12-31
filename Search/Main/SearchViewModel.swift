@@ -45,29 +45,25 @@ class SearchViewModel {
     }
     
     private func configureCellVMs(_ results: [SearchResult]) -> [[TableCellRepresentable]] {
-//        results.map { $0.screenshotUrls }
+        var section: [[TableCellRepresentable]] = []
+        for result in results {
+            var cellVMs: [TableCellRepresentable] = []
+            
+            let appIconCellVM = AppIconCellViewModel(result)
+            cellVMs.append(appIconCellVM)
+            
+            let representableImageUrl = result.screenshotUrls.first ?? ""
+            if representableImageUrl.isLandscape == true {
+                let landscapeVM = LandscapeCellViewModel(result.screenshotUrls, imageSize: representableImageUrl.size)
+                cellVMs.append(landscapeVM)
+            } else {
+                let portraitVM = PortaitCellViewModel(result, imageSize: representableImageUrl.size)
+                cellVMs.append(portraitVM)
+            }
+            section.append(cellVMs)
+        }
         
-        
-//
-        let str = "/406x228bb.jpg"
-        print(str.size)
-        return [[]]
-//
-//
-//        results.map { $0.screenshotUrls.first }
-//        .split(separator: "/").last
-//        .map { String($0) }
-//        ?.removeSubrange(Range()
-//
-//
-//        // image가 landscape 모드인가?
-//        let landScapeSection: [TableCellRepresentable] = [
-//            AppIconViewModel.init(result), LandScapeViewModel(result)
-//        ]
-//        // image가 portrait 모드인가?
-//        let portraitSection: [TableCellRepresentable] = [
-//            AppIconViewModel.init(result), PortaitViewModel(result)
-//        ]
+        return section
     }
     
     private func bindRequestKeyword() {
@@ -111,13 +107,6 @@ class SearchViewModel {
 }
                          
 private extension String {
-    
-//    var isDecimalNumber: Bool {
-//        "0" ~ "9"
-//        return true
-//        else false
-//    }
-    
     // 406x228bb.jpg
     var size: CGSize {
         let imageSizeString = self.split(separator: "/").last
@@ -136,5 +125,10 @@ private extension String {
             return .zero
         }
         return CGSize(width: width, height: height)
+    }
+    
+    var isLandscape: Bool {
+        let size = self.size
+        return size.width > size.height
     }
 }
