@@ -36,7 +36,6 @@ class AppIconCellViewModel: TableCellRepresentable {
 }
 
 class AppIconCell: UITableViewCell, BindableTableViewCell {
-    static let name = "AppIconCell"
     
     private var disposeBag = DisposeBag()
     

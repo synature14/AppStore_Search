@@ -14,7 +14,7 @@ class LandscapeCellViewModel: TableCellRepresentable {
         LandscapeScreenShotCell.self
     }
     
-    private var urls: [String]?
+    private(set) var urls: [String]?
     let imageSize: CGSize
     
     private var disposeBag = DisposeBag()
@@ -26,12 +26,14 @@ class LandscapeCellViewModel: TableCellRepresentable {
 }
 
 class LandscapeScreenShotCell: UITableViewCell, BindableTableViewCell {
-    static let name = "LandscapeScreenShotCell"
     private var cellVM: LandscapeCellViewModel?
-    private var landscapeImageViewWidth: CGFloat = 0.0
     private var disposeBag = DisposeBag()
     
-    @IBOutlet weak var screenShotTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var screenShotImageView: UIImageView!
+    
+    deinit {
+        disposeBag = DisposeBag()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,17 +43,7 @@ class LandscapeScreenShotCell: UITableViewCell, BindableTableViewCell {
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
         guard let cellVM = cellVM as? LandscapeCellViewModel else { return }
         self.cellVM = cellVM
-        landscapeImageViewWidth = UIScreen.main.bounds.width - screenShotTrailingConstraint.constant * 2
-        
-//        cellVM.firstScreenShot
-//            .subscribe(onNext: { [weak self] image in
-//                guard let image = image, let self = self else {
-//                    return
-//                }
-//
-//                let scaledHeight = image.scaledImageHeight(of: self.landscapeImageViewWidth)
-//                cellVM.scaledImageHeight.accept(scaledHeight)
-//            })
-//            .disposed(by: disposeBag)
+        screenShotImageView.loadImage(cellVM.urls?.first ?? "",
+                            disposeBag)
     }
 }

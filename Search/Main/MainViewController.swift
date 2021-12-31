@@ -113,17 +113,18 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return UIScreen.main.bounds.height / 3
             
         case _ as AppIconCellViewModel:
-            return 55.0
+            return 60.0
             
         case let portaitCellVM as PortaitCellViewModel:
-            let imageHeight = portaitCellVM.imageSize.height
+            let imageSize = portaitCellVM.imageSize
             
             return scaledPortraitHeight(padding: 20*2,
-                                     originImageHeight: imageHeight) + 50.0
+                                        originalImageSize: imageSize) + 40
             
         case let landscapeCellVM as LandscapeCellViewModel:
+            let imageSize = landscapeCellVM.imageSize
             return scaledLandscapeHeight(padding: 20*2,
-                                     originImageHeight: landscapeCellVM.imageSize.height) + 10.0
+                                         originalImageSize: imageSize) + 30
             
         default:
             return 0.0
@@ -133,15 +134,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 private extension MainViewController {
-    func scaledLandscapeHeight(padding leadingTrailing: CGFloat, originImageHeight: CGFloat) -> CGFloat {
+    func scaledLandscapeHeight(padding leadingTrailing: CGFloat, originalImageSize: CGSize) -> CGFloat {
         let resizedWidth = UIScreen.main.bounds.width - leadingTrailing
-        let imageViewScaledHeight = originImageHeight * resizedWidth / resizedWidth
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
         return imageViewScaledHeight
     }
-    
-    func scaledPortraitHeight(padding leadingTrailing: CGFloat, originImageHeight: CGFloat) -> CGFloat {
-        let eachImageViewWidth = CGFloat(UIScreen.main.bounds.width - leadingTrailing / 3)
-        let imageViewScaledHeight = originImageHeight * eachImageViewWidth / eachImageViewWidth
+
+    func scaledPortraitHeight(padding leadingTrailing: CGFloat, originalImageSize: CGSize) -> CGFloat {
+        let stackViewSpacing: CGFloat = 6.0
+        let eachImageViewWidth = CGFloat(UIScreen.main.bounds.width - leadingTrailing - stackViewSpacing*2) / 3
+        let imageViewScaledHeight = originalImageSize.height * eachImageViewWidth / originalImageSize.width
         return imageViewScaledHeight
     }
 }

@@ -11,8 +11,6 @@ class ActivityViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         ActivityViewCell.self
     }
-    
-    
 }
 
 class ActivityViewCell: UITableViewCell, BindableTableViewCell {

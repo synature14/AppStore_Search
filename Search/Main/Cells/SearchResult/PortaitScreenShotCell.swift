@@ -49,17 +49,9 @@ class PortaitCellViewModel: TableCellRepresentable {
 }
 
 class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
-    static let name = "PortaitScreenShotCell"
-    private let screenShotImageViewWidth: CGFloat = (UIScreen.main.bounds.width - 40.0 - 5.0*2) / 3
-    
     private var disposeBag = DisposeBag()
     private var vm: PortaitCellViewModel?
-    
-    // screenShotImageView의 width 사이즈
-    private var landscapeImageViewWidth: CGFloat = 0.0
-    private var portraitImageViewWidth: CGFloat = 0.0
-    
-    @IBOutlet weak var screenShotTrailingConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var portraitStackView: UIStackView!
     @IBOutlet weak var screenShotImageView: UIImageView!
     @IBOutlet weak var screenShotImageView01: UIImageView!
@@ -69,11 +61,11 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        // screenshotImage 사이즈 계산해서 높이 다시 맞춰야함..
-        // screenShotImageViewWidth : x = 이미지 사이즈 가로 : y
-        landscapeImageViewWidth = UIScreen.main.bounds.width - screenShotTrailingConstraint.constant * 2
-        portraitImageViewWidth = (self.landscapeImageViewWidth - self.portraitStackView.spacing) / CGFloat(3)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.screenShotImageView02.isHidden = true
     }
     
     deinit {
@@ -99,6 +91,7 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
         self.screenShotImageView01.loadImage(urls[1], self.disposeBag)
         
         if urls.count == 3 {
+            self.screenShotImageView02.isHidden = false
             self.screenShotImageView02.loadImage(urls[2], self.disposeBag)
         }
     }
