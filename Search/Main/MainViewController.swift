@@ -44,7 +44,9 @@ private extension MainViewController {
        searchController.searchBar.rx.text
             .orEmpty
             .distinctUntilChanged()
-            .bind(to: self.viewModel.searchText)
+            .subscribe(onNext: { [weak self] searchText in
+                self?.viewModel.searchText.accept(searchText)
+            })
             .disposed(by: disposeBag)
 
         searchController.searchBar.rx.searchButtonClicked
@@ -98,8 +100,17 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let cellVM = sections[indexPath.row]
         
         switch cellVM {
-        case _ as AppIconCellViewModel:
+        case _ as RecentSearchHistoryCellViewModel:
             return 50.0
+        
+        case _ as SearchingResultCellViewModel:
+            return 44.0
+            
+        case _ as NoResultsCellViewModel:
+            return UIScreen.main.bounds.height / 3
+            
+        case _ as AppIconCellViewModel:
+            return 55.0
             
         case let portaitCellVM as PortaitCellViewModel:
             let imageHeight = portaitCellVM.imageSize.height
