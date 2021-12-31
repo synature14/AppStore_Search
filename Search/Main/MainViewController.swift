@@ -75,7 +75,7 @@ private extension MainViewController {
             })
             .disposed(by: disposeBag)
         
-        searchVM.updatedCellVMs
+        searchVM.updatedCellTypes
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items) { (tableView, indexPathRow, cellType) in
                 let indexPath = IndexPath(item: indexPathRow, section: 0)
@@ -115,7 +115,8 @@ private extension MainViewController {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return searchVM.updatedCellVMs.value[indexPath.row].cellHeight
+//        return searchVM.updatedCellVMs.value[indexPath.row]
+        switch 
     }
 }
 

@@ -19,7 +19,7 @@ class SearchViewModel {
     private var requestKeywordDisposeBag = DisposeBag()
     let searchText = BehaviorRelay<String>(value: "")
     let requestKeyword = PublishSubject<String>()
-    var updatedCellVMs = BehaviorRelay<[SearchHistoryCellType]>(value: [])     // tableView reload 시키는 주체
+    var updatedCellTypes = BehaviorRelay<[SearchCellType]>(value: [])     // tableView reload 시키는 주체
 
     private var response: Observable<SYResponse>?
     
@@ -52,8 +52,10 @@ class SearchViewModel {
             .subscribe(onNext: { [weak self] results in
                 let cellTypeArr  = results
                     .map { ResultCellViewModel($0) }
-                    .map { SearchHistoryCellType.resultInfoCell($0) }
-                self?.updatedCellVMs.accept(cellTypeArr)
+                    .map { SearchCellType. resultInfoCell($0) }
+                self?.updatedCellTypes.accept(cellTypeArr)
+                
+                
             }).disposed(by: requestKeywordDisposeBag)
     }
     

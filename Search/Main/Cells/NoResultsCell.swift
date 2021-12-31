@@ -7,7 +7,9 @@
 
 import UIKit
 
-class NoResultsCell: UITableViewCell {
+class NoResultsCell: UITableViewCell, BindableTableViewCell {
+    var cellType: UITableViewCell.Type
+    
     static let name = "NoResultsCell"
 
     override func awakeFromNib() {
