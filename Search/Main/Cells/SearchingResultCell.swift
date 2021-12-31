@@ -18,7 +18,8 @@ class SearchingResultCell: UITableViewCell, BindableTableViewCell {
         // Initialization code
     }
     
-    func setData(_ vm: RecentSearchHistoryCellViewModel) {
+    func bindCellVM(_ cellVM: TableCellRepresentable?) {
+        guard let vm = cellVM as? SearchingResultCellViewModel else { return }
         wordLabel.text = vm.item.word
     }
 }

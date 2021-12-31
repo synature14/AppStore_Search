@@ -16,27 +16,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="375"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a1n-wv-eaV">
-                        <rect key="frame" x="20" y="10" width="280" height="355"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a1n-wv-eaV">
+                        <rect key="frame" x="20" y="0.0" width="280" height="365"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qS-RB-Vel">
-                                <rect key="frame" x="0.0" y="0.0" width="90" height="355"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qS-RB-Vel">
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="365"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lx-lJl">
-                                <rect key="frame" x="95" y="0.0" width="90" height="355"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lx-lJl">
+                                <rect key="frame" x="95" y="0.0" width="90" height="365"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLR-TB-IDs">
-                                <rect key="frame" x="190" y="0.0" width="90" height="355"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PLR-TB-IDs">
+                                <rect key="frame" x="190" y="0.0" width="90" height="365"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
@@ -44,64 +44,24 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
-                    </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="j7N-AR-mvo">
-                        <rect key="frame" x="20" y="10" width="280" height="355"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubb-fx-nM9">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="355"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcv-rU-msM">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="355"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZWI-ns-paF">
-                                                <rect key="frame" x="0.0" y="0.0" width="280" height="355"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="12"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="ZWI-ns-paF" firstAttribute="top" secondItem="tcv-rU-msM" secondAttribute="top" id="KCE-RY-UV4"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZWI-ns-paF" secondAttribute="trailing" id="WUL-pD-btE"/>
-                                            <constraint firstItem="ZWI-ns-paF" firstAttribute="leading" secondItem="tcv-rU-msM" secondAttribute="leading" id="b8k-QX-J0Q"/>
-                                            <constraint firstAttribute="bottom" secondItem="ZWI-ns-paF" secondAttribute="bottom" id="cWR-7a-1Wt"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="tcv-rU-msM" firstAttribute="leading" secondItem="Ubb-fx-nM9" secondAttribute="leading" id="1e8-9T-jdg"/>
-                                    <constraint firstItem="tcv-rU-msM" firstAttribute="top" secondItem="Ubb-fx-nM9" secondAttribute="top" id="4ME-kM-3pj"/>
-                                    <constraint firstAttribute="trailing" secondItem="tcv-rU-msM" secondAttribute="trailing" id="Ik1-85-ruj"/>
-                                    <constraint firstAttribute="bottom" secondItem="tcv-rU-msM" secondAttribute="bottom" id="aKb-T7-JhZ"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="j7N-AR-mvo" secondAttribute="trailing" constant="20" id="4G6-mg-ZFB"/>
-                    <constraint firstAttribute="bottom" secondItem="j7N-AR-mvo" secondAttribute="bottom" constant="10" id="RLs-rf-qpg"/>
-                    <constraint firstItem="j7N-AR-mvo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="S7q-FW-AFF"/>
-                    <constraint firstItem="j7N-AR-mvo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="VkY-c9-nq6"/>
+                    <constraint firstItem="a1n-wv-eaV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="4f3-jf-whJ"/>
+                    <constraint firstAttribute="trailing" secondItem="a1n-wv-eaV" secondAttribute="trailing" constant="20" id="YaO-mj-99p"/>
+                    <constraint firstItem="a1n-wv-eaV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cyr-sG-wkG"/>
+                    <constraint firstAttribute="bottom" secondItem="a1n-wv-eaV" secondAttribute="bottom" constant="10" id="yi1-eN-eEz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="landScapeImageView" destination="ZWI-ns-paF" id="XCt-CP-GvF"/>
-                <outlet property="landScapeView" destination="tcv-rU-msM" id="T0X-Sb-eY4"/>
                 <outlet property="portraitStackView" destination="a1n-wv-eaV" id="oAL-Xt-qi3"/>
                 <outlet property="screenShotImageView" destination="2qS-RB-Vel" id="L1K-D6-eQz"/>
                 <outlet property="screenShotImageView01" destination="FYC-lx-lJl" id="dBv-VJ-aW6"/>
                 <outlet property="screenShotImageView02" destination="PLR-TB-IDs" id="6o1-aM-2Ke"/>
-                <outlet property="screenShotTrailingConstraint" destination="4G6-mg-ZFB" id="nMQ-rc-4qO"/>
+                <outlet property="screenShotTrailingConstraint" destination="YaO-mj-99p" id="mgy-Tg-nVD"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="192.52232142857142"/>
         </tableViewCell>

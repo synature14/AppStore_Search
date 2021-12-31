@@ -12,7 +12,7 @@ import RxCocoa
 class MainViewController: UIViewController {
     let searchController = UISearchController()
     
-    private let searchVM = SearchViewModel()
+    private let viewModel = SearchViewModel()
     private var disposeBag = DisposeBag()
     
  
@@ -44,80 +44,61 @@ private extension MainViewController {
        searchController.searchBar.rx.text
             .orEmpty
             .distinctUntilChanged()
-            .bind(to: self.searchVM.searchText)
+            .bind(to: self.viewModel.searchText)
             .disposed(by: disposeBag)
 
         searchController.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 guard let text = self?.searchController.searchBar.text else { return }
-                self?.searchVM.search(text)
+                self?.viewModel.search(text)
             })
             .disposed(by: disposeBag)
     }
     
     func setTableView() {
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        tableView.register(UINib(nibName: RecentSearchHistoryCell.name, bundle: nil),
-                           forCellReuseIdentifier: RecentSearchHistoryCell.name)
-        tableView.register(UINib(nibName: SearchingResultCell.name, bundle: nil),
-                           forCellReuseIdentifier: SearchingResultCell.name)
-        tableView.register(UINib(nibName: NoResultsCell.name, bundle: nil),
-                           forCellReuseIdentifier: NoResultsCell.name)
-        tableView.register(UINib(nibName: ResultInfoCell.name, bundle: nil),
-                           forCellReuseIdentifier: ResultInfoCell.name)
-       
+        tableView.register(cells: [
+            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandScapeScreenShotCell.self, AppIconCell.self
+        ])
+
         tableView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 print("\(indexPath.item) is Selected...!")
             })
             .disposed(by: disposeBag)
         
-        searchVM.updatedCellTypes
+        viewModel.updatedCellVMs
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items) { (tableView, indexPathRow, cellType) in
-                let indexPath = IndexPath(item: indexPathRow, section: 0)
-                
-                switch cellType {
-                case .allResultsCell(let cellVM):
-                    if let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchHistoryCell.name, for: indexPath) as? RecentSearchHistoryCell {
-                        cell.setData(cellVM)
-                        return cell
-                    }
-                    
-                case .searchResultsCell(let cellVM):
-                    if let cell = tableView.dequeueReusableCell(withIdentifier: SearchingResultCell.name, for: indexPath) as? SearchingResultCell {
-                        cell.setData(cellVM)
-                        return cell
-                    }
-                    
-                case .resultInfoCell(let cellVM):
-                    if let cell = tableView.dequeueReusableCell(withIdentifier: ResultInfoCell.name, for: indexPath) as? ResultInfoCell {
-                        cell.setData(cellVM)
-                        return cell
-                    }
-                    
-                case .noResultsCell:
-                    if let cell = tableView.dequeueReusableCell(withIdentifier: NoResultsCell.name, for: indexPath) as? NoResultsCell {
-                        return cell
-                    }
-                }
-                
-                return UITableViewCell()
-            }
-            .disposed(by: disposeBag)
+            .do(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+//                .disposed(by: disposeBag)
         
-        searchVM.searchHistory(.all)
+        viewModel.searchHistory(.all)
     }
 }
 
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return searchVM.updatedCellVMs.value[indexPath.row]
-        switch 
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.sections.count
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.sections[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let sections = viewModel.sections[indexPath.section]
+        return tableView.resolveCell(sections[indexPath.row], indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //        return searchVM.updatedCellVMs.value[indexPath.row]
+        
+    }
+                
 }
 
 

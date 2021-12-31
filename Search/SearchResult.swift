@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import RxSwift
 
 struct SYResponse: Decodable {
     let results: [SearchResult]
@@ -86,6 +88,30 @@ struct SearchResult: Decodable {
         self.userRatingCount = try container.decode(Int.self, forKey: .userRatingCount)
         self.averageUserRating = try container.decode(Double.self, forKey: .averageUserRating)
         
+    }
+}
+
+struct DisplayResult {
+    private var disposeBag = DisposeBag()
+    
+    var result: SearchResult
+    private(set) var imageMode: Observable<UIImage.ImageMode>
+    
+    init(_ result: SearchResult) {
+        self.result = result
+        
+        let url = URL(string: result.screenshotUrls[0])!
+        
+        let image = Observable.of(url)
+            .map { URLRequest(url: $0) }
+            .flatMap { request -> Observable<Data> in
+                return URLSession.shared.rx.data(request: request)
+            }
+            .map { UIImage(data: $0) }
+        
+        imageMode = image.compactMap { image in
+            return image?.imageMode()
+        }
     }
 }
 

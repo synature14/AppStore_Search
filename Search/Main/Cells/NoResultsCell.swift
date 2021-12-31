@@ -7,9 +7,14 @@
 
 import UIKit
 
-class NoResultsCell: UITableViewCell, BindableTableViewCell {
-    var cellType: UITableViewCell.Type
+class NoResultsCellViewModel: TableCellRepresentable {
+    var cellType: UITableViewCell.Type {
+        NoResultsCell.self
+    }
     
+}
+
+class NoResultsCell: UITableViewCell, BindableTableViewCell {
     static let name = "NoResultsCell"
 
     override func awakeFromNib() {
@@ -17,4 +22,6 @@ class NoResultsCell: UITableViewCell, BindableTableViewCell {
         // Initialization code
     }
     
+    func bindCellVM(_ cellVM: TableCellRepresentable?) {
+    }
 }

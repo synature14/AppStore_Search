@@ -31,7 +31,11 @@ class RecentSearchHistoryCell: UITableViewCell, BindableTableViewCell {
         wordLabel.text = ""
     }
     
-    func setData(_ vm: RecentSearchHistoryCellViewModel) {
+    
+    func bindCellVM(_ cellVM: TableCellRepresentable?) {
+        guard let vm = cellVM as? RecentSearchHistoryCellViewModel else {
+            return
+        }
         self.cellVM = vm
         wordLabel.text = vm.item.word
         setBindings()

@@ -12,7 +12,3 @@ protocol CellDelegate {
     func deleteRow(at indexPath: IndexPath)
 }
 
-struct Constants {
-    static let leading_Trailing_Padding: CGFloat = 40.0
-}
-

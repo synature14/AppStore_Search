@@ -8,22 +8,26 @@
 import Foundation
 import RxSwift
 
-extension SearchHistoryCellType {
-    var cellHeight: CGFloat {
-        switch self {
-        case .allResultsCell(_):
-            return 50.0
-        case .searchResultsCell(_):
-            return 45.0
-        case .resultInfoCell(let vm):
-            return vm.scaledImageHeight.asObservable()
-        case .noResultsCell:
-            return Observable.of(UIScreen.main.bounds.width)
-        }
-    }
-}
+//extension SearchHistoryCellType {
+//    var cellHeight: CGFloat {
+//        switch self {
+//        case .allResultsCell(_):
+//            return 50.0
+//        case .searchResultsCell(_):
+//            return 45.0
+//        case .resultInfoCell(let vm):
+//            return vm.scaledImageHeight.asObservable()
+//        case .noResultsCell:
+//            return Observable.of(UIScreen.main.bounds.width)
+//        }
+//    }
+//}
 
-class RecentSearchHistoryCellViewModel {
+class RecentSearchHistoryCellViewModel: TableCellRepresentable {
+    var cellType: UITableViewCell.Type {
+        RecentSearchHistoryCell.self
+    }
+    
     private var disposeBag = DisposeBag()
     var item: RecentSearchEntity
     

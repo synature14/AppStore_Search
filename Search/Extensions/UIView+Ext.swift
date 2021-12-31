@@ -16,4 +16,8 @@ extension UIView {
             layer.cornerRadius = newValue
         }
     }
+    
+    class var nib: UINib {
+        return UINib(nibName: self.className, bundle: self.bundle)
+    }
 }
