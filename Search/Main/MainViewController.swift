@@ -62,7 +62,7 @@ private extension MainViewController {
         tableView.delegate = self
         
         tableView.register(cells: [
-            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self
+            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self, ActivityViewCell.self
         ])
 
         tableView.rx.itemSelected
@@ -100,13 +100,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let cellVM = sections[indexPath.row]
         
         switch cellVM {
-        case _ as RecentSearchHistoryCellViewModel:
+        case _ as RecentSearchHistoryCellViewModel: // 검색어 히스토리 띄우는 셀
             return 50.0
         
-        case _ as SearchingResultCellViewModel:
+        case _ as SearchingResultCellViewModel:     // 검색어 타이핑할 때 띄우는 셀
             return 44.0
+        
+        case _ as ActivityViewModel:                // activityIndicatorView 띄우는 셀
+            return UIScreen.main.bounds.height / 3
             
-        case _ as NoResultsCellViewModel:
+        case _ as NoResultsCellViewModel:           // 해당되는 검색어 히스토리가 없을 때 띄우는 셀
             return UIScreen.main.bounds.height / 3
             
         case _ as AppIconCellViewModel:

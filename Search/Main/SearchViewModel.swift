@@ -74,6 +74,7 @@ class SearchViewModel {
         requestKeyword
             .do(onNext: { [weak self] searchTextValue in
                 SYCoreDataManager.shared.save(searchTextValue)
+                self?.sections = [[ActivityViewModel()]]
             })
             .flatMapLatest { NetworkManager.request(search: $0) }   // emit될 Observable 여러개일 수 있음. 이전에 만든 observable은 무시하고 가장 최근의 Observable을 따름
             .map { $0.results }

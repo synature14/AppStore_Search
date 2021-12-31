@@ -47,6 +47,8 @@
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
 		98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7573277DF6160042D1E6 /* ImageCache.swift */; };
+		98E6FA11277F5FDC00C0EC6A /* ActivityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E6FA0F277F5FDC00C0EC6A /* ActivityViewCell.swift */; };
+		98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E6FA10277F5FDC00C0EC6A /* ActivityViewCell.xib */; };
 		FF080207192534A34A370806 /* Pods_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		98AE7573277DF6160042D1E6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		98E6FA0F277F5FDC00C0EC6A /* ActivityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewCell.swift; sourceTree = "<group>"; };
+		98E6FA10277F5FDC00C0EC6A /* ActivityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityViewCell.xib; sourceTree = "<group>"; };
 		EC1B6C6D0A28ECCE31A39B3F /* Pods-Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.release.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +209,8 @@
 				98949DB2277C935700C29734 /* PortaitScreenShotCell.xib */,
 				983DB44C277EE8E7004CC8CA /* LandscapeScreenShotCell.swift */,
 				983DB44D277EE8E7004CC8CA /* LandscapeScreenShotCell.xib */,
+				98E6FA0F277F5FDC00C0EC6A /* ActivityViewCell.swift */,
+				98E6FA10277F5FDC00C0EC6A /* ActivityViewCell.xib */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -320,6 +326,7 @@
 				983DB44F277EE8E7004CC8CA /* LandscapeScreenShotCell.xib in Resources */,
 				98949DB4277C935700C29734 /* PortaitScreenShotCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
+				98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */,
 				983DB44B277EE715004CC8CA /* AppIconCell.xib in Resources */,
 				98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */,
 				9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */,
@@ -403,6 +410,7 @@
 				98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */,
 				98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */,
 				983DB446277EE4BD004CC8CA /* CellRepresentable.swift in Sources */,
+				98E6FA11277F5FDC00C0EC6A /* ActivityViewCell.swift in Sources */,
 				98949DB6277C9C7B00C29734 /* UIView+Ext.swift in Sources */,
 				9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */,
 				98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */,
