@@ -21,6 +21,7 @@ class MemoryStorage {
     // 조회
     func read(_ key: String) -> UIImage? {
         if let data = cache.object(forKey: key as NSString) {
+            print("[READ] From Memory")
             return UIImage(data: data as Data)
         }
         return nil
@@ -30,10 +31,12 @@ class MemoryStorage {
     func store(_ key: String, data: Data) {
         let nsData = NSData(data: data)
         cache.setObject(nsData, forKey: key as NSString)
+        print("[STORE] From Memory")
     }
     
     func remove(_ key: String) {
         cache.removeObject(forKey: key as NSString)
+        print("[DELETE] From Memory")
     }
 }
 

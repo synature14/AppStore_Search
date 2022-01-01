@@ -62,25 +62,28 @@ class ImageManager {
         do {
             if let cachedImage = try imageCache.value(key: imageFilePath) {
                 return Observable.of(cachedImage)
+                
+            } else {
+                // 이미지 서버에서 요청
+                return Observable.of(imageFilePath)
+                    .compactMap { URL(string: $0) }
+                    .map { URLRequest(url: $0) }
+                    .flatMap { request -> Observable<Data> in
+                        return URLSession.shared.rx.data(request: request)
+                    }
+                    .compactMap { UIImage(data: $0) }
+                    .do(onNext: { [weak self] image in
+                        do {
+                            try self?.imageCache.write(key: imageFilePath, image: image)
+                        } catch {
+                            print(SYStorageError.writeError)
+                        }
+                    })
             }
         } catch let error {
             print(error.localizedDescription)
         }
         
-        // 이미지 서버에서 요청
-        return Observable.of(imageFilePath)
-            .compactMap { URL(string: $0) }
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-                return URLSession.shared.rx.data(request: request)
-            }
-            .compactMap { UIImage(data: $0) }
-            .do(onNext: { [weak self] image in
-                do {
-                    try self?.imageCache.write(key: imageFilePath, image: image)
-                } catch {
-                    print(SYStorageError.writeError)
-                }
-            })
+        return .empty()
     }
 }

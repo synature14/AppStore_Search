@@ -18,7 +18,5 @@ class UIUtility {
     
     func loadImage(_ url: String) -> Observable<UIImage> {
         return ImageManager.shared.loadImage(url)
-            .observeOn(MainScheduler.instance)
-            .asObservable()
     }
 }

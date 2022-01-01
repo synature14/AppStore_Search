@@ -48,6 +48,7 @@ class DiskStorage {
         }
 
         maybeCachedCheckingQueue.async {
+            print("[STORE] Disk")
             self.fileManager.createFile(atPath: fileURL, contents: data)
             self.maybeCached?.insert(cacheDirectory.lastPathComponent)
         }
@@ -79,6 +80,8 @@ class DiskStorage {
             metaChangingQueue.async {
                 // 파일 메타 데이터 업데이트
             }
+            
+            print("[READ] Disk")
             return image
             
         } catch {
