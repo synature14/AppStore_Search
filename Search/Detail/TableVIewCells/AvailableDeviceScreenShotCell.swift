@@ -48,6 +48,7 @@ class AvailableDeviceScreenShotCell: UITableViewCell, BindableTableViewCell {
         ipadIconView.isHidden = ipadImages.isEmpty
         
         let supportWatch = !cellVM.supportedDevices
+            .map { $0.lowercased() }
             .filter { $0.contains("watch") }
             .isEmpty
         watchIconView.isHidden = !supportWatch
