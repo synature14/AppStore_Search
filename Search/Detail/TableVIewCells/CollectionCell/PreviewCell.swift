@@ -14,14 +14,8 @@ class PreviewCellViewModel: CollectionCellRepresentable {
     }
     
     private var disposeBag = DisposeBag()
-    lazy var previewImage: Observable<UIImage?> = {
-        return Observable.of(self.imageURL)
-            .compactMap { URL(string: $0) }
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-              return URLSession.shared.rx.data(request: request)
-            }
-            .map { UIImage(data: $0) }
+    lazy var previewImage: Observable<UIImage> = {
+        UIUtility.shared.loadImage(imageURL)
     }()
     
     private(set) var imageURL: String

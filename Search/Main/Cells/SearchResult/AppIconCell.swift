@@ -24,14 +24,8 @@ class AppIconCellViewModel: TableCellRepresentable {
         disposeBag = DisposeBag()
     }
     
-    lazy var appIconImage: Observable<UIImage?> = {
-        return Observable.of(searchResult.iconImage)
-            .compactMap { URL(string: $0) }
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-              return URLSession.shared.rx.data(request: request)
-            }
-            .map { UIImage(data: $0) }
+    lazy var appIconImage: Observable<UIImage> = {
+        return UIUtility.shared.loadImage(searchResult.iconImage)
     }()
 }
 

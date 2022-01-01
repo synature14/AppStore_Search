@@ -15,20 +15,13 @@ class AppIconBigCellViewModel: TableCellRepresentable {
     
     private(set) var result: SearchResult
     
-    lazy var appIconImage: Observable<UIImage?> = {
-        return Observable.of(result.iconImage)
-            .compactMap { URL(string: $0) }
-            .map { URLRequest(url: $0) }
-            .flatMap { request -> Observable<Data> in
-              return URLSession.shared.rx.data(request: request)
-            }
-            .map { UIImage(data: $0) }
+    lazy var appIconImage: Observable<UIImage> = {
+        return UIUtility.shared.loadImage(result.iconImage)
     }()
     
     init(_ result: SearchResult) {
         self.result = result
     }
-    
 }
 
 class AppIconBigCell: UITableViewCell, BindableTableViewCell {
