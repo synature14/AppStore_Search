@@ -15,3 +15,11 @@ protocol TableCellRepresentable {
 protocol BindableTableViewCell: UITableViewCell {
     func bindCellVM(_ cellVM: TableCellRepresentable?)
 }
+
+protocol CollectionCellRepresentable {
+    var cellType: UICollectionViewCell.Type { get }
+}
+
+protocol BindableCollectionViewCell: UICollectionViewCell {
+    func bindCellVM(_ cellVM: CollectionCellRepresentable?)
+}

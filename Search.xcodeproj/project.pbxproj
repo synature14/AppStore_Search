@@ -49,6 +49,11 @@
 		98AC8A3B278002F900B8FBB3 /* AppInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */; };
 		98AC8A3E2780128000B8FBB3 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A3C2780128000B8FBB3 /* TitleCell.swift */; };
 		98AC8A3F2780128000B8FBB3 /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A3D2780128000B8FBB3 /* TitleCell.xib */; };
+		98AC8A4227801BE500B8FBB3 /* CollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A4027801BE500B8FBB3 /* CollectionViewContainerCell.swift */; };
+		98AC8A4327801BE500B8FBB3 /* CollectionViewContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A4127801BE500B8FBB3 /* CollectionViewContainerCell.xib */; };
+		98AC8A472780249A00B8FBB3 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A452780249A00B8FBB3 /* BadgeCell.swift */; };
+		98AC8A482780249A00B8FBB3 /* BadgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A462780249A00B8FBB3 /* BadgeCell.xib */; };
+		98AC8A4A2780251E00B8FBB3 /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A492780251E00B8FBB3 /* UICollectionView+Ext.swift */; };
 		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
@@ -105,6 +110,11 @@
 		98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
 		98AC8A3C2780128000B8FBB3 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		98AC8A3D2780128000B8FBB3 /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
+		98AC8A4027801BE500B8FBB3 /* CollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewContainerCell.swift; sourceTree = "<group>"; };
+		98AC8A4127801BE500B8FBB3 /* CollectionViewContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewContainerCell.xib; sourceTree = "<group>"; };
+		98AC8A452780249A00B8FBB3 /* BadgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
+		98AC8A462780249A00B8FBB3 /* BadgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeCell.xib; sourceTree = "<group>"; };
+		98AC8A492780251E00B8FBB3 /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
 		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -273,8 +283,20 @@
 				98AC8A37277FFE6800B8FBB3 /* AppIconBigCell.xib */,
 				98AC8A3C2780128000B8FBB3 /* TitleCell.swift */,
 				98AC8A3D2780128000B8FBB3 /* TitleCell.xib */,
+				98AC8A4027801BE500B8FBB3 /* CollectionViewContainerCell.swift */,
+				98AC8A4127801BE500B8FBB3 /* CollectionViewContainerCell.xib */,
+				98AC8A442780244400B8FBB3 /* CollectionCell */,
 			);
 			path = TableVIewCells;
+			sourceTree = "<group>";
+		};
+		98AC8A442780244400B8FBB3 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				98AC8A452780249A00B8FBB3 /* BadgeCell.swift */,
+				98AC8A462780249A00B8FBB3 /* BadgeCell.xib */,
+			);
+			path = CollectionCell;
 			sourceTree = "<group>";
 		};
 		98AE7563277DCFB00042D1E6 /* Extensions */ = {
@@ -283,6 +305,7 @@
 				98949DB5277C9C7B00C29734 /* UIView+Ext.swift */,
 				98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */,
 				983DB440277ECD9C004CC8CA /* UIImage+Ext.swift */,
+				98AC8A492780251E00B8FBB3 /* UICollectionView+Ext.swift */,
 				983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */,
 				983DB454277EF146004CC8CA /* NSObject+Ext.swift */,
 			);
@@ -359,6 +382,8 @@
 			files = (
 				983DB44F277EE8E7004CC8CA /* LandscapeScreenShotCell.xib in Resources */,
 				98949DB4277C935700C29734 /* PortaitScreenShotCell.xib in Resources */,
+				98AC8A482780249A00B8FBB3 /* BadgeCell.xib in Resources */,
+				98AC8A4327801BE500B8FBB3 /* CollectionViewContainerCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
 				98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */,
 				98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */,
@@ -436,7 +461,9 @@
 				37F4AD31277AD16700941E21 /* MainViewController.swift in Sources */,
 				37F4AD2D277AD16700941E21 /* AppDelegate.swift in Sources */,
 				37F4AD4F277AE09900941E21 /* SearchViewModel.swift in Sources */,
+				98AC8A4227801BE500B8FBB3 /* CollectionViewContainerCell.swift in Sources */,
 				98949DAF277C8C2900C29734 /* SearchingResultCell.swift in Sources */,
+				98AC8A4A2780251E00B8FBB3 /* UICollectionView+Ext.swift in Sources */,
 				983DB441277ECD9C004CC8CA /* UIImage+Ext.swift in Sources */,
 				98949DA7277C6B9200C29734 /* Common.swift in Sources */,
 				37F4AD42277AD65F00941E21 /* RecentSearchWordModel.xcdatamodeld in Sources */,
@@ -445,6 +472,7 @@
 				37F4AD4A277AD75600941E21 /* RecentSearchEntity+CoreDataProperties.swift in Sources */,
 				37F4AD2F277AD16700941E21 /* SceneDelegate.swift in Sources */,
 				98AC8A3E2780128000B8FBB3 /* TitleCell.swift in Sources */,
+				98AC8A472780249A00B8FBB3 /* BadgeCell.swift in Sources */,
 				98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */,
 				98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */,
 				98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */,
