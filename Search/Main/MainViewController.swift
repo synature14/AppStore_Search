@@ -67,6 +67,8 @@ private extension MainViewController {
 
         tableView.rx.itemSelected
             .subscribe(onNext: { indexPath in
+                let vc = AppInfoViewController.create()
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("\(indexPath.item) is Selected...!")
             })
             .disposed(by: disposeBag)

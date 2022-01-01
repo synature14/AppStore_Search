@@ -42,6 +42,8 @@
 		98949DB6277C9C7B00C29734 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DB5277C9C7B00C29734 /* UIView+Ext.swift */; };
 		9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */; };
 		9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */; };
+		98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */; };
+		98AC8A34277FFA4900B8FBB3 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */; };
 		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
@@ -91,6 +93,8 @@
 		98949DB5277C9C7B00C29734 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		9898CBE9277B3DAE00D89E60 /* RecentSearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchHistoryCell.swift; sourceTree = "<group>"; };
 		9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchHistoryCell.xib; sourceTree = "<group>"; };
+		98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 				98949DA6277C6B9200C29734 /* Common.swift */,
 				983DB443277ECFA0004CC8CA /* UIUtility.swift */,
 				9898CBE8277B3D0600D89E60 /* Main */,
+				98AC8A30277FF9FA00B8FBB3 /* Detail */,
 				37F4AD57277AEA8500941E21 /* Model */,
 				37F4AD50277AE28C00941E21 /* Network */,
 				37F4AD4B277AD81D00941E21 /* RecentSearchCoreData */,
@@ -240,6 +245,23 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		98AC8A30277FF9FA00B8FBB3 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */,
+				98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */,
+				98AC8A35277FFCC100B8FBB3 /* TableVIewCells */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		98AC8A35277FFCC100B8FBB3 /* TableVIewCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableVIewCells;
+			sourceTree = "<group>";
+		};
 		98AE7563277DCFB00042D1E6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +346,7 @@
 				98949DB4277C935700C29734 /* PortaitScreenShotCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
 				98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */,
+				98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */,
 				983DB44B277EE715004CC8CA /* AppIconCell.xib in Resources */,
 				98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */,
 				9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */,
@@ -384,6 +407,7 @@
 			files = (
 				983DB451277EF045004CC8CA /* SearchingResultCellViewModel.swift in Sources */,
 				98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */,
+				98AC8A34277FFA4900B8FBB3 /* AppInfoViewController.swift in Sources */,
 				98949DB3277C935700C29734 /* PortaitScreenShotCell.swift in Sources */,
 				982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */,
 				983DB444277ECFA0004CC8CA /* UIUtility.swift in Sources */,

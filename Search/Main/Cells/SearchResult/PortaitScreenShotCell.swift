@@ -64,6 +64,10 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        screenShotImageView.image = nil
+        screenShotImageView01.image = nil
+        screenShotImageView02.image = nil
         // 이미지 요청 cancel
         self.disposeBag = DisposeBag()
     }
