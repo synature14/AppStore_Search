@@ -19,6 +19,11 @@ class AppInfoViewController: UIViewController {
         setTableView()
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.navigationController?.navigationBar.prefersLargeTitles = false
+//    }
+    
     static func create(result: SearchResult) -> AppInfoViewController {
         let sb = UIStoryboard(name: "Detail", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "AppInfoViewController") as! AppInfoViewController
@@ -45,7 +50,7 @@ private extension AppInfoViewController {
         tableView.delegate = self
         
         tableView.register(cells: [
-            AppIconBigCell.self
+            AppIconBigCell.self, TitleCell.self
         ])
 
         tableView.rx.itemSelected
@@ -88,6 +93,9 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
         switch section[indexPath.row] {
         case _ as AppIconBigCellViewModel:
             return 130
+            
+        case _ as TitleCellViewModel:
+            return 45
         default:
             return 0
         }
