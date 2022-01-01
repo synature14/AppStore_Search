@@ -101,38 +101,23 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRt-Xe-tXb">
-                                <rect key="frame" x="293" y="62.5" width="52" height="22"/>
-                                <color key="backgroundColor" systemColor="separatorColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eje-VQ-uEP">
+                                <rect key="frame" x="285" y="60" width="60" height="27.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="gpC-tb-jSB"/>
-                                    <constraint firstAttribute="width" constant="52" id="sg3-mA-9q8"/>
+                                    <constraint firstAttribute="width" constant="60" id="M43-57-BUc"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="받기">
-                                            <attributes>
-                                                <font key="NSFont" size="12" name="AppleSDGothicNeo-Regular"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <buttonConfiguration key="configuration" style="gray" title="받기" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="11"/>
                                 </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="9"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5aD-39-ZE1" firstAttribute="leading" secondItem="bom-jI-U0A" secondAttribute="leading" id="3Hv-gI-nYn"/>
-                            <constraint firstAttribute="trailing" secondItem="lRt-Xe-tXb" secondAttribute="trailing" id="8T9-Kw-Xw7"/>
-                            <constraint firstItem="lRt-Xe-tXb" firstAttribute="leading" secondItem="z9m-NB-NF8" secondAttribute="trailing" constant="5" id="Apc-yf-M0q"/>
-                            <constraint firstItem="lRt-Xe-tXb" firstAttribute="centerY" secondItem="bom-jI-U0A" secondAttribute="centerY" id="BlS-eW-9pj"/>
                             <constraint firstAttribute="bottom" secondItem="5aD-39-ZE1" secondAttribute="bottom" id="Cah-05-4HF"/>
+                            <constraint firstItem="eje-VQ-uEP" firstAttribute="centerY" secondItem="bom-jI-U0A" secondAttribute="centerY" id="HQp-Eh-gws"/>
                             <constraint firstItem="z9m-NB-NF8" firstAttribute="leading" secondItem="5aD-39-ZE1" secondAttribute="trailing" constant="8" id="Ka2-MV-cJC"/>
+                            <constraint firstAttribute="trailing" secondItem="eje-VQ-uEP" secondAttribute="trailing" id="XSi-4m-Slv"/>
                             <constraint firstItem="5aD-39-ZE1" firstAttribute="top" secondItem="bom-jI-U0A" secondAttribute="top" id="ZYV-DA-0gt"/>
                             <constraint firstAttribute="bottom" secondItem="z9m-NB-NF8" secondAttribute="bottom" constant="10" id="btY-aM-5vO"/>
                             <constraint firstItem="z9m-NB-NF8" firstAttribute="top" secondItem="bom-jI-U0A" secondAttribute="top" constant="3" id="gJo-58-mgs"/>
@@ -161,9 +146,6 @@
     <resources>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
-        <systemColor name="separatorColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

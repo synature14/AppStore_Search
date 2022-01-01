@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import UIKit
 
 class AppInfoViewModel {
     private var disposeBag = DisposeBag()
@@ -50,7 +51,16 @@ class AppInfoViewModel {
         let availableDevices = [AvailableDeviceScreenShotCellViewModel(result.ipadScreenshotUrls, supportedDevices: result.supportedDevices)]
         
         let 정보 = [TitleCellViewModel("정보")]
-        section = [appIconBig, badges, 새로운기능Title, 미리보기, screenShots, availableDevices, 정보]
+        let infoTexts = [InfoTextCellViewModel(.제공자, desc: result.sellerName),
+                         InfoTextCellViewModel(.크기, desc: result.fileSizeBytes ?? "0"),
+                         InfoTextCellViewModel(.카테고리, desc: result.genres.first ?? ""),
+                         InfoTextCellViewModel(.호환성, desc: result.minimumOsVersion),
+                         InfoTextCellViewModel(.언어, desc: result.languageCodesISO2A.description),
+                         InfoTextCellViewModel(.연령등급, desc: result.trackContentRating),
+                         InfoTextCellViewModel(.저작권, desc: "© \(result.sellerName)")
+        ]
+        
+        section = [appIconBig, badges, 새로운기능Title, 미리보기, screenShots, availableDevices, 정보, infoTexts]
         return section
     }
     

@@ -59,6 +59,8 @@
 		98AC8A502780416B00B8FBB3 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A4F2780416B00B8FBB3 /* String+Ext.swift */; };
 		98AC8A53278064B700B8FBB3 /* AvailableDeviceScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A51278064B700B8FBB3 /* AvailableDeviceScreenShotCell.swift */; };
 		98AC8A54278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */; };
+		98AC8A572780755600B8FBB3 /* InfoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A552780755600B8FBB3 /* InfoTextCell.swift */; };
+		98AC8A582780755600B8FBB3 /* InfoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A562780755600B8FBB3 /* InfoTextCell.xib */; };
 		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
@@ -125,6 +127,8 @@
 		98AC8A4F2780416B00B8FBB3 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		98AC8A51278064B700B8FBB3 /* AvailableDeviceScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableDeviceScreenShotCell.swift; sourceTree = "<group>"; };
 		98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvailableDeviceScreenShotCell.xib; sourceTree = "<group>"; };
+		98AC8A552780755600B8FBB3 /* InfoTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextCell.swift; sourceTree = "<group>"; };
+		98AC8A562780755600B8FBB3 /* InfoTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTextCell.xib; sourceTree = "<group>"; };
 		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				98AC8A4127801BE500B8FBB3 /* CollectionViewContainerCell.xib */,
 				98AC8A51278064B700B8FBB3 /* AvailableDeviceScreenShotCell.swift */,
 				98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */,
+				98AC8A552780755600B8FBB3 /* InfoTextCell.swift */,
+				98AC8A562780755600B8FBB3 /* InfoTextCell.xib */,
 				98AC8A442780244400B8FBB3 /* CollectionCell */,
 			);
 			path = TableVIewCells;
@@ -401,6 +407,7 @@
 				98AC8A482780249A00B8FBB3 /* BadgeCell.xib in Resources */,
 				98AC8A4327801BE500B8FBB3 /* CollectionViewContainerCell.xib in Resources */,
 				37F4AD39277AD16A00941E21 /* LaunchScreen.storyboard in Resources */,
+				98AC8A582780755600B8FBB3 /* InfoTextCell.xib in Resources */,
 				98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */,
 				98AC8A54278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib in Resources */,
 				98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */,
@@ -476,6 +483,7 @@
 				98AC8A4D27803E7100B8FBB3 /* PreviewCell.swift in Sources */,
 				37F4AD52277AE2DD00941E21 /* NetworkManager.swift in Sources */,
 				983DB44A277EE715004CC8CA /* AppIconCell.swift in Sources */,
+				98AC8A572780755600B8FBB3 /* InfoTextCell.swift in Sources */,
 				37F4AD31277AD16700941E21 /* MainViewController.swift in Sources */,
 				37F4AD2D277AD16700941E21 /* AppDelegate.swift in Sources */,
 				37F4AD4F277AE09900941E21 /* SearchViewModel.swift in Sources */,
