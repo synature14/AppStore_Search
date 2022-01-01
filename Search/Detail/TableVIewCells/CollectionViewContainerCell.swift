@@ -16,9 +16,24 @@ struct BadgeInfo {
     enum BadgeCategory {
         case 평가
         case 연령
-        case 차트
+        case 카테고리
         case 개발자
         case 언어
+    }
+    
+    func typeToString() -> String {
+        switch category {
+        case .평가:
+            return "평가"
+        case .연령:
+            return "연령"
+        case .카테고리:
+            return "카테고리"
+        case .개발자:
+            return "개발자"
+        case .언어:
+            return "언어"
+        }
     }
 }
 
@@ -52,11 +67,11 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         var items: [CollectionCellRepresentable] = []
         let 평가 = BadgeInfo(category: .평가, result: searchResult)
         let 연령 = BadgeInfo(category: .연령, result: searchResult)
-        let 차트 = BadgeInfo(category: .차트, result: searchResult)
+        let 카테고리 = BadgeInfo(category: .카테고리, result: searchResult)
         let 개발자 = BadgeInfo(category: .개발자, result: searchResult)
         let 언어 = BadgeInfo(category: .언어, result: searchResult)
         
-        let vms = [평가, 연령, 차트, 개발자, 언어].map { BadgeCellViewModel($0) }
+        let vms = [평가, 연령, 카테고리, 개발자, 언어].map { BadgeCellViewModel($0) }
         items = vms
         
         return items

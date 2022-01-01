@@ -33,7 +33,7 @@ class AppInfoViewModel {
     private func configureCellVMs(_ result: SearchResult) -> [[TableCellRepresentable]] {
         var section: [[TableCellRepresentable]] = []
         let appIconBig = [AppIconBigCellViewModel(result)]
-        let badges = [CollectionViewContainerCellViewModel(result, cellHeight: 60)]
+        let badges = [CollectionViewContainerCellViewModel(result, cellHeight: 100)]
         let 새로운기능Title = [TitleCellViewModel("새로운 기능", buttonTitle: "버전 기록")]
         let 미리보기 = [TitleCellViewModel("미리보기")]
         let 정보 = [TitleCellViewModel("정보")]
