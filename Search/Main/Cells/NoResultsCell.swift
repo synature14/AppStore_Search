@@ -15,8 +15,6 @@ class NoResultsCellViewModel: TableCellRepresentable {
 }
 
 class NoResultsCell: UITableViewCell, BindableTableViewCell {
-    static let name = "NoResultsCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

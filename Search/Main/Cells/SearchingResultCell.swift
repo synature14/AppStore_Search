@@ -8,8 +8,6 @@
 import UIKit
 
 class SearchingResultCell: UITableViewCell, BindableTableViewCell {
-    static let name = "SearchingResultCell"
-    
     @IBOutlet weak var wordLabel: UILabel!
     
     

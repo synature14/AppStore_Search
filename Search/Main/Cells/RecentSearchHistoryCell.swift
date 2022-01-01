@@ -10,8 +10,6 @@ import RxSwift
 import RxCocoa
 
 class RecentSearchHistoryCell: UITableViewCell, BindableTableViewCell {
-    static let name = "RecentSearchHistoryCell"
-    
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     
