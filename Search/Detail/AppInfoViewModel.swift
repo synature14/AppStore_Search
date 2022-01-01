@@ -47,9 +47,10 @@ class AppInfoViewModel {
         let screenShots = [CollectionViewContainerCellViewModel(result,
                                                                 cellSize: cellSize,
                                                                 type: .PreviewCell)]
+        let availableDevices = [AvailableDeviceScreenShotCellViewModel(result.ipadScreenshotUrls, supportedDevices: result.supportedDevices)]
         
         let 정보 = [TitleCellViewModel("정보")]
-        section = [appIconBig, badges, 새로운기능Title, 미리보기, screenShots, 정보]
+        section = [appIconBig, badges, 새로운기능Title, 미리보기, screenShots, availableDevices, 정보]
         return section
     }
     

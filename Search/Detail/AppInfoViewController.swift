@@ -45,7 +45,8 @@ private extension AppInfoViewController {
         tableView.delegate = self
         
         tableView.register(cells: [
-            AppIconBigCell.self, TitleCell.self, CollectionViewContainerCell.self
+            AppIconBigCell.self, TitleCell.self, CollectionViewContainerCell.self,
+            AvailableDeviceScreenShotCell.self
         ])
 
         tableView.rx.itemSelected
@@ -94,6 +95,9 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
             
         case let cellVM as CollectionViewContainerCellViewModel:
             return cellVM.cellSize.height
+        
+        case _ as AvailableDeviceScreenShotCellViewModel:
+            return 60
         default:
             return 0
         }
