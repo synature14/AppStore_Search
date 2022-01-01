@@ -141,6 +141,7 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
                 break
             case .PreviewCell:
                 layout.minimumLineSpacing = 15
+                collectionView.decelerationRate = .init(rawValue: 0.6)
             default:
                 break
             }
