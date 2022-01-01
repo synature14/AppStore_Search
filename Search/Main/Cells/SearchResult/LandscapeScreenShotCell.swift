@@ -15,13 +15,15 @@ class LandscapeCellViewModel: TableCellRepresentable {
     }
     
     private(set) var urls: [String]?
+    var searchResult: SearchResult
     let imageSize: CGSize
     
     private var disposeBag = DisposeBag()
     
-    init(_ imageUrls: [String], imageSize: CGSize) {
-        self.urls = imageUrls
+    init(_ searchResult: SearchResult, imageSize: CGSize) {
+        self.searchResult = searchResult
         self.imageSize = imageSize
+        self.urls = searchResult.screenshotUrls
     }
 }
 

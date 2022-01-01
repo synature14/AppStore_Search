@@ -64,14 +64,6 @@ private extension MainViewController {
         tableView.register(cells: [
             RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self, ActivityViewCell.self
         ])
-
-        tableView.rx.itemSelected
-            .subscribe(onNext: { indexPath in
-                let vc = AppInfoViewController.create()
-                self.navigationController?.pushViewController(vc, animated: true)
-                print("\(indexPath.item) is Selected...!")
-            })
-            .disposed(by: disposeBag)
         
         viewModel.updatedCellVMs
             .observeOn(MainScheduler.instance)
@@ -131,6 +123,28 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             return 0.0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = viewModel.sections[indexPath.section][indexPath.item]
+        var result: SearchResult
+        
+        switch selectedItem {
+        case let appInfoVM as AppIconCellViewModel:
+            result = appInfoVM.searchResult
+            
+        case let screenShotVM as LandscapeCellViewModel:
+            result = screenShotVM.searchResult
+            
+        case let screenShotVM as PortaitCellViewModel:
+            result = screenShotVM.searchResult
+        default:
+            return
+        }
+        
+        let vc = AppInfoViewController.create(result: result)
+        self.navigationController?.pushViewController(vc, animated: true)
+        print("\(indexPath.item) is Selected...!")
     }
                 
 }

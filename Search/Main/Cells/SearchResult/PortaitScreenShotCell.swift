@@ -14,15 +14,11 @@ class PortaitCellViewModel: TableCellRepresentable {
         PortaitScreenShotCell.self
     }
     
-    private var searchResult: SearchResult?
+    var searchResult: SearchResult
     let imageSize: CGSize
     var screenShotTrailingConstraint: CGFloat = 0.0
     
     lazy var screenShotUrls: [String] = {
-        guard let searchResult = self.searchResult else {
-            return []
-        }
-
         // MARK: 깜짝 놀랐쥬?? 임시 코드 ~
         var count = searchResult.screenshotUrls.count
         if count > 3 {

@@ -44,6 +44,9 @@
 		9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */; };
 		98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */; };
 		98AC8A34277FFA4900B8FBB3 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */; };
+		98AC8A38277FFE6800B8FBB3 /* AppIconBigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A36277FFE6800B8FBB3 /* AppIconBigCell.swift */; };
+		98AC8A39277FFE6800B8FBB3 /* AppIconBigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A37277FFE6800B8FBB3 /* AppIconBigCell.xib */; };
+		98AC8A3B278002F900B8FBB3 /* AppInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */; };
 		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
@@ -95,6 +98,9 @@
 		9898CBEA277B3DAE00D89E60 /* RecentSearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchHistoryCell.xib; sourceTree = "<group>"; };
 		98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
+		98AC8A36277FFE6800B8FBB3 /* AppIconBigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconBigCell.swift; sourceTree = "<group>"; };
+		98AC8A37277FFE6800B8FBB3 /* AppIconBigCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppIconBigCell.xib; sourceTree = "<group>"; };
+		98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
 		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -250,6 +256,7 @@
 			children = (
 				98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */,
 				98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */,
+				98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */,
 				98AC8A35277FFCC100B8FBB3 /* TableVIewCells */,
 			);
 			path = Detail;
@@ -258,6 +265,8 @@
 		98AC8A35277FFCC100B8FBB3 /* TableVIewCells */ = {
 			isa = PBXGroup;
 			children = (
+				98AC8A36277FFE6800B8FBB3 /* AppIconBigCell.swift */,
+				98AC8A37277FFE6800B8FBB3 /* AppIconBigCell.xib */,
 			);
 			path = TableVIewCells;
 			sourceTree = "<group>";
@@ -349,6 +358,7 @@
 				98AC8A32277FFA2600B8FBB3 /* Detail.storyboard in Resources */,
 				983DB44B277EE715004CC8CA /* AppIconCell.xib in Resources */,
 				98949DB0277C8C2900C29734 /* SearchingResultCell.xib in Resources */,
+				98AC8A39277FFE6800B8FBB3 /* AppIconBigCell.xib in Resources */,
 				9898CBEC277B3DAE00D89E60 /* RecentSearchHistoryCell.xib in Resources */,
 				37F4AD36277AD16A00941E21 /* Assets.xcassets in Resources */,
 				98949DAC277C87F200C29734 /* NoResultsCell.xib in Resources */,
@@ -413,6 +423,7 @@
 				983DB444277ECFA0004CC8CA /* UIUtility.swift in Sources */,
 				37F4AD56277AEA7000941E21 /* SearchResult.swift in Sources */,
 				983DB44E277EE8E7004CC8CA /* LandscapeScreenShotCell.swift in Sources */,
+				98AC8A38277FFE6800B8FBB3 /* AppIconBigCell.swift in Sources */,
 				37F4AD52277AE2DD00941E21 /* NetworkManager.swift in Sources */,
 				983DB44A277EE715004CC8CA /* AppIconCell.swift in Sources */,
 				37F4AD31277AD16700941E21 /* MainViewController.swift in Sources */,
@@ -434,6 +445,7 @@
 				98949DB6277C9C7B00C29734 /* UIView+Ext.swift in Sources */,
 				9898CBEB277B3DAE00D89E60 /* RecentSearchHistoryCell.swift in Sources */,
 				98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */,
+				98AC8A3B278002F900B8FBB3 /* AppInfoViewModel.swift in Sources */,
 				983DB453277EF0D5004CC8CA /* UITableView+Ext.swift in Sources */,
 				37F4AD54277AE7CB00941E21 /* SYError.swift in Sources */,
 				37F4AD4D277AD84700941E21 /* SYCoreDataManager.swift in Sources */,

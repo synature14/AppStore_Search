@@ -26,8 +26,6 @@ class SearchViewModel {
         }
     }
     let updatedCellVMs = BehaviorRelay<[[TableCellRepresentable]]>(value: [[]])     // tableView reload 시키는 주체
-
-    private var response: Observable<SYResponse>?
     
     init() {
         bindings()
@@ -58,7 +56,7 @@ class SearchViewModel {
             
             let representableImageUrl = result.screenshotUrls.first ?? ""
             if representableImageUrl.isLandscape == true {
-                let landscapeVM = LandscapeCellViewModel(result.screenshotUrls, imageSize: representableImageUrl.size)
+                let landscapeVM = LandscapeCellViewModel(result, imageSize: representableImageUrl.size)
                 cellVMs.append(landscapeVM)
             } else {
                 let portraitVM = PortaitCellViewModel(result, imageSize: representableImageUrl.size)
