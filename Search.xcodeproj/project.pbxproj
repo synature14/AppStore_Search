@@ -61,6 +61,7 @@
 		98AC8A54278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */; };
 		98AC8A572780755600B8FBB3 /* InfoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A552780755600B8FBB3 /* InfoTextCell.swift */; };
 		98AC8A582780755600B8FBB3 /* InfoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A562780755600B8FBB3 /* InfoTextCell.xib */; };
+		98AC8A5C27809D6200B8FBB3 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A5B27809D6200B8FBB3 /* CarouselLayout.swift */; };
 		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
@@ -129,6 +130,7 @@
 		98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvailableDeviceScreenShotCell.xib; sourceTree = "<group>"; };
 		98AC8A552780755600B8FBB3 /* InfoTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextCell.swift; sourceTree = "<group>"; };
 		98AC8A562780755600B8FBB3 /* InfoTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTextCell.xib; sourceTree = "<group>"; };
+		98AC8A5B27809D6200B8FBB3 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		98AC8A30277FF9FA00B8FBB3 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				98AC8A5B27809D6200B8FBB3 /* CarouselLayout.swift */,
 				98AC8A31277FFA2600B8FBB3 /* Detail.storyboard */,
 				98AC8A33277FFA4900B8FBB3 /* AppInfoViewController.swift */,
 				98AC8A3A278002F900B8FBB3 /* AppInfoViewModel.swift */,
@@ -498,6 +501,7 @@
 				37F4AD4A277AD75600941E21 /* RecentSearchEntity+CoreDataProperties.swift in Sources */,
 				37F4AD2F277AD16700941E21 /* SceneDelegate.swift in Sources */,
 				98AC8A53278064B700B8FBB3 /* AvailableDeviceScreenShotCell.swift in Sources */,
+				98AC8A5C27809D6200B8FBB3 /* CarouselLayout.swift in Sources */,
 				98AC8A3E2780128000B8FBB3 /* TitleCell.swift in Sources */,
 				98AC8A472780249A00B8FBB3 /* BadgeCell.swift in Sources */,
 				98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */,

@@ -130,21 +130,21 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
         collectionView.dataSource = self
         collectionView.register(cells: [ BadgeCell.self, PreviewCell.self ])
         
-        
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = cellVM?.cellSize ?? .zero
-            layout.scrollDirection = .horizontal
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-            
-            switch cellVM?.type {
-            case .BadgeCell:
-                break
-            case .PreviewCell:
-                layout.minimumLineSpacing = 15
-                collectionView.decelerationRate = .init(rawValue: 0.6)
-            default:
-                break
+        switch cellVM?.type {
+        case .BadgeCell:
+            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.itemSize = cellVM?.cellSize ?? .zero
+                layout.scrollDirection = .horizontal
+                layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             }
+        case .PreviewCell:
+            // layout 교체
+            let carouselLayout = CarouselLayout()
+            carouselLayout.eachItemSize = cellVM?.cellSize ?? .zero
+            carouselLayout.itemCount = cellVM?.items.count ?? 0
+            collectionView.collectionViewLayout = carouselLayout
+        default:
+            break
         }
     }
     
