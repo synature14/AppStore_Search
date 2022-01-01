@@ -93,7 +93,7 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
             return 45
             
         case let cellVM as CollectionViewContainerCellViewModel:
-            return cellVM.cellHeight
+            return cellVM.cellSize.height
         default:
             return 0
         }

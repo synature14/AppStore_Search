@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,8 +17,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="158" height="97"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cw4-69-xk5" userLabel="separator">
+                        <rect key="frame" x="0.0" y="0.0" width="158" height="0.5"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.25" id="pap-tC-WfW"/>
+                        </constraints>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5m6-ve-doA">
-                        <rect key="frame" x="0.0" y="0.0" width="158" height="97"/>
+                        <rect key="frame" x="0.0" y="0.5" width="158" height="96.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-Of-t6j">
                                 <rect key="frame" x="0.0" y="0.0" width="158" height="17"/>
@@ -75,7 +83,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6N-AW-wRF">
-                                <rect key="frame" x="0.0" y="67" width="158" height="10"/>
+                                <rect key="frame" x="0.0" y="67" width="158" height="9.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="소셜 네트워킹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-CT-gvL">
                                         <rect key="frame" x="5" y="5" width="148" height="16"/>
@@ -92,7 +100,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-7V-5Yc">
-                                <rect key="frame" x="0.0" y="77" width="158" height="20"/>
+                                <rect key="frame" x="0.0" y="76.5" width="158" height="20"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wnx-Si-klx">
                                         <rect key="frame" x="15" y="0.0" width="128" height="20"/>
@@ -132,14 +140,27 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMw-yw-I0o" userLabel="separator">
+                        <rect key="frame" x="0.0" y="97" width="158" height="0.0"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.25" id="WM4-ez-Chp"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="5m6-ve-doA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5UO-hM-8Hj"/>
+                <constraint firstItem="cw4-69-xk5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="29C-eo-qmS"/>
+                <constraint firstItem="5m6-ve-doA" firstAttribute="top" secondItem="cw4-69-xk5" secondAttribute="bottom" id="B4a-9y-Zbt"/>
+                <constraint firstItem="IMw-yw-I0o" firstAttribute="top" secondItem="5m6-ve-doA" secondAttribute="bottom" id="CMV-Zb-MX7"/>
                 <constraint firstItem="5m6-ve-doA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SRE-Mb-mfh"/>
                 <constraint firstAttribute="trailing" secondItem="5m6-ve-doA" secondAttribute="trailing" id="TIU-KJ-8DW"/>
-                <constraint firstAttribute="bottom" secondItem="5m6-ve-doA" secondAttribute="bottom" id="i8B-e0-Q1r"/>
+                <constraint firstAttribute="trailing" secondItem="cw4-69-xk5" secondAttribute="trailing" id="ZsL-ZO-5ac"/>
+                <constraint firstItem="IMw-yw-I0o" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fNC-O8-yxa"/>
+                <constraint firstAttribute="trailing" secondItem="IMw-yw-I0o" secondAttribute="trailing" id="j6i-35-HsF"/>
+                <constraint firstAttribute="bottom" secondItem="IMw-yw-I0o" secondAttribute="bottom" id="k6v-Iu-Rgf"/>
+                <constraint firstItem="cw4-69-xk5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mi1-42-9It"/>
             </constraints>
             <size key="customSize" width="158" height="97"/>
             <connections>
@@ -163,5 +184,8 @@
         <image name="person.crop.square" catalog="system" width="128" height="114"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="star.fill.left" catalog="system" width="128" height="116"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

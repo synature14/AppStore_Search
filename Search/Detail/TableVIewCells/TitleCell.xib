@@ -17,16 +17,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 기능" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xA9-87-dwl">
-                        <rect key="frame" x="20" y="12" width="77.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <rect key="frame" x="20" y="11.5" width="82.5" height="21.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90B-u1-zKN">
-                        <rect key="frame" x="227" y="0.0" width="73" height="44"/>
+                        <rect key="frame" x="231" y="0.0" width="69" height="44"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="버전 기록">
-                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
+                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="12"/>
                         </buttonConfiguration>
                     </button>
                 </subviews>

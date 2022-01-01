@@ -38,6 +38,15 @@ struct BadgeInfo {
 }
 
 class CollectionViewContainerCellViewModel: TableCellRepresentable {
+    enum ViewAction {
+        case tapped
+    }
+    
+    enum CollectionViewCellType {
+        case BadgeCell
+        case PreviewCell
+    }
+    
     var cellType: UITableViewCell.Type {
         CollectionViewContainerCell.self
     }
@@ -50,19 +59,23 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
     }
     let updatedCellVMs = BehaviorRelay<[CollectionCellRepresentable]>(value: [])
     
-    enum ViewAction {
-        case tapped
-    }
+    private(set) var cellSize: CGSize
+    private(set) var type: CollectionViewCellType
     
-    private(set) var cellHeight: CGFloat
-    
-    init(_ searchResult: SearchResult, cellHeight: CGFloat) {
+    init(_ searchResult: SearchResult, cellSize: CGSize, type: CollectionViewCellType) {
         self.searchResult = searchResult
-        self.cellHeight = cellHeight
-        self.items = self.configureCellVMs()
+        self.cellSize = cellSize
+        self.type = type
+        
+        switch type {
+        case .BadgeCell:
+            self.items = self.configureBadgeCellVMs()
+        case .PreviewCell:
+            self.items = self.configurePreviewCellVMs()
+        }
     }
     
-    private func configureCellVMs() -> [CollectionCellRepresentable] {
+    private func configureBadgeCellVMs() -> [CollectionCellRepresentable] {
         guard let searchResult = self.searchResult else { return [] }
         var items: [CollectionCellRepresentable] = []
         let 평가 = BadgeInfo(category: .평가, result: searchResult)
@@ -77,8 +90,14 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         return items
     }
     
-    
+    private func configurePreviewCellVMs() -> [CollectionCellRepresentable] {
+        let items: [CollectionCellRepresentable]? = searchResult?.screenshotUrls
+            .compactMap { PreviewCellViewModel($0) }
+            .compactMap { $0 as CollectionCellRepresentable }
+        return items ?? []
+    }
 }
+
 
 class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
 
@@ -109,12 +128,22 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(cells: [ BadgeCell.self, PreviewCell.self ])
         
-        collectionView.register(cells: [ BadgeCell.self ])
+        
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 15*2)/4, height: 70)
+            layout.itemSize = cellVM?.cellSize ?? .zero
             layout.scrollDirection = .horizontal
-            layout.sectionInset = .zero
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            
+            switch cellVM?.type {
+            case .BadgeCell:
+                break
+            case .PreviewCell:
+                layout.minimumLineSpacing = 15
+            default:
+                break
+            }
         }
     }
     
