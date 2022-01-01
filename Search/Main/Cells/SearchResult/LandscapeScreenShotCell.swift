@@ -40,6 +40,11 @@ class LandscapeScreenShotCell: UITableViewCell, BindableTableViewCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+    }
+    
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
         guard let cellVM = cellVM as? LandscapeCellViewModel else { return }
         self.cellVM = cellVM

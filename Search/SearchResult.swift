@@ -39,7 +39,7 @@ struct SearchResult: Decodable {
     
     // InfoData
     let sellerName: String              // 제공자
-    let fileSizeBytes: String           // 크기
+    let fileSizeBytes: String?           // 크기
     let genres: [String]                // 카테고리
     let minimumOsVersion: String        // 호환성 os버전
     let languageCodesISO2A: [String]    // 언어 ($0 및 $1)
@@ -75,7 +75,7 @@ struct SearchResult: Decodable {
         self.description = try container.decode(String.self, forKey: .description)
         
         self.sellerName = try container.decode(String.self, forKey: .sellerName)
-        self.fileSizeBytes = try container.decode(String.self, forKey: .fileSizeBytes)
+        self.fileSizeBytes = try? container.decode(String.self, forKey: .fileSizeBytes)
         self.genres = try container.decode(Array<String>.self, forKey: .genres)
         self.minimumOsVersion = try container.decode(String.self, forKey: .minimumOsVersion)
         self.languageCodesISO2A = try container.decode(Array<String>.self, forKey: .languageCodesISO2A)

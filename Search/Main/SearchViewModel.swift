@@ -112,7 +112,7 @@ class SearchViewModel {
 }
                          
 private extension String {
-    // 406x228bb.jpg
+    // /406x228bb.jpg
     var size: CGSize {
         let imageSizeString = self.split(separator: "/").last
         let splited = imageSizeString?.split(separator: "x") ?? []

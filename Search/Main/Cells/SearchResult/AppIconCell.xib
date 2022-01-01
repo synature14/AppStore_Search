@@ -44,10 +44,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모든 이동을 위한" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeV-gj-R19">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모든 이동을 위한" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeV-gj-R19">
                                         <rect key="frame" x="0.0" y="19" width="79.5" height="13"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="13" id="8IJ-OY-Ky1"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="13" id="8IJ-OY-Ky1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                         <color key="textColor" systemColor="systemGray2Color"/>
@@ -152,6 +152,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="appIconImageView" destination="5aD-39-ZE1" id="xfB-oW-s12"/>
+                <outlet property="sellerNameLabel" destination="PeV-gj-R19" id="uKL-vY-GeD"/>
                 <outlet property="trackNameLabel" destination="0Qu-Fi-fqi" id="Jfd-ik-HSH"/>
                 <outlet property="userRatingCountLabel" destination="RhT-85-A2B" id="FYv-jY-nfT"/>
             </connections>

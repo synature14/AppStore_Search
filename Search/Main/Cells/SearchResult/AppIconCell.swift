@@ -41,6 +41,7 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
     
     @IBOutlet weak var appIconImageView: UIImageView!
     @IBOutlet weak var trackNameLabel: UILabel!
+    @IBOutlet weak var sellerNameLabel: UILabel!
     @IBOutlet weak var userRatingCountLabel: UILabel!
     
     override func awakeFromNib() {
@@ -50,7 +51,9 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         trackNameLabel.text = ""
+        sellerNameLabel.text = ""
         userRatingCountLabel.text = ""
+        disposeBag = DisposeBag()
     }
     
     func bindCellVM(_ viewModel: TableCellRepresentable?) {
@@ -60,6 +63,7 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
         let result = vm.searchResult
         trackNameLabel.text = result.trackName
         userRatingCountLabel.text = "\(result.userRatingCount)"
+        sellerNameLabel.text = result.sellerName
         
         vm.appIconImage
             .observeOn(MainScheduler.instance)

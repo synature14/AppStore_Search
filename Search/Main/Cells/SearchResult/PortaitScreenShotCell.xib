@@ -52,10 +52,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="a1n-wv-eaV" firstAttribute="centerX" secondItem="bpY-Dn-i1N" secondAttribute="centerX" id="6Ft-PR-CoE"/>
+                            <constraint firstAttribute="trailing" secondItem="a1n-wv-eaV" secondAttribute="trailing" constant="20" id="7l0-HA-O8k"/>
                             <constraint firstAttribute="bottom" secondItem="a1n-wv-eaV" secondAttribute="bottom" id="KMi-qJ-mlf"/>
                             <constraint firstItem="a1n-wv-eaV" firstAttribute="centerY" secondItem="bpY-Dn-i1N" secondAttribute="centerY" id="O3P-fM-bLf"/>
-                            <constraint firstItem="a1n-wv-eaV" firstAttribute="leading" secondItem="bpY-Dn-i1N" secondAttribute="leading" constant="20" id="c2l-bg-aQ6"/>
                             <constraint firstItem="a1n-wv-eaV" firstAttribute="top" secondItem="bpY-Dn-i1N" secondAttribute="top" id="dmV-34-8N8"/>
+                            <constraint firstItem="a1n-wv-eaV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bpY-Dn-i1N" secondAttribute="leading" constant="20" symbolic="YES" id="kEJ-rh-yY5"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-7d-HpF" userLabel="spacingView">
