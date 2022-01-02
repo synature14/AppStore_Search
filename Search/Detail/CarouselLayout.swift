@@ -26,11 +26,12 @@ class CarouselLayout: UICollectionViewFlowLayout {
         self.collectionView?.decelerationRate = .init(rawValue: 0.4)
     }
     
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         let xOffset = proposedContentOffset.x
         let updatedIndex = round(xOffset / (itemSize.width + minimumLineSpacing))
         
         let updatedOffset = updatedIndex * (itemSize.width + minimumLineSpacing)
+        print("updatedIndex = \(updatedIndex) , updatedOffset = \(updatedOffset)")
         return CGPoint(x: updatedOffset, y: 0)
     }
 }

@@ -70,7 +70,7 @@ class SYCoreDataManager: InAppDataHandler {
             return
         }
         
-        let predicate = NSPredicate(format: "", word)
+        let predicate = NSPredicate(format: "word == %@", word)
         
         loadAllData(predicate: predicate) { recentSearchEntities in
             guard let recentSearchEntities = recentSearchEntities else {
