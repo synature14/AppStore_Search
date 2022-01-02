@@ -9,11 +9,16 @@ import Foundation
 import RxSwift
 
 
+protocol RecentSearchHistoryCellVMDelegate: AnyObject {
+    func deleteButtonTapped(within item: RecentSearchEntity)
+}
+
 class RecentSearchHistoryCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         RecentSearchHistoryCell.self
     }
     
+    weak var delegate: RecentSearchHistoryCellVMDelegate?
     private var disposeBag = DisposeBag()
     var item: RecentSearchEntity
     
@@ -31,9 +36,10 @@ class RecentSearchHistoryCellViewModel: TableCellRepresentable {
     private func bindings() {
         deleteHistorySubject
             .subscribe(onNext: { word in
-                SYCoreDataManager.shared.delete(word) {
+                SYCoreDataManager.shared.delete(word) { [weak self] in
                     // tableView deleteRow
-                    
+                    guard let self = self else { return }
+                    self.delegate?.deleteButtonTapped(within: self.item)
                 }
                 
                 print("Delete Success! --> tableView Row should be removed")

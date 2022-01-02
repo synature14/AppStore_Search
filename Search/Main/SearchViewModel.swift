@@ -89,7 +89,10 @@ class SearchViewModel {
             SYCoreDataManager.shared.loadAllData { entities in
                 guard let entities = entities else { return }
                 
-                let cellVMs = entities.compactMap { RecentSearchHistoryCellViewModel($0) }
+                let cellVMs = entities
+                    .compactMap { RecentSearchHistoryCellViewModel($0) }
+                    
+                cellVMs.forEach { $0.delegate = self }
                 print("cellVMs: \(cellVMs)")
                 print("=== [SearchFilter: .all] recentSearchHistory emit====")
                 self.sections = [cellVMs]
@@ -112,3 +115,8 @@ class SearchViewModel {
     }
 }
 
+extension SearchViewModel: RecentSearchHistoryCellVMDelegate {
+    func deleteButtonTapped(within item: RecentSearchEntity) {
+        searchHistory(.all)
+    }
+}

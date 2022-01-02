@@ -81,6 +81,7 @@ private extension MainViewController {
             RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self, ActivityViewCell.self
         ])
         
+        // 검색어 request에 대한 응답값으로 tableView 리로드
         viewModel.updatedCellVMs
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] cellVMs in
@@ -142,9 +143,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 먼저 keyboard hide
-        
-        
         let selectedItem = viewModel.sections[indexPath.section][indexPath.item]
         var result: SearchResult
         
@@ -175,7 +173,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         let vc = AppInfoViewController.create(result: result)
         self.navigationController?.pushViewController(vc, animated: true)
-        print("\(indexPath.item) is Selected...!")
     }
                 
 }
@@ -194,7 +191,4 @@ private extension MainViewController {
         return imageViewScaledHeight
     }
 }
-
-
-
 
