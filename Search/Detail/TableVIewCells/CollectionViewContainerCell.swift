@@ -143,6 +143,7 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
             carouselLayout.eachItemSize = cellVM?.cellSize ?? .zero
             carouselLayout.itemCount = cellVM?.items.count ?? 0
             collectionView.collectionViewLayout = carouselLayout
+            
         default:
             break
         }
