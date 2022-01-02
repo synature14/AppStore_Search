@@ -48,7 +48,7 @@ class DescriptionCell: UITableViewCell, BindableTableViewCell {
         self.cellVM = cellVM
         
         expandButton.isHidden = cellVM.expandCell
-        
+        expandButton.backgroundColor = .systemBackground
         let attributedStr = NSMutableAttributedString(string: cellVM.description)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4

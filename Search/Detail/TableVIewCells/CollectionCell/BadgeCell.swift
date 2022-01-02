@@ -54,6 +54,7 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
         largeFontView.isHidden = true
         developerIconImage.isHidden = true
         ratingView.isHidden = true
+        descriptionView.isHidden = false
         
         guard let cellVM = cellVM as? BadgeCellViewModel else {
             return

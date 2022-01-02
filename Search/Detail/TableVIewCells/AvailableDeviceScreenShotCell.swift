@@ -26,7 +26,7 @@ class AvailableDeviceScreenShotCellViewModel: TableCellRepresentable {
     private(set) var ipadScreenShotUrls: [String]
     private(set) var supportedDevices: [String]
     private(set) var soleType: DeviceType?
-    private(set) var showUnfoldButton: Bool
+    private(set) var showUnfoldButton: Bool = false
     
     init(_ soleType: DeviceType? = nil, ipadScreenShotUrls: [String] = [], supportedDevices: [String] = []) {
         self.ipadScreenShotUrls = ipadScreenShotUrls
