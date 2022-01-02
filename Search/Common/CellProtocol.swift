@@ -1,5 +1,5 @@
 //
-//  Common.swift
+//  CellProtocol.swift
 //  Search
 //
 //  Created by Suvely on 2021/12/29.
