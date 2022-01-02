@@ -53,7 +53,11 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
         }
         self.cellVM = cellVM
         
-        guard let badgeInfo = cellVM.badgeInfo else {
+        setUI()
+    }
+    
+    private func setUI() {
+        guard let badgeInfo = self.cellVM?.badgeInfo else {
             return
         }
         let result = badgeInfo.result
@@ -83,13 +87,24 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
             
         case .언어:
             largeFontView.isHidden = false
-            largeFontLabel.text = result.languageCodesISO2A.first
+            var firstLang = ""
+            if result.languageCodesISO2A.contains("KO") {
+                firstLang = "KO"
+            }
+            
+            largeFontLabel.text = firstLang
             if result.languageCodesISO2A.count > 1 {
-                descriptionLabel.text = "+ \(result.languageCodesISO2A.count)개 언어"
+                descriptionLabel.text = "+ \(result.languageCodesISO2A.count - 1)개 언어"
             } else {
-                //MARK: 수정해야함 "KO" -> "한국어"로 맵핑
-                descriptionLabel.text = "한국어"
+                descriptionLabel.text = localizedString(result.languageCodesISO2A).first
             }
         }
+    }
+    
+    private func localizedString(_ codes: [String]) -> [String] {
+        let languageStrings = codes
+            .map { $0.lowercased() }
+            .compactMap { Locale.current.localizedString(forLanguageCode: $0) }
+        return languageStrings
     }
 }

@@ -37,7 +37,7 @@ class AppInfoViewModel {
         
         let badgeWidth = (UIScreen.main.bounds.width - 15*2)/4
         let badges = [CollectionViewContainerCellViewModel(result,
-                                                           cellSize: CGSize(width: badgeWidth, height: 70),
+                                                           cellSize: CGSize(width: badgeWidth, height: 75),
                                                            type: .BadgeCell)]
         let 새로운기능Title = [TitleCellViewModel("새로운 기능", buttonTitle: "버전 기록")]
         let 미리보기 = [TitleCellViewModel("미리보기")]
@@ -55,7 +55,7 @@ class AppInfoViewModel {
                          InfoTextCellViewModel(.크기, desc: result.fileSizeBytes ?? "0"),
                          InfoTextCellViewModel(.카테고리, desc: result.genres.first ?? ""),
                          InfoTextCellViewModel(.호환성, desc: result.minimumOsVersion),
-                         InfoTextCellViewModel(.언어, desc: result.languageCodesISO2A.description),
+                         InfoTextCellViewModel(.언어, languages: result.languageCodesISO2A),
                          InfoTextCellViewModel(.연령등급, desc: result.trackContentRating),
                          InfoTextCellViewModel(.저작권, desc: "© \(result.sellerName)")
         ]

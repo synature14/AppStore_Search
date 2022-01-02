@@ -25,12 +25,29 @@ class InfoTextCellViewModel: TableCellRepresentable {
     private(set) var title: String
     private(set) var description: String
     
-    init(_ type: TitleType, desc: String) {
+    init(_ type: TitleType, desc: String = "", languages: [String] = []) {
         self.title = type.rawValue
         self.description = desc
         
-        if type == .크기 {
+        switch type {
+        case .크기:
             self.description = byteFormatted(desc)
+        case .언어:
+            let languageArray = localizedString(languages)
+            let firstLang = languageArray.first ?? ""
+            self.description = firstLang
+            
+            let langsCount = languageArray.count
+            if langsCount == 2 {
+                let lastLang = languageArray.last ?? ""
+                self.description = "\(firstLang) 및 \(lastLang) "
+                
+            } else if langsCount > 2 {
+                self.description = "\(firstLang) 외 \(langsCount)개"
+            }
+                
+        case .제공자, .카테고리, .호환성, .연령등급, .저작권:
+            break
         }
     }
     
@@ -42,6 +59,13 @@ class InfoTextCellViewModel: TableCellRepresentable {
         formatter.isAdaptive = true
         let byteInt = Int64(byte) ?? 0
         return formatter.string(fromByteCount: byteInt) // '53.4 MB'
+    }
+    
+    private func localizedString(_ codes: [String]) -> [String] {
+        let languageStrings = codes
+            .map { $0.lowercased() }
+            .compactMap { Locale.current.localizedString(forLanguageCode: $0) }
+        return languageStrings
     }
 }
 
