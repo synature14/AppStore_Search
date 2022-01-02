@@ -40,9 +40,8 @@ class RecentSearchHistoryCellViewModel: TableCellRepresentable {
                     // tableView deleteRow
                     guard let self = self else { return }
                     self.delegate?.deleteButtonTapped(within: self.item)
+                    print("Delete Success! --> tableView Row should be removed")
                 }
-                
-                print("Delete Success! --> tableView Row should be removed")
             }, onError: { error in
                 print("[error] \(error.localizedDescription)")
             })

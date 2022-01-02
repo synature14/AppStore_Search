@@ -49,7 +49,13 @@ class DescriptionCell: UITableViewCell, BindableTableViewCell {
         
         expandButton.isHidden = cellVM.expandCell
         
-        descriptionLabel.text = cellVM.description
+        let attributedStr = NSMutableAttributedString(string: cellVM.description)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        attributedStr.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                   value: paragraphStyle,
+                                   range: NSMakeRange(0, attributedStr.length))
+        descriptionLabel.attributedText = attributedStr
         cellVM.descriptionLabelFont = descriptionLabel.font
     }
 }

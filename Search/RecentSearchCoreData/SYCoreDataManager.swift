@@ -74,6 +74,7 @@ class SYCoreDataManager: InAppDataHandler {
         
         loadAllData(predicate: predicate) { recentSearchEntities in
             guard let recentSearchEntities = recentSearchEntities else {
+                completion()
                 print(SYCoreDataError.fetchFail)
                 return
             }
@@ -82,7 +83,9 @@ class SYCoreDataManager: InAppDataHandler {
             context.delete(searched)
             do {
                 try context.save()
+                completion()
             } catch {
+                completion()
                 print(SYCoreDataError.commonError(error.localizedDescription))
             }
         }
