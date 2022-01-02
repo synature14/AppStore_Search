@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import CoreData
-import RxSwift
 
 protocol InAppDataHandler {
     func save(_ word: String)
@@ -17,51 +16,113 @@ protocol InAppDataHandler {
 // MARK: UserDefaults에 저장할수도 있음..
 class SYCoreDataManager: InAppDataHandler {
     static let shared = SYCoreDataManager()
-    private var disposeBag = DisposeBag()
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
     private lazy var context: NSManagedObjectContext? = {
         return appDelegate?.persistentContainer.viewContext
     }()
     
-    deinit {
-        disposeBag = DisposeBag()
-    }
-    
     // 조회
-    func loadData<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
-        guard let context = self.context else {
-            return []
-        }
-        
+    func loadAllData(predicate: NSPredicate? = nil, completion: (([RecentSearchEntity]?) -> Void)) {
+        guard let context = self.context else { return }
+        let fetchRequest = RecentSearchEntity.fetchRequest()
+        fetchRequest.predicate = predicate
         do {
-            let results = try context.fetch(request)
-            return results
+            let cdTasks = try context.fetch(fetchRequest)
+            completion(cdTasks)
         } catch {
-            print(error.localizedDescription)
-            return []
+            completion(nil)
         }
     }
     
-    // 저장
-    func update(_ word: String) {
+    // 저장 (동일한 키워드 검색시 date 업데이트)
+    func save(_ word: String) {
         // 1. 예전에 검색했던 검색어인가?
-        let loadedData = loadData(request: RecentSearchEntity.fetchRequest())        // 데이터에 대한 참조(lazy load)만 가져온거라 성능에 이슈 없음.
-        let hasWord = !loadedData.filter({ $0.word == word }).isEmpty
+        guard let context = self.context else { return }
+        let predicate = NSPredicate(format: "word == %@", word)
         
-        if hasWord {
-            // 1-1. 그렇다면 delete
-            delete(word, request: RecentSearchEntity.fetchRequest())
-                .subscribe(onNext: { [weak self] _ in
-                    // 1-2. 다시 save
-                    self?.save(word)
-                })
-                .disposed(by: disposeBag)
-        } else {
-            save(word)
+        // CoreData에서 조회할때 데이터에 대한 참조(lazy load)만 가져온거라 성능에 이슈 없음.
+        loadAllData(predicate: predicate) { recentSearchEntities in
+            guard let recentSearchEntities = recentSearchEntities else {
+                return
+            }
+            
+            if recentSearchEntities.isEmpty {
+                saveNewWord(word)       // 검색어 히스토리에 없는 경우 새로 저장
+                return
+            }
+            
+            // date 수정 후 저장
+            guard let searched = recentSearchEntities.first else { return }
+            searched.date = Date()
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    
+    // 삭제
+    func delete(_ word: String, completion: (() -> Void)) {
+        guard let context = self.context else {
+            completion()
+            return
+        }
+        
+        let predicate = NSPredicate(format: "", word)
+        
+        loadAllData(predicate: predicate) { recentSearchEntities in
+            guard let recentSearchEntities = recentSearchEntities else {
+                print(SYCoreDataError.fetchFail)
+                return
+            }
+            
+            guard let searched = recentSearchEntities.first else { return }
+            context.delete(searched)
+            do {
+                try context.save()
+            } catch {
+                print(SYCoreDataError.commonError(error.localizedDescription))
+            }
         }
     }
     
-    internal func save(_ word: String) {
+    // 특정 키워드 찾기
+    func find(_ keyword: String, completion: (([RecentSearchEntity]) -> Void)) {
+        loadAllData { recentSearchEntities in
+            guard let recentSearchEntities = recentSearchEntities else {
+                print(SYCoreDataError.fetchFail)
+                completion([])
+                return
+            }
+            let secondaryResults = recentSearchEntities
+                .filter { entity in
+                    let word = entity.word ?? ""
+                    return !word.hasPrefix(keyword)
+                }
+                .filter { entity in
+                    let word = entity.word ?? ""
+                    return word.contains(keyword)
+                }
+            
+            var primaryResults = recentSearchEntities
+                .filter { entity in
+                    let word = entity.word ?? ""
+                    return word.hasPrefix(keyword)
+                }
+            
+            primaryResults.append(contentsOf: secondaryResults)
+            completion(primaryResults)
+        }
+    }
+    
+    // MARK: 검색 날짜에 따른 최신순 정렬
+    func sortByDate() -> [RecentSearchEntity] { return [] }
+}
+
+private extension SYCoreDataManager {
+    func saveNewWord(_ word: String) {
         guard let context = self.context,
               let entity = NSEntityDescription.entity(forEntityName: RecentSearchEntity.name, in: context) else {
             return
@@ -71,7 +132,6 @@ class SYCoreDataManager: InAppDataHandler {
             return
         }
 
-        // 2. 아니라면 그냥 save
         recentSearchWords.word = word
         recentSearchWords.date = Date()
         
@@ -83,59 +143,4 @@ class SYCoreDataManager: InAppDataHandler {
             print(error.localizedDescription)
         }
     }
-
-    
-    // 삭제
-    func delete<T: NSManagedObject>(_ word: String, request: NSFetchRequest<T>) -> Observable<Any> {
-        return Observable.create { emitter in
-            guard let context = self.context else {
-                emitter.onError(SYCoreDataError.invalidContext)
-                return Disposables.create()
-            }
-            
-            do {
-                let targetObject = try context.fetch(request)
-                if targetObject.isEmpty {
-                    emitter.onError(SYCoreDataError.fetchFail)
-                }
-                
-                context.delete(targetObject.first!)
-                try context.save()
-                emitter.onNext(())
-                emitter.onCompleted()
-                
-            } catch {
-                print(error.localizedDescription)
-                emitter.onError(SYCoreDataError.commonError(error.localizedDescription))
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func find(_ keyword: String) -> [RecentSearchEntity] {
-        let recentSearchHistory = self.loadData(request: RecentSearchEntity.fetchRequest())
-        let secondaryResults = recentSearchHistory
-            .filter { entity in
-                let word = entity.word ?? ""
-                return !word.hasPrefix(keyword)
-            }
-            .filter { entity in
-                let word = entity.word ?? ""
-                return word.contains(keyword)
-            }
-        
-        var primaryResults = recentSearchHistory
-            .filter { entity in
-                let word = entity.word ?? ""
-                return word.hasPrefix(keyword)
-            }
-        
-        primaryResults.append(contentsOf: secondaryResults)
-        
-        return primaryResults
-    }
-    
-    // MARK: 검색 날짜에 따른 최신순 정렬
-    func sortByDate() -> [RecentSearchEntity] { return [] }
 }

@@ -71,7 +71,7 @@ class SearchViewModel {
     private func bindRequestKeyword() {
         requestKeyword
             .do(onNext: { [weak self] searchTextValue in
-                SYCoreDataManager.shared.update(searchTextValue)
+                SYCoreDataManager.shared.save(searchTextValue)
                 self?.sections = [[ActivityViewModel()]]
             })
             .flatMapLatest { NetworkManager.request(search: $0) }   // emit될 Observable 여러개일 수 있음. 이전에 만든 observable은 무시하고 가장 최근의 Observable을 따름
@@ -86,19 +86,22 @@ class SearchViewModel {
     func searchHistory(_ filter: SearchFilter) {
         switch filter {
         case .all:
-            let cellVMs: [TableCellRepresentable] = SYCoreDataManager.shared
-                .loadData(request: RecentSearchEntity.fetchRequest())
-                .map { RecentSearchHistoryCellViewModel($0) }
+            SYCoreDataManager.shared.loadAllData { entities in
+                guard let entities = entities else { return }
                 
-            print("=== [SearchFilter: .all] recentSearchHistory emit====")
-            self.sections = [cellVMs]
+                let cellVMs = entities.compactMap { RecentSearchHistoryCellViewModel($0) }
+                print("cellVMs: \(cellVMs)")
+                print("=== [SearchFilter: .all] recentSearchHistory emit====")
+                self.sections = [cellVMs]
+            }
             
         case .keyword(let word):
-            let cellVMs: [TableCellRepresentable] = SYCoreDataManager.shared.find(word)
-                .map { RecentSearchHistoryCellViewModel($0) }
-            print("==== keyword: \(word) searched =====")
-            
-            self.sections = cellVMs.count > 0 ? [cellVMs] : [[NoResultsCellViewModel()]]
+            SYCoreDataManager.shared.find(word) { entities in
+                let cellVMs = entities.map { RecentSearchHistoryCellViewModel($0) }
+                print("==== keyword: \(word) searched =====")
+                
+                self.sections = cellVMs.count > 0 ? [cellVMs] : [[NoResultsCellViewModel()]]
+            }
         }
     }
     

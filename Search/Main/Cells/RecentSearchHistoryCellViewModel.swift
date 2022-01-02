@@ -8,20 +8,6 @@
 import Foundation
 import RxSwift
 
-//extension SearchHistoryCellType {
-//    var cellHeight: CGFloat {
-//        switch self {
-//        case .allResultsCell(_):
-//            return 50.0
-//        case .searchResultsCell(_):
-//            return 45.0
-//        case .resultInfoCell(let vm):
-//            return vm.scaledImageHeight.asObservable()
-//        case .noResultsCell:
-//            return Observable.of(UIScreen.main.bounds.width)
-//        }
-//    }
-//}
 
 class RecentSearchHistoryCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
@@ -44,12 +30,10 @@ class RecentSearchHistoryCellViewModel: TableCellRepresentable {
     
     private func bindings() {
         deleteHistorySubject
-            .flatMapLatest { word in
-                SYCoreDataManager.shared.delete(word,
-                                                request: RecentSearchEntity.fetchRequest())
-            }
-            .subscribe(onNext: { _ in
-                // tableView deleteRow
+            .subscribe(onNext: { word in
+                SYCoreDataManager.shared.delete(word) {
+                    // tableView deleteRow
+                }
                 
                 print("Delete Success! --> tableView Row should be removed")
             }, onError: { error in
