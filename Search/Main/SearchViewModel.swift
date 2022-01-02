@@ -22,10 +22,10 @@ class SearchViewModel {
     
     private(set) var sections: [[TableCellRepresentable]] = [] {
         didSet {
-            updatedCellVMs.accept(sections)
+            updateCellVMs.onNext(sections)
         }
     }
-    let updatedCellVMs = BehaviorRelay<[[TableCellRepresentable]]>(value: [[]])     // tableView reload 시키는 주체
+    let updateCellVMs = PublishSubject<[[TableCellRepresentable]]>()     // tableView reload 시키는 주체
     
     init() {
         bindings()

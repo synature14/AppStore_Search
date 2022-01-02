@@ -12,11 +12,11 @@ import UIKit
 
 class AppInfoViewModel {
     private var disposeBag = DisposeBag()
-    let updatedCellVMs = PublishSubject<[[TableCellRepresentable]]>()
+    let updateCellVMs = PublishSubject<[[TableCellRepresentable]]>()
     private(set) var searchResult: SearchResult
     private(set) var sections: [[TableCellRepresentable]] = [] {
         didSet {
-            updatedCellVMs.onNext(sections)
+            updateCellVMs.onNext(sections)
         }
     }
     

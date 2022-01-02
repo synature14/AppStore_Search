@@ -82,7 +82,7 @@ private extension MainViewController {
         ])
         
         // 검색어 request에 대한 응답값으로 tableView 리로드
-        viewModel.updatedCellVMs
+        viewModel.updateCellVMs
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] cellVMs in
                 self?.tableView.reloadData()

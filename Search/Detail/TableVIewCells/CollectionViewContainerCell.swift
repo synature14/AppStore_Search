@@ -55,10 +55,10 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
     private var searchResult: SearchResult?
     private(set) var items: [CollectionCellRepresentable] = [] {
         didSet {
-            updatedCellVMs.accept(items)
+            updateCellVMs.onNext(items)
         }
     }
-    let updatedCellVMs = BehaviorRelay<[CollectionCellRepresentable]>(value: [])
+    let updateCellVMs = PublishSubject<[CollectionCellRepresentable]>()
     
     private(set) var cellSize: CGSize
     private(set) var type: CollectionViewCellType

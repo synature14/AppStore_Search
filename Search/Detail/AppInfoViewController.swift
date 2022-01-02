@@ -56,7 +56,7 @@ private extension AppInfoViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel?.updatedCellVMs
+        viewModel?.updateCellVMs
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] cellVMs in
                 self?.tableView.reloadData()
