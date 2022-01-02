@@ -33,7 +33,7 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var ratingView: UIView!
-    @IBOutlet var starImageViews: [UIImageView]!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +41,8 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        descriptionLabel.text = ""
+        largeFontLabel.text = ""
     }
 
     func bindCellVM(_ cellVM: CollectionCellRepresentable?) {

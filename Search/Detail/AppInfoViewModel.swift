@@ -12,11 +12,11 @@ import UIKit
 
 class AppInfoViewModel {
     private var disposeBag = DisposeBag()
-    let updatedCellVMs = BehaviorRelay<[[TableCellRepresentable]]>(value: [[]])
+    let updatedCellVMs = PublishSubject<[[TableCellRepresentable]]>()
     private(set) var searchResult: SearchResult
     private(set) var sections: [[TableCellRepresentable]] = [] {
         didSet {
-            updatedCellVMs.accept(sections)
+            updatedCellVMs.onNext(sections)
         }
     }
     
@@ -43,12 +43,12 @@ class AppInfoViewModel {
         let 미리보기 = [TitleCellViewModel("미리보기")]
         
         guard let imageURL = result.screenshotUrls.first else { return [[]] }
-        let originalSize = imageURL.size
-        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        let cellSize = cellSize(imageURL)
         let screenShots = [CollectionViewContainerCellViewModel(result,
                                                                 cellSize: cellSize,
-                                                                type: .PreviewCell)]
-        let availableDevices = [AvailableDeviceScreenShotCellViewModel(result.ipadScreenshotUrls, supportedDevices: result.supportedDevices)]
+                                                                type: .iPhonePreviewCell)]
+        let availableDevices = [AvailableDeviceScreenShotCellViewModel(ipadScreenShotUrls: result.ipadScreenshotUrls,
+                                                                       supportedDevices: result.supportedDevices)]
         
         let description = [DescriptionCellViewModel(result.description)]
         
@@ -70,6 +70,21 @@ class AppInfoViewModel {
         return section
     }
     
+    func showIpadScreenShotCell(at indexPath: IndexPath) {
+        let availableIPhone = [AvailableDeviceScreenShotCellViewModel(.iPhone)]
+        guard let imageURL = searchResult.ipadScreenshotUrls.first else { return }
+        let cellSize = cellSize(imageURL)
+        let ipadScreenShots = [CollectionViewContainerCellViewModel(searchResult, cellSize: cellSize, type: .iPadPreviewCell)]
+        let availableIPad = [AvailableDeviceScreenShotCellViewModel(.iPad)]
+        
+        var prepareSections = self.sections
+        prepareSections.remove(at: indexPath.section)
+        prepareSections.insert(availableIPhone, at: indexPath.section)
+        prepareSections.insert(ipadScreenShots, at: indexPath.section + 1)
+        prepareSections.insert(availableIPad, at: indexPath.section + 2)
+        sections = prepareSections
+    }
+    
 }
 
 private extension AppInfoViewModel {
@@ -84,5 +99,11 @@ private extension AppInfoViewModel {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2)
         let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
+    }
+    
+    func cellSize(_ imageURL: String) -> CGSize {
+        let originalSize = imageURL.size
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        return cellSize
     }
 }

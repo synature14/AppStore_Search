@@ -56,13 +56,12 @@ private extension AppInfoViewController {
             })
             .disposed(by: disposeBag)
         
-//        viewModel.updatedCellVMs
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [weak self] cellVMs in
-//                self?.tableView.reloadData()
-//            }).disposed(by: disposeBag)
-//
-//        viewModel.searchHistory(.all)
+        viewModel?.updatedCellVMs
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] cellVMs in
+                self?.tableView.reloadData()
+            }).disposed(by: disposeBag)
+
     }
 }
 
@@ -128,6 +127,22 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
         
         let selectedItem = section[indexPath.row]
         switch selectedItem {
+        case let cellVM as AvailableDeviceScreenShotCellViewModel:
+            if cellVM.ipadScreenShotUrls.isEmpty {
+                return
+            }
+            
+            viewModel?.showIpadScreenShotCell(at: indexPath)
+//            tableView.performBatchUpdates({
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//                tableView.insertRows(at: [
+//                    indexPath,
+//                    IndexPath(row: indexPath.row + 1, section: indexPath.section),
+//                    IndexPath(row: indexPath.row + 2, section: indexPath.section)],
+//                                     with: .fade)
+//
+//            })
+            
         case let cellVM as DescriptionCellViewModel:
             cellVM.expandCell = true
             tableView.performBatchUpdates({

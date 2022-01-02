@@ -44,7 +44,8 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
     
     enum CollectionViewCellType {
         case BadgeCell
-        case PreviewCell
+        case iPhonePreviewCell
+        case iPadPreviewCell
     }
     
     var cellType: UITableViewCell.Type {
@@ -69,13 +70,15 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         
         switch type {
         case .BadgeCell:
-            self.items = self.configureBadgeCellVMs()
-        case .PreviewCell:
-            self.items = self.configurePreviewCellVMs()
+            self.items = self.configBadgeCellVMs()
+        case .iPhonePreviewCell:
+            self.items = self.configiPhonePreviewCellVMs()
+        case .iPadPreviewCell:
+            self.items = self.configiPadPreviewCellVMs()
         }
     }
     
-    private func configureBadgeCellVMs() -> [CollectionCellRepresentable] {
+    private func configBadgeCellVMs() -> [CollectionCellRepresentable] {
         guard let searchResult = self.searchResult else { return [] }
         var items: [CollectionCellRepresentable] = []
         let 평가 = BadgeInfo(category: .평가, result: searchResult)
@@ -90,8 +93,15 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         return items
     }
     
-    private func configurePreviewCellVMs() -> [CollectionCellRepresentable] {
+    private func configiPhonePreviewCellVMs() -> [CollectionCellRepresentable] {
         let items: [CollectionCellRepresentable]? = searchResult?.screenshotUrls
+            .compactMap { PreviewCellViewModel($0) }
+            .compactMap { $0 as CollectionCellRepresentable }
+        return items ?? []
+    }
+    
+    private func configiPadPreviewCellVMs() -> [CollectionCellRepresentable] {
+        let items: [CollectionCellRepresentable]? = searchResult?.ipadScreenshotUrls
             .compactMap { PreviewCellViewModel($0) }
             .compactMap { $0 as CollectionCellRepresentable }
         return items ?? []
@@ -108,7 +118,9 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(cells: [ BadgeCell.self, PreviewCell.self ])
     }
     
     override func prepareForReuse() {
@@ -123,13 +135,10 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
         
         self.cellVM = cellVM
         setCollectionView()
+        collectionView.reloadData()
     }
     
     private func setCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(cells: [ BadgeCell.self, PreviewCell.self ])
-        
         switch cellVM?.type {
         case .BadgeCell:
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -137,7 +146,7 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
                 layout.scrollDirection = .horizontal
                 layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             }
-        case .PreviewCell:
+        case .iPhonePreviewCell, .iPadPreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
             carouselLayout.eachItemSize = cellVM?.cellSize ?? .zero

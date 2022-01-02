@@ -97,6 +97,7 @@
             <connections>
                 <outlet property="descrptionLabel" destination="czb-rd-CcW" id="3e1-3s-CDS"/>
                 <outlet property="ipadIconView" destination="IEB-KW-sWx" id="RvG-6S-vXX"/>
+                <outlet property="iphoneIconView" destination="nyr-Lv-bTy" id="DcV-Rm-u5p"/>
                 <outlet property="unfoldButton" destination="gYO-Lu-mv1" id="NyR-Rj-fXV"/>
                 <outlet property="watchIconView" destination="kzE-Y5-55E" id="BPt-3n-ZkJ"/>
             </connections>

@@ -82,8 +82,8 @@
                                     <constraint firstItem="mYR-A8-hwq" firstAttribute="top" secondItem="HDs-Bg-qBK" secondAttribute="top" id="vIw-j8-XS0"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6N-AW-wRF">
-                                <rect key="frame" x="0.0" y="75" width="158" height="1.5"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6N-AW-wRF">
+                                <rect key="frame" x="0.0" y="75" width="158" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="소셜 네트워킹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-CT-gvL">
                                         <rect key="frame" x="5" y="5" width="148" height="14.5"/>
@@ -99,44 +99,9 @@
                                     <constraint firstItem="wp0-CT-gvL" firstAttribute="top" secondItem="H6N-AW-wRF" secondAttribute="top" constant="5" id="tTH-Kn-kdL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-7V-5Yc">
-                                <rect key="frame" x="0.0" y="76.5" width="158" height="20"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wnx-Si-klx">
-                                        <rect key="frame" x="15" y="0.0" width="128" height="20"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hYL-qh-YXO">
-                                                <rect key="frame" x="0.0" y="-0.5" width="25.5" height="20"/>
-                                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="inV-NY-4nd">
-                                                <rect key="frame" x="25.5" y="-0.5" width="25.5" height="20"/>
-                                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gPd-Rk-c0o">
-                                                <rect key="frame" x="51" y="-0.5" width="26" height="20"/>
-                                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KNR-0H-Xul">
-                                                <rect key="frame" x="77" y="-0.5" width="25.5" height="20"/>
-                                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="u1V-Zw-xhg">
-                                                <rect key="frame" x="102.5" y="-0.5" width="25.5" height="20"/>
-                                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-7V-5Yc">
+                                <rect key="frame" x="0.0" y="75" width="158" height="21.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="wnx-Si-klx" firstAttribute="leading" secondItem="hwU-7V-5Yc" secondAttribute="leading" constant="15" id="D9i-22-lWZ"/>
-                                    <constraint firstItem="wnx-Si-klx" firstAttribute="top" secondItem="hwU-7V-5Yc" secondAttribute="top" id="UMn-Zq-l78"/>
-                                    <constraint firstItem="wnx-Si-klx" firstAttribute="centerX" secondItem="hwU-7V-5Yc" secondAttribute="centerX" id="V0O-DO-g6o"/>
-                                    <constraint firstAttribute="trailing" secondItem="wnx-Si-klx" secondAttribute="trailing" constant="15" id="cjR-kF-0og"/>
-                                    <constraint firstAttribute="bottom" secondItem="wnx-Si-klx" secondAttribute="bottom" id="u1L-qJ-dfd"/>
-                                    <constraint firstItem="wnx-Si-klx" firstAttribute="centerY" secondItem="hwU-7V-5Yc" secondAttribute="centerY" id="wrU-l1-PTN"/>
-                                </constraints>
                             </view>
                         </subviews>
                     </stackView>
@@ -171,19 +136,12 @@
                 <outlet property="largeFontLabel" destination="ev5-SL-2p8" id="PtH-7E-nIc"/>
                 <outlet property="largeFontView" destination="KaN-7c-aAB" id="dcf-g6-XNn"/>
                 <outlet property="ratingView" destination="hwU-7V-5Yc" id="hHP-3Z-kim"/>
-                <outletCollection property="starImageViews" destination="hYL-qh-YXO" collectionClass="NSMutableArray" id="xdf-Cu-7zd"/>
-                <outletCollection property="starImageViews" destination="inV-NY-4nd" collectionClass="NSMutableArray" id="K9n-v6-mRC"/>
-                <outletCollection property="starImageViews" destination="gPd-Rk-c0o" collectionClass="NSMutableArray" id="eL6-uu-vHe"/>
-                <outletCollection property="starImageViews" destination="KNR-0H-Xul" collectionClass="NSMutableArray" id="R8g-bL-AgS"/>
-                <outletCollection property="starImageViews" destination="u1V-Zw-xhg" collectionClass="NSMutableArray" id="ERs-YV-7eO"/>
             </connections>
             <point key="canvasLocation" x="175.36231884057972" y="128.90625"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="person.crop.square" catalog="system" width="128" height="114"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
-        <image name="star.fill.left" catalog="system" width="128" height="116"/>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
