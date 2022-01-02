@@ -58,12 +58,19 @@ private extension MainViewController {
             })
             .disposed(by: disposeBag)
 
+        // 검색버튼
         searchController.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 guard let text = self?.searchController.searchBar.text else { return }
                 self?.viewModel.search(text)
             })
             .disposed(by: disposeBag)
+        
+        // 취소버튼
+        searchController.searchBar.rx.cancelButtonClicked
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.searchHistory(.all)
+            }).disposed(by: disposeBag)
     }
     
     func setTableView() {
@@ -135,6 +142,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 먼저 keyboard hide
+        
+        
         let selectedItem = viewModel.sections[indexPath.section][indexPath.item]
         var result: SearchResult
         
