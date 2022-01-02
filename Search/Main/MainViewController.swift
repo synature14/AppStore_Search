@@ -139,6 +139,12 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         var result: SearchResult
         
         switch selectedItem {
+        case let recentSearchCellVM as RecentSearchHistoryCellViewModel:
+            let word = recentSearchCellVM.item.word ?? ""
+            searchController.searchBar.text = word
+            viewModel.search(word)
+
+            return
         case let appInfoVM as AppIconCellViewModel:
             result = appInfoVM.searchResult
             
