@@ -35,17 +35,12 @@ class AppInfoViewModel {
         var section: [[TableCellRepresentable]] = []
         let appIconBig = [AppIconBigCellViewModel(result)]
         
-        let badgeWidth = (UIScreen.main.bounds.width - 15*2)/4
         let badges = [CollectionViewContainerCellViewModel(result,
-                                                           cellSize: CGSize(width: badgeWidth, height: 76),
                                                            type: .BadgeCell)]
         let 새로운기능Title = [TitleCellViewModel("새로운 기능", buttonTitle: "버전 기록")]
         let 미리보기 = [TitleCellViewModel("미리보기")]
         
-        guard let imageURL = result.screenshotUrls.first else { return [[]] }
-        let cellSize = cellSize(imageURL)
         let screenShots = [CollectionViewContainerCellViewModel(result,
-                                                                cellSize: cellSize,
                                                                 type: .iPhonePreviewCell)]
         let availableDevices = [AvailableDeviceScreenShotCellViewModel(ipadScreenShotUrls: result.ipadScreenshotUrls,
                                                                        supportedDevices: result.supportedDevices)]
@@ -72,9 +67,7 @@ class AppInfoViewModel {
     
     func showIpadScreenShotCell(at indexPath: IndexPath) {
         let availableIPhone = [AvailableDeviceScreenShotCellViewModel(.iPhone)]
-        guard let imageURL = searchResult.ipadScreenshotUrls.first else { return }
-        let cellSize = cellSize(imageURL)
-        let ipadScreenShots = [CollectionViewContainerCellViewModel(searchResult, cellSize: cellSize, type: .iPadPreviewCell)]
+        let ipadScreenShots = [CollectionViewContainerCellViewModel(searchResult, type: .iPadPreviewCell)]
         let availableIPad = [AvailableDeviceScreenShotCellViewModel(.iPad)]
         
         var prepareSections = self.sections
@@ -85,25 +78,4 @@ class AppInfoViewModel {
         sections = prepareSections
     }
     
-}
-
-private extension AppInfoViewModel {
-    // collectionView 좌우 패딩 = 20
-    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
-        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
-        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-    }
-    
-    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
-        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
-        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-    }
-    
-    func cellSize(_ imageURL: String) -> CGSize {
-        let originalSize = imageURL.size
-        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
-        return cellSize
-    }
 }

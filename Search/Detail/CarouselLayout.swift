@@ -8,7 +8,6 @@
 import UIKit
 
 class CarouselLayout: UICollectionViewFlowLayout {
-    var eachItemSize: CGSize = .zero
     var itemCount: Int = 0
     private var previousOffset: CGFloat = 0
     private var currentPage: Int = 0
@@ -22,7 +21,6 @@ class CarouselLayout: UICollectionViewFlowLayout {
         self.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         self.scrollDirection = .horizontal
         self.minimumLineSpacing = 10
-        self.itemSize = eachItemSize
         self.collectionView?.decelerationRate = .init(rawValue: 0.4)
     }
     

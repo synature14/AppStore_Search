@@ -52,7 +52,7 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         CollectionViewContainerCell.self
     }
     
-    private var searchResult: SearchResult?
+    private(set) var searchResult: SearchResult?
     private(set) var items: [CollectionCellRepresentable] = [] {
         didSet {
             updateCellVMs.onNext(items)
@@ -60,12 +60,10 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
     }
     let updateCellVMs = PublishSubject<[CollectionCellRepresentable]>()
     
-    private(set) var cellSize: CGSize
     private(set) var type: CollectionViewCellType
     
-    init(_ searchResult: SearchResult, cellSize: CGSize, type: CollectionViewCellType) {
+    init(_ searchResult: SearchResult, type: CollectionViewCellType) {
         self.searchResult = searchResult
-        self.cellSize = cellSize
         self.type = type
         
         switch type {
@@ -139,22 +137,32 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
     }
     
     private func setCollectionView() {
-        switch cellVM?.type {
+        guard let cellVM = self.cellVM, let result = cellVM.searchResult else { return }
+
+        switch cellVM.type {
         case .BadgeCell:
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.itemSize = cellVM?.cellSize ?? .zero
+                layout.itemSize = CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height)
                 layout.scrollDirection = .horizontal
                 layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             }
-        case .iPhonePreviewCell, .iPadPreviewCell:
+        case .iPhonePreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
-            carouselLayout.eachItemSize = cellVM?.cellSize ?? .zero
-            carouselLayout.itemCount = cellVM?.items.count ?? 0
+            let cellSize = cellSize(result.screenshotUrls.first ?? "")
+            carouselLayout.itemSize = CGSize(width: cellSize.width-3,
+                                                 height: cellSize.height-3)
+            carouselLayout.itemCount = cellVM.items.count
             collectionView.collectionViewLayout = carouselLayout
             
-        default:
-            break
+        case .iPadPreviewCell:
+            // layout 교체
+            let carouselLayout = CarouselLayout()
+            let cellSize = cellSize(result.screenshotUrls.first ?? "")
+            carouselLayout.itemSize = CGSize(width: cellSize.width-2,
+                                                 height: cellSize.height-2)
+            carouselLayout.itemCount = cellVM.items.count
+            collectionView.collectionViewLayout = carouselLayout
         }
     }
     
@@ -181,5 +189,26 @@ extension CollectionViewContainerCell: UICollectionViewDataSource, UICollectionV
         
         let badge = selectedItem as? BadgeCellViewModel
         badge?.badgeInfo?.category
+    }
+}
+
+private extension CollectionViewContainerCell {
+    func cellSize(_ imageURL: String) -> CGSize {
+        let originalSize = imageURL.size
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        return cellSize
+    }
+    
+    // collectionView 좌우 패딩 = 20
+    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
+        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
+    }
+    
+    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
+        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
 }

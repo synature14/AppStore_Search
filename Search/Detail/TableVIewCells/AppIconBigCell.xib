@@ -31,13 +31,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZe-xD-tqC">
                         <rect key="frame" x="156" y="15" width="253" height="126"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카카오맵 - 대한민국 No.1 지도앱" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9I-2q-Wix">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카카오맵 - 대한민국 No.1 지도앱" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9I-2q-Wix">
                                 <rect key="frame" x="0.0" y="0.0" width="253" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대한민국 1등ㅜㅜ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEL-EX-IMZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대한민국 1등ㅜㅜ" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEL-EX-IMZ">
                                 <rect key="frame" x="0.0" y="25.5" width="253" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" systemColor="placeholderTextColor"/>
@@ -67,9 +67,9 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g38-ur-0te" userLabel="shareButton">
-                        <rect key="frame" x="379" y="91" width="50" height="50"/>
+                        <rect key="frame" x="379" y="101" width="50" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="o9c-bI-ApP"/>
+                            <constraint firstAttribute="height" constant="40" id="o9c-bI-ApP"/>
                             <constraint firstAttribute="width" constant="50" id="uYC-xV-AvV"/>
                         </constraints>
                         <state key="normal" title="Button"/>

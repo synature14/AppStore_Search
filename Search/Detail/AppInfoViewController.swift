@@ -93,7 +93,20 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
             return 45
             
         case let cellVM as CollectionViewContainerCellViewModel:
-            return cellVM.cellSize.height
+            switch cellVM.type {
+            case .BadgeCell:
+                return 76
+                
+            case .iPhonePreviewCell:
+                guard let imageURL = cellVM.searchResult?.screenshotUrls.first else { return 0 }
+                let cellSize = cellSize(imageURL)
+                return cellSize.height
+                
+            case .iPadPreviewCell:
+                guard let imageURL = cellVM.searchResult?.ipadScreenshotUrls.first else { return 0 }
+                let cellSize = cellSize(imageURL)
+                return cellSize.height
+            }
         
         case _ as AvailableDeviceScreenShotCellViewModel:
             return 60
@@ -133,15 +146,6 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             viewModel?.showIpadScreenShotCell(at: indexPath)
-//            tableView.performBatchUpdates({
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-//                tableView.insertRows(at: [
-//                    indexPath,
-//                    IndexPath(row: indexPath.row + 1, section: indexPath.section),
-//                    IndexPath(row: indexPath.row + 2, section: indexPath.section)],
-//                                     with: .fade)
-//
-//            })
             
         case let cellVM as DescriptionCellViewModel:
             cellVM.expandCell = true
@@ -169,5 +173,24 @@ private extension AppInfoViewController {
         label.sizeToFit()
         let fitted = label.frame
         return fitted.height
+    }
+    
+    func cellSize(_ imageURL: String) -> CGSize {
+        let originalSize = imageURL.size
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        return cellSize
+    }
+    
+    // collectionView 좌우 패딩 = 20
+    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
+        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
+    }
+    
+    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
+        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
 }

@@ -12,11 +12,10 @@
         <scene sceneID="sl5-Jq-fvt">
             <objects>
                 <navigationController toolbarHidden="NO" id="YlY-XV-zyg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" largeTitles="YES" id="xDY-aQ-ET4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="xDY-aQ-ET4">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBarAppearance key="compactAppearance"/>
+                        <navigationBarAppearance key="standardAppearance"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9tc-Vn-gvB"/>
