@@ -105,8 +105,6 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
         case let cellVM as DescriptionCellViewModel:
             // expanded냐 체크 후에 label 높이 계산해서 return
             if cellVM.expandCell {
-                
-                print("DescriptionCellViewModel height: \(cellVM.expandedCellHeight)")
                 guard let height = cellVM.expandedCellHeight else {
                     cellVM.expandedCellHeight = fittedSizeHeight(for: UIScreen.main.bounds.width - 20*2,
                                                                     text: cellVM.description,
