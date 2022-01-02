@@ -124,7 +124,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return UIScreen.main.bounds.height / 3
             
         case _ as AppIconCellViewModel:
-            return 60.0
+            return 65.0
             
         case let portaitCellVM as PortaitCellViewModel:
             let imageSize = portaitCellVM.imageSize

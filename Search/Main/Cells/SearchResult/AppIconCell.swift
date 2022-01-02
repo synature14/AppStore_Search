@@ -38,6 +38,12 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
     @IBOutlet weak var sellerNameLabel: UILabel!
     @IBOutlet weak var userRatingCountLabel: UILabel!
     
+    @IBOutlet var ratingViews: [RatingView]!
+    
+    private var sortedRatingViews: [RatingView] {
+        ratingViews.sorted { $0.tag < $1.tag }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -63,5 +69,23 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
             .observeOn(MainScheduler.instance)
             .bind(to: self.appIconImageView.rx.image)
             .disposed(by: disposeBag)
+        
+        let averageRating = round(result.averageUserRating*10) / 10
+        // 평점 3.2136 라면
+        let floatAverageRating = averageRating
+        let filledCnt = Int(floatAverageRating)                    // 3
+        let unFilledRate = averageRating - CGFloat(filledCnt)    // 0.2136
+        
+        for i in 0..<filledCnt {
+            sortedRatingViews[i].progress = 1
+        }
+        for i in filledCnt..<(filledCnt+1) {
+            sortedRatingViews[i].progress = unFilledRate
+        }
+        
+        let emptyStarIndex = filledCnt+1
+        for i in emptyStarIndex..<ratingViews.count {
+            sortedRatingViews[i].progress = 0
+        }
     }
 }

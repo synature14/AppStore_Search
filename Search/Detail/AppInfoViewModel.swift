@@ -37,7 +37,7 @@ class AppInfoViewModel {
         
         let badgeWidth = (UIScreen.main.bounds.width - 15*2)/4
         let badges = [CollectionViewContainerCellViewModel(result,
-                                                           cellSize: CGSize(width: badgeWidth, height: 75),
+                                                           cellSize: CGSize(width: badgeWidth, height: 76),
                                                            type: .BadgeCell)]
         let 새로운기능Title = [TitleCellViewModel("새로운 기능", buttonTitle: "버전 기록")]
         let 미리보기 = [TitleCellViewModel("미리보기")]
