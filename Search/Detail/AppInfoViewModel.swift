@@ -49,6 +49,9 @@ class AppInfoViewModel {
                                                                 cellSize: cellSize,
                                                                 type: .PreviewCell)]
         let availableDevices = [AvailableDeviceScreenShotCellViewModel(result.ipadScreenshotUrls, supportedDevices: result.supportedDevices)]
+        
+        let description = [DescriptionCellViewModel(result.description)]
+        
         let 평가및리뷰 = [TitleCellViewModel("평가 및 리뷰", buttonTitle: "모두 보기")]
         
         let 정보 = [TitleCellViewModel("정보")]
@@ -61,7 +64,9 @@ class AppInfoViewModel {
                          InfoTextCellViewModel(.저작권, desc: "© \(result.sellerName)")
         ]
         
-        section = [appIconBig, badges, 새로운기능Title, 미리보기, screenShots, availableDevices, 평가및리뷰, 정보, infoTexts]
+        section = [appIconBig, badges, 새로운기능Title, 미리보기,
+                   screenShots, availableDevices, description,
+                   평가및리뷰, 정보, infoTexts]
         return section
     }
     

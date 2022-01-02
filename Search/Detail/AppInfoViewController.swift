@@ -102,11 +102,59 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
         case _ as InfoTextCellViewModel:
             return 45
             
-        case _ as DescriptionCellViewModel:
-            return 90
+        case let cellVM as DescriptionCellViewModel:
+            // expanded냐 체크 후에 label 높이 계산해서 return
+            if cellVM.expandCell {
+                
+                print("DescriptionCellViewModel height: \(cellVM.expandedCellHeight)")
+                guard let height = cellVM.expandedCellHeight else {
+                    cellVM.expandedCellHeight = fittedSizeHeight(for: UIScreen.main.bounds.width - 20*2,
+                                                                    text: cellVM.description,
+                                                                    font: cellVM.descriptionLabelFont)
+                    return cellVM.expandedCellHeight ?? 0.0
+                }
+                
+                return height
+            } else {
+                return 90
+            }
         default:
             return 0
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let section = viewModel?.sections[indexPath.section] else {
+            return
+        }
+        
+        let selectedItem = section[indexPath.row]
+        switch selectedItem {
+        case let cellVM as DescriptionCellViewModel:
+            cellVM.expandCell = true
+            tableView.performBatchUpdates({
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            })
+
+        default:
+            break
+        }
+    }
+    
+}
+
+private extension AppInfoViewController {
+    func fittedSizeHeight(for width: CGFloat, text: String, font: UIFont) -> CGFloat {
+        let labelFrame = CGRect(x: 0, y: 0,
+                                width: width,
+                                height: 0)
+        let label = UILabel(frame: labelFrame)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byCharWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        let fitted = label.frame
+        return fitted.height
+    }
 }

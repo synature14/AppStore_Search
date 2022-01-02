@@ -166,5 +166,10 @@ extension CollectionViewContainerCell: UICollectionViewDataSource, UICollectionV
         return collectionView.resolveCell(item, indexPath: indexPath)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedItem = cellVM?.items[indexPath.item] else { return }
+        
+        let badge = selectedItem as? BadgeCellViewModel
+        badge?.badgeInfo?.category
+    }
 }

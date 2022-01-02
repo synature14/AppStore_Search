@@ -6,13 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class DescriptionCellViewModel: TableCellRepresentable {
+
     var cellType: UITableViewCell.Type {
         DescriptionCell.self
     }
+    var leadingTrailingMargin: CGFloat = 20
     
     private(set) var description: String
+    var expandCell: Bool = false
+    var expandedCellHeight: CGFloat?
+    var descriptionLabelFont: UIFont = .systemFont(ofSize: 13)
+    
     init(_ descrption: String) {
         self.description = descrption
     }
@@ -20,6 +28,7 @@ class DescriptionCellViewModel: TableCellRepresentable {
 
 class DescriptionCell: UITableViewCell, BindableTableViewCell {
 
+    private var disposeBag = DisposeBag()
     private(set) var cellVM: DescriptionCellViewModel?
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -27,17 +36,17 @@ class DescriptionCell: UITableViewCell, BindableTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
     
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
         guard let cellVM = cellVM as? DescriptionCellViewModel else { return }
         self.cellVM = cellVM
-        
-        
-        
         descriptionLabel.text = cellVM.description
+        cellVM.descriptionLabelFont = descriptionLabel.font
     }
-    
-
 }
