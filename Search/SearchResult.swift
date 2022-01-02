@@ -32,6 +32,7 @@ struct SearchResult: Decodable {
     let ipadScreenshotUrls: [String]
     let supportedDevices: [String]
     let trackName: String   // 앱 타이틀
+    let trackViewUrl: String    // 앱 다운로드 url
     
     // 릴리즈노트
     let version: String     // 최신 버전
@@ -57,7 +58,7 @@ struct SearchResult: Decodable {
     enum CodingKeys: String, CodingKey {
         case iconImage = "artworkUrl512"
         case screenshotUrls, ipadScreenshotUrls, supportedDevices
-        case trackName
+        case trackName, trackViewUrl
         case version, releaseNotes, description
         case sellerName, fileSizeBytes, genres, minimumOsVersion, languageCodesISO2A
         case trackContentRating, advisories, sellerUrl
@@ -71,6 +72,7 @@ struct SearchResult: Decodable {
         self.ipadScreenshotUrls = try container.decode(Array<String>.self, forKey: .ipadScreenshotUrls)
         self.supportedDevices = try container.decode(Array<String>.self, forKey: .supportedDevices)
         self.trackName = try container.decode(String.self, forKey: .trackName)
+        self.trackViewUrl = try container.decode(String.self, forKey: .trackViewUrl)
         
         self.version = try container.decode(String.self, forKey: .version)
         self.releaseNotes = try? container.decode(String.self, forKey: .releaseNotes)

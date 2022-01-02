@@ -25,17 +25,6 @@ class AppInfoViewController: UIViewController {
         vc.viewModel = AppInfoViewModel(result)
         return vc
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -77,6 +66,9 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = viewModel?.sections[indexPath.section] else { return UITableViewCell() }
+        if let cellVM = section[indexPath.row] as? AppIconBigCellViewModel {
+            cellVM.delegate = self
+        }
         return tableView.resolveCell(section[indexPath.row], indexPath: indexPath)
     }
     
@@ -192,5 +184,13 @@ private extension AppInfoViewController {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2)
         let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
+    }
+}
+
+extension AppInfoViewController: AppIconBigCellVMProtocol {
+    func didShareButtonTapped(_ downloadURL: String) {
+        let vc = UIActivityViewController(activityItems: [URL(string: downloadURL)], applicationActivities: nil)
+        vc.excludedActivityTypes = [.addToReadingList, .assignToContact]
+        self.present(vc, animated: true, completion: nil)
     }
 }

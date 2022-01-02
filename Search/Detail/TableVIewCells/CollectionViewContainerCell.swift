@@ -142,7 +142,7 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
         switch cellVM.type {
         case .BadgeCell:
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.itemSize = CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height)
+                layout.itemSize = CGSize(width: collectionView.frame.width / 4, height: 76)
                 layout.scrollDirection = .horizontal
                 layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             }

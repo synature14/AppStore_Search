@@ -8,13 +8,17 @@
 import UIKit
 import RxSwift
 
+protocol AppIconBigCellVMProtocol {
+    func didShareButtonTapped(_ downloadURL: String)
+}
+
 class AppIconBigCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         AppIconBigCell.self
     }
     
     private(set) var result: SearchResult
-    
+    var delegate: AppIconBigCellVMProtocol?
     lazy var appIconImage: Observable<UIImage> = {
         return UIUtility.shared.loadImage(result.iconImage)
     }()
@@ -58,6 +62,11 @@ class AppIconBigCell: UITableViewCell, BindableTableViewCell {
             .bind(to: self.iconImageView.rx.image)
             .disposed(by: disposeBag)
         
+        shareButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                cellVM.delegate?.didShareButtonTapped(cellVM.result.trackViewUrl)
+            }).disposed(by: disposeBag)
     }
     
 }
