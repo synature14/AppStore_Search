@@ -34,6 +34,11 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
     
     @IBOutlet weak var ratingView: UIView!
 
+    @IBOutlet var ratingViews: [RatingView]!
+    
+    private var sortedRatingViews: [RatingView] {
+        ratingViews.sorted { $0.tag < $1.tag }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,11 +73,29 @@ class BadgeCell: UICollectionViewCell, BindableCollectionViewCell {
         switch badgeInfo.category {
         case .평가:
             categoryLabel.text = "\(badgeInfo.result.userRatingCount)개의 평가"
-            let averageRating = String(format: "%.1f", round(result.averageUserRating*10) / 10)
+            let ratingFloat = round(result.averageUserRating*10) / 10
+            let averageRating = String(format: "%.1f", ratingFloat)
             largeFontLabel.text = averageRating
             largeFontView.isHidden = false
             ratingView.isHidden = false
             descriptionView.isHidden = true
+            
+            // 평점 3.2 라면
+            let floatAverageRating = CGFloat((averageRating as NSString).floatValue)
+            let filledCnt = Int(floatAverageRating)                    // 3
+            let unFilledRate = ratingFloat - CGFloat(filledCnt)    // 0.2
+            
+            for i in 0..<filledCnt {
+                sortedRatingViews[i].progress = 1
+            }
+            for i in filledCnt..<(filledCnt+1) {
+                sortedRatingViews[i].progress = unFilledRate
+            }
+            
+            let emptyStarIndex = filledCnt+1
+            for i in emptyStarIndex..<ratingViews.count {
+                sortedRatingViews[i].progress = 0
+            }
             
         case .연령:
             largeFontLabel.text = "\(result.trackContentRating)"

@@ -32,6 +32,7 @@
 		983DB451277EF045004CC8CA /* SearchingResultCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB450277EF045004CC8CA /* SearchingResultCellViewModel.swift */; };
 		983DB453277EF0D5004CC8CA /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */; };
 		983DB455277EF146004CC8CA /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983DB454277EF146004CC8CA /* NSObject+Ext.swift */; };
+		9863F8062781DDEF00C588ED /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863F8052781DDEF00C588ED /* RatingView.swift */; };
 		98949DA7277C6B9200C29734 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DA6277C6B9200C29734 /* CellProtocol.swift */; };
 		98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98949DA9277C87F200C29734 /* NoResultsCell.swift */; };
 		98949DAC277C87F200C29734 /* NoResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98949DAA277C87F200C29734 /* NoResultsCell.xib */; };
@@ -103,6 +104,7 @@
 		983DB450277EF045004CC8CA /* SearchingResultCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingResultCellViewModel.swift; sourceTree = "<group>"; };
 		983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		983DB454277EF146004CC8CA /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
+		9863F8052781DDEF00C588ED /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		98949DA6277C6B9200C29734 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		98949DA9277C87F200C29734 /* NoResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsCell.swift; sourceTree = "<group>"; };
 		98949DAA277C87F200C29734 /* NoResultsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoResultsCell.xib; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				983DB443277ECFA0004CC8CA /* UIUtility.swift */,
+				9863F8052781DDEF00C588ED /* RatingView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				983DB451277EF045004CC8CA /* SearchingResultCellViewModel.swift in Sources */,
 				98949DAB277C87F200C29734 /* NoResultsCell.swift in Sources */,
 				98AC8A34277FFA4900B8FBB3 /* AppInfoViewController.swift in Sources */,
+				9863F8062781DDEF00C588ED /* RatingView.swift in Sources */,
 				98949DB3277C935700C29734 /* PortaitScreenShotCell.swift in Sources */,
 				982525D3277B573D0048A9DE /* RecentSearchHistoryCellViewModel.swift in Sources */,
 				983DB444277ECFA0004CC8CA /* UIUtility.swift in Sources */,
