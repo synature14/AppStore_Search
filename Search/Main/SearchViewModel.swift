@@ -97,7 +97,7 @@ class SearchViewModel {
             
         case .keyword(let word):
             SYCoreDataManager.shared.find(word) { entities in
-                let cellVMs = entities.map { RecentSearchHistoryCellViewModel($0) }
+                let cellVMs = entities.map { SearchingResultCellViewModel($0) }
                 print("==== keyword: \(word) searched =====")
                 
                 self.sections = cellVMs.count > 0 ? [cellVMs] : [[NoResultsCellViewModel()]]

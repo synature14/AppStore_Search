@@ -33,6 +33,7 @@ class RecentSearchHistoryCellViewModel: TableCellRepresentable {
             .subscribe(onNext: { word in
                 SYCoreDataManager.shared.delete(word) {
                     // tableView deleteRow
+                    
                 }
                 
                 print("Delete Success! --> tableView Row should be removed")
