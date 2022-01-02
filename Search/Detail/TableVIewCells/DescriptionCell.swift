@@ -46,6 +46,9 @@ class DescriptionCell: UITableViewCell, BindableTableViewCell {
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
         guard let cellVM = cellVM as? DescriptionCellViewModel else { return }
         self.cellVM = cellVM
+        
+        expandButton.isHidden = cellVM.expandCell
+        
         descriptionLabel.text = cellVM.description
         cellVM.descriptionLabelFont = descriptionLabel.font
     }
