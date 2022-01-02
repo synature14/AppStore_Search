@@ -17,7 +17,7 @@ class SearchViewModel {
     
     private var disposeBag = DisposeBag()
     private var requestKeywordDisposeBag = DisposeBag()
-    let searchText = BehaviorRelay<String>(value: "")
+    let searchText = PublishSubject<String>()
     let requestKeyword = PublishSubject<String>()
     
     private(set) var sections: [[TableCellRepresentable]] = [] {
@@ -71,7 +71,7 @@ class SearchViewModel {
     private func bindRequestKeyword() {
         requestKeyword
             .do(onNext: { [weak self] searchTextValue in
-                SYCoreDataManager.shared.save(searchTextValue)
+                SYCoreDataManager.shared.update(searchTextValue)
                 self?.sections = [[ActivityViewModel()]]
             })
             .flatMapLatest { NetworkManager.request(search: $0) }   // emit될 Observable 여러개일 수 있음. 이전에 만든 observable은 무시하고 가장 최근의 Observable을 따름

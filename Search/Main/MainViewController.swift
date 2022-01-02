@@ -54,7 +54,7 @@ private extension MainViewController {
             .orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] searchText in
-                self?.viewModel.searchText.accept(searchText)
+                self?.viewModel.searchText.onNext(searchText)
             })
             .disposed(by: disposeBag)
 

@@ -17,9 +17,15 @@ protocol InAppDataHandler {
 // MARK: UserDefaults에 저장할수도 있음..
 class SYCoreDataManager: InAppDataHandler {
     static let shared = SYCoreDataManager()
-    
+    private var disposeBag = DisposeBag()
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    private lazy var context = appDelegate?.persistentContainer.viewContext
+    private lazy var context: NSManagedObjectContext? = {
+        return appDelegate?.persistentContainer.viewContext
+    }()
+    
+    deinit {
+        disposeBag = DisposeBag()
+    }
     
     // 조회
     func loadData<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
@@ -37,7 +43,25 @@ class SYCoreDataManager: InAppDataHandler {
     }
     
     // 저장
-    func save(_ word: String) {
+    func update(_ word: String) {
+        // 1. 예전에 검색했던 검색어인가?
+        let loadedData = loadData(request: RecentSearchEntity.fetchRequest())        // 데이터에 대한 참조(lazy load)만 가져온거라 성능에 이슈 없음.
+        let hasWord = !loadedData.filter({ $0.word == word }).isEmpty
+        
+        if hasWord {
+            // 1-1. 그렇다면 delete
+            delete(word, request: RecentSearchEntity.fetchRequest())
+                .subscribe(onNext: { [weak self] _ in
+                    // 1-2. 다시 save
+                    self?.save(word)
+                })
+                .disposed(by: disposeBag)
+        } else {
+            save(word)
+        }
+    }
+    
+    internal func save(_ word: String) {
         guard let context = self.context,
               let entity = NSEntityDescription.entity(forEntityName: RecentSearchEntity.name, in: context) else {
             return
@@ -46,10 +70,7 @@ class SYCoreDataManager: InAppDataHandler {
         guard let recentSearchWords = NSManagedObject(entity: entity, insertInto: context) as? RecentSearchEntity else {
             return
         }
-        // 1. 예전에 검색했던 검색어인가?
-        // 1-1. 그렇다면 delete
-        // 1-2. 다시 save
-        
+
         // 2. 아니라면 그냥 save
         recentSearchWords.word = word
         recentSearchWords.date = Date()
@@ -114,4 +135,7 @@ class SYCoreDataManager: InAppDataHandler {
         
         return primaryResults
     }
+    
+    // MARK: 검색 날짜에 따른 최신순 정렬
+    func sortByDate() -> [RecentSearchEntity] { return [] }
 }
