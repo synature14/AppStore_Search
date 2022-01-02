@@ -36,10 +36,10 @@ class ImageCache {
     
     // 2. 쓰기 (disk & memory)
     func write(key imageFilePath: String, image: UIImage) throws {
-        guard let compressedData = image.jpegData(compressionQuality: 0.7) else { return }
-        MemoryStorage.shared.store(imageFilePath, data: compressedData)
+        guard let pngData = image.pngData() else { return }
+        MemoryStorage.shared.store(imageFilePath, data: pngData)
         do {
-            try DiskStorage.shared.store(at: imageFilePath, data: compressedData)
+            try DiskStorage.shared.store(at: imageFilePath, data: pngData)
         } catch {
             throw SYStorageError.diskError(reason: "data writeError")
         }
