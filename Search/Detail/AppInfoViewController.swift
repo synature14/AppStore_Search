@@ -46,7 +46,7 @@ private extension AppInfoViewController {
         
         tableView.register(cells: [
             AppIconBigCell.self, TitleCell.self, CollectionViewContainerCell.self,
-            AvailableDeviceScreenShotCell.self, InfoTextCell.self
+            AvailableDeviceScreenShotCell.self, InfoTextCell.self, DescriptionCell.self
         ])
 
         tableView.rx.itemSelected
@@ -101,6 +101,9 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
             
         case _ as InfoTextCellViewModel:
             return 45
+            
+        case _ as DescriptionCellViewModel:
+            return 90
         default:
             return 0
         }

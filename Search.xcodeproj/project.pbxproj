@@ -66,6 +66,8 @@
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
 		98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7573277DF6160042D1E6 /* ImageCache.swift */; };
+		98BC974B278142CE00415B62 /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC9749278142CE00415B62 /* DescriptionCell.swift */; };
+		98BC974C278142CE00415B62 /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BC974A278142CE00415B62 /* DescriptionCell.xib */; };
 		98E6FA11277F5FDC00C0EC6A /* ActivityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E6FA0F277F5FDC00C0EC6A /* ActivityViewCell.swift */; };
 		98E6FA12277F5FDC00C0EC6A /* ActivityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E6FA10277F5FDC00C0EC6A /* ActivityViewCell.xib */; };
 		FF080207192534A34A370806 /* Pods_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A3EBD599BD5A9A7A0403E /* Pods_Search.framework */; };
@@ -135,6 +137,8 @@
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		98AE7573277DF6160042D1E6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		98BC9749278142CE00415B62 /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
+		98BC974A278142CE00415B62 /* DescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCell.xib; sourceTree = "<group>"; };
 		98E6FA0F277F5FDC00C0EC6A /* ActivityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewCell.swift; sourceTree = "<group>"; };
 		98E6FA10277F5FDC00C0EC6A /* ActivityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityViewCell.xib; sourceTree = "<group>"; };
 		EC1B6C6D0A28ECCE31A39B3F /* Pods-Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search.release.xcconfig"; path = "Target Support Files/Pods-Search/Pods-Search.release.xcconfig"; sourceTree = "<group>"; };
@@ -306,6 +310,8 @@
 				98AC8A52278064B700B8FBB3 /* AvailableDeviceScreenShotCell.xib */,
 				98AC8A552780755600B8FBB3 /* InfoTextCell.swift */,
 				98AC8A562780755600B8FBB3 /* InfoTextCell.xib */,
+				98BC9749278142CE00415B62 /* DescriptionCell.swift */,
+				98BC974A278142CE00415B62 /* DescriptionCell.xib */,
 				98AC8A442780244400B8FBB3 /* CollectionCell */,
 			);
 			path = TableVIewCells;
@@ -405,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				983DB44F277EE8E7004CC8CA /* LandscapeScreenShotCell.xib in Resources */,
+				98BC974C278142CE00415B62 /* DescriptionCell.xib in Resources */,
 				98949DB4277C935700C29734 /* PortaitScreenShotCell.xib in Resources */,
 				98AC8A4E27803E7100B8FBB3 /* PreviewCell.xib in Resources */,
 				98AC8A482780249A00B8FBB3 /* BadgeCell.xib in Resources */,
@@ -494,6 +501,7 @@
 				98949DAF277C8C2900C29734 /* SearchingResultCell.swift in Sources */,
 				98AC8A4A2780251E00B8FBB3 /* UICollectionView+Ext.swift in Sources */,
 				983DB441277ECD9C004CC8CA /* UIImage+Ext.swift in Sources */,
+				98BC974B278142CE00415B62 /* DescriptionCell.swift in Sources */,
 				98949DA7277C6B9200C29734 /* Common.swift in Sources */,
 				37F4AD42277AD65F00941E21 /* RecentSearchWordModel.xcdatamodeld in Sources */,
 				983DB455277EF146004CC8CA /* NSObject+Ext.swift in Sources */,
