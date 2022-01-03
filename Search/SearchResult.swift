@@ -2,7 +2,7 @@
 //  SearchResult.swift
 //  Search
 //
-//  Created by SutieDev on 2021/12/28.
+//  Created by Suvely on 2021/12/28.
 //
 
 import Foundation
@@ -38,6 +38,7 @@ struct SearchResult: Decodable {
     let version: String     // 최신 버전
     let releaseNotes: String?
     let description: String
+    let bundleId: String
     
     // InfoData
     let sellerName: String              // 제공자
@@ -59,7 +60,7 @@ struct SearchResult: Decodable {
         case iconImage = "artworkUrl512"
         case screenshotUrls, ipadScreenshotUrls, supportedDevices
         case trackName, trackViewUrl
-        case version, releaseNotes, description
+        case version, releaseNotes, bundleId, description
         case sellerName, fileSizeBytes, genres, minimumOsVersion, languageCodesISO2A
         case trackContentRating, advisories, sellerUrl
         case userRatingCount, averageUserRating
@@ -76,6 +77,7 @@ struct SearchResult: Decodable {
         
         self.version = try container.decode(String.self, forKey: .version)
         self.releaseNotes = try? container.decode(String.self, forKey: .releaseNotes)
+        self.bundleId = try container.decode(String.self, forKey: .bundleId)
         self.description = try container.decode(String.self, forKey: .description)
         
         self.sellerName = try container.decode(String.self, forKey: .sellerName)

@@ -2,7 +2,7 @@
 //  CollectionViewContainerCellViewModel.swift
 //  Search
 //
-//  Created by SutieDev on 2022/01/03.
+//  Created by Suvely on 2022/01/03.
 //
 
 import Foundation

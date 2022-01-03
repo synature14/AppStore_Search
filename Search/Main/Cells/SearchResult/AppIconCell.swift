@@ -37,8 +37,8 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var sellerNameLabel: UILabel!
     @IBOutlet weak var userRatingCountLabel: UILabel!
-    
     @IBOutlet var ratingViews: [RatingView]!
+    @IBOutlet weak var installButton: UIButton!
     
     private var sortedRatingViews: [RatingView] {
         ratingViews.sorted { $0.tag < $1.tag }
@@ -64,6 +64,12 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
         trackNameLabel.text = result.trackName
         userRatingCountLabel.text = "\(result.userRatingCount)"
         sellerNameLabel.text = result.sellerName
+        
+        if checkIsAppInstalled(result.bundleId) {
+            installButton.setTitle("열기", for: .normal)
+        } else {
+            installButton.setTitle("받기", for: .normal)
+        }
         
         vm.appIconImage
             .observeOn(MainScheduler.instance)
@@ -92,6 +98,17 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
         let emptyStarIndex = filledCnt+1
         for i in emptyStarIndex..<ratingViews.count {
             sortedRatingViews[i].progress = 0
+        }
+    }
+    
+    func checkIsAppInstalled(_ bundleID: String) -> Bool {
+        let app = UIApplication.shared
+        guard let url = URL(string: bundleID) else { return false }
+        if app.canOpenURL(url) {
+            // 앱 설치되어있음
+            return true
+        } else {
+            return false
         }
     }
 }

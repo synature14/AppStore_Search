@@ -152,6 +152,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="appIconImageView" destination="5aD-39-ZE1" id="xfB-oW-s12"/>
+                <outlet property="installButton" destination="eje-VQ-uEP" id="pKX-ao-JnN"/>
                 <outlet property="sellerNameLabel" destination="PeV-gj-R19" id="uKL-vY-GeD"/>
                 <outlet property="trackNameLabel" destination="0Qu-Fi-fqi" id="Jfd-ik-HSH"/>
                 <outlet property="userRatingCountLabel" destination="RhT-85-A2B" id="FYv-jY-nfT"/>

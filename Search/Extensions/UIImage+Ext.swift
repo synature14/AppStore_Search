@@ -8,19 +8,6 @@
 import UIKit
 
 extension UIImage {
-    func resize(newSize: CGSize) -> UIImage {
-        let scale = newSize.width / self.size.width
-        let newHeight = self.size.height * scale
-        let size = CGSize(width: newSize.width, height: newHeight)
-        let render = UIGraphicsImageRenderer(size: size)
-        let renderImage = render.image { context in
-            self.draw(in: CGRect(origin: .zero, size: size))
-        }
-        print("origin: \(self), resize: \(renderImage)")
-        return renderImage
-    }
-
-
     // 이미지뷰 크기에 맞게 조절 + 해상도
     func downSampling(_ imageViewSize: CGSize? = nil) -> UIImage {
         let scale = UIScreen.main.scale

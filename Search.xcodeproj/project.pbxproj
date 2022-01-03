@@ -69,7 +69,6 @@
 		98AC8A572780755600B8FBB3 /* InfoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A552780755600B8FBB3 /* InfoTextCell.swift */; };
 		98AC8A582780755600B8FBB3 /* InfoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8A562780755600B8FBB3 /* InfoTextCell.xib */; };
 		98AC8A5C27809D6200B8FBB3 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8A5B27809D6200B8FBB3 /* CarouselLayout.swift */; };
-		98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */; };
 		98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */; };
 		98AE7572277DE1950042D1E6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7571277DE1950042D1E6 /* DiskStorage.swift */; };
 		98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE7573277DF6160042D1E6 /* ImageCache.swift */; };
@@ -147,7 +146,6 @@
 		98AC8A552780755600B8FBB3 /* InfoTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextCell.swift; sourceTree = "<group>"; };
 		98AC8A562780755600B8FBB3 /* InfoTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTextCell.xib; sourceTree = "<group>"; };
 		98AC8A5B27809D6200B8FBB3 /* CarouselLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
-		98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		98AE756D277DDDB80042D1E6 /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		98AE7571277DE1950042D1E6 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		98AE7573277DF6160042D1E6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -379,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				98949DB5277C9C7B00C29734 /* UIView+Ext.swift */,
-				98AE756B277DD2890042D1E6 /* UIImageView+Ex.swift */,
 				983DB440277ECD9C004CC8CA /* UIImage+Ext.swift */,
 				98AC8A492780251E00B8FBB3 /* UICollectionView+Ext.swift */,
 				983DB452277EF0D5004CC8CA /* UITableView+Ext.swift */,
@@ -566,7 +563,6 @@
 				98AC8A472780249A00B8FBB3 /* BadgeCell.swift in Sources */,
 				98AE7574277DF6160042D1E6 /* ImageCache.swift in Sources */,
 				98AE756E277DDDB80042D1E6 /* MemoryStorage.swift in Sources */,
-				98AE756C277DD2890042D1E6 /* UIImageView+Ex.swift in Sources */,
 				983DB446277EE4BD004CC8CA /* CellRepresentable.swift in Sources */,
 				98E6FA11277F5FDC00C0EC6A /* ActivityViewCell.swift in Sources */,
 				98949DB6277C9C7B00C29734 /* UIView+Ext.swift in Sources */,
