@@ -52,8 +52,8 @@ class LandscapeScreenShotCell: UITableViewCell, BindableTableViewCell {
         self.cellVM = cellVM
         
         ImageManager.shared.loadImage(cellVM.urls?.first ?? "")
-            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
-            .map { $0.downSampling() }
+//            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+//            .map { $0.downSampling() }
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] image in
                 self?.screenShotImageView.image = image

@@ -96,14 +96,19 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
                 return 76
                 
             case .iPhonePreviewCell:
-//                guard let imageURL = cellVM.searchResult?.screenshotUrls.first else { return 0 }
-//                let cellSize = cellSize(imageURL)
-                return 500
+                guard let imageURL = cellVM.searchResult?.screenshotUrls.first else { return 0 }
+                let cellSize = cellSize(imageURL)
+                return cellSize.height
                 
             case .iPadPreviewCell:
-//                guard let imageURL = cellVM.searchResult?.ipadScreenshotUrls.first else { return 0 }
-//                let cellSize = cellSize(imageURL)
-                return 360
+                guard let imageURLs = cellVM.searchResult?.ipadScreenshotUrls else { return 0 }
+                let maxSize = imageURLs
+                    .map { $0.size }
+                    .sorted { $0.height > $1.height }
+                    .first
+                
+                let scaledSize = scaledSizeForLandscape(maxSize ?? .zero)
+                return scaledSize.height
             }
         
         case _ as AvailableDeviceScreenShotCellViewModel:
@@ -173,23 +178,26 @@ private extension AppInfoViewController {
         return fitted.height
     }
     
-//    func cellSize(_ imageURL: String) -> CGSize {
-//        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape() : scaledSizeForPortrait()
-//        return cellSize
-//    }
-//
-//    // collectionView 좌우 패딩 = 20
-//    func scaledSizeForPortrait() -> CGSize {
-//        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
-//        let imageViewScaledHeight = Constants.iPhonePreviewRowHeight
-//        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-//    }
-//
-//    func scaledSizeForLandscape() -> CGSize {
-//        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
-//        let imageViewScaledHeight = Constants.iPadPreviewRowHeight
-//        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-//    }
+    func cellSize(_ imageURL: String) -> CGSize {
+        let originalSize = imageURL.size
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        return cellSize
+    }
+
+    // collectionView 좌우 패딩 = 20
+    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
+        let sectionInset = CGFloat(40)
+        let resizedWidth = (tableView.frame.width - sectionInset) * 0.76
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
+    }
+
+    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
+        let sectionInset = CGFloat(40)
+        let resizedWidth = (tableView.frame.width - sectionInset) * 0.76
+        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        return CGSize(width: resizedWidth, height: imageViewScaledHeight - 3)
+    }
 }
 
 extension AppInfoViewController: AppIconBigCellVMProtocol {
@@ -200,3 +208,5 @@ extension AppInfoViewController: AppIconBigCellVMProtocol {
         self.present(vc, animated: true, completion: nil)
     }
 }
+
+

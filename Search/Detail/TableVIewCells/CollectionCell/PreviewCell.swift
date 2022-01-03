@@ -17,8 +17,8 @@ class PreviewCellViewModel: CollectionCellRepresentable {
     
     lazy var previewImage: Observable<UIImage> = {
         return ImageManager.shared.loadImage(imageURL)
-            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
-            .map { $0.downSampling(self.itemSize) }
+//            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+//            .map { $0.downSampling() }
     }()
     
     private(set) var imageURL: String
@@ -41,9 +41,10 @@ class PreviewCell: UICollectionViewCell, BindableCollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
@@ -53,6 +54,7 @@ class PreviewCell: UICollectionViewCell, BindableCollectionViewCell {
         guard let cellVM = cellVM as? PreviewCellViewModel else {
             return
         }
+        
         cellVM.previewImage
             .observeOn(MainScheduler.instance)
             .bind(to: self.imageView.rx.image)

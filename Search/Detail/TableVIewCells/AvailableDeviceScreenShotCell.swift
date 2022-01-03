@@ -28,7 +28,7 @@ class AvailableDeviceScreenShotCellViewModel: TableCellRepresentable {
         self.ipadScreenShotUrls = ipadScreenShotUrls
         self.supportedDevices = supportedDevices
         self.soleType = soleType
-        self.showUnfoldButton = soleType != nil
+        self.showUnfoldButton = soleType == nil
     }
 }
 
@@ -86,10 +86,12 @@ class AvailableDeviceScreenShotCell: UITableViewCell, BindableTableViewCell {
         case .iPhone:
             ipadIconView.isHidden = true
             watchIconView.isHidden = true
+            iphoneIconView.isHidden = false
             descrptionLabel.text = "iPhone"
         case .iPad:
             iphoneIconView.isHidden = true
             watchIconView.isHidden = true
+            ipadIconView.isHidden = false
             descrptionLabel.text = "iPad용 앱"
         case .watch:
             iphoneIconView.isHidden = true

@@ -103,13 +103,9 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
     }
     
     private func loadImage(_ url: String, imageView: UIImageView) {
-        guard let vm = self.vm else {
-            return
-        }
-        
         ImageManager.shared.loadImage(url)
-            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
-            .map { $0.downSampling() }
+//            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+//            .map { $0.downSampling() }
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { img in
                 imageView.image = img

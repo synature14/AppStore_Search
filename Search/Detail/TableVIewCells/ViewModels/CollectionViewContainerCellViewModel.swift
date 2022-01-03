@@ -106,16 +106,5 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
             .compactMap { $0 as CollectionCellRepresentable }
         return items ?? []
     }
-    
-    func updateItemSizeForCell(_ size: CGSize, _ type: PreviewCollectionCellType) {
-        switch type {
-        case .BadgeCell:
-            break
-        case .iPhonePreviewCell:
-            self.items = configiPhonePreviewCellVMs(size)
-        case .iPadPreviewCell:
-            self.items = configiPadPreviewCellVMs(size)
-        }
-    }
 }
 
