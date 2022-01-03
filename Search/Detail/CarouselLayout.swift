@@ -28,7 +28,6 @@ class CarouselLayout: UICollectionViewFlowLayout {
         let updatedIndex = round(xOffset / (itemSize.width + minimumLineSpacing))
         
         let updatedOffset = updatedIndex * (itemSize.width + minimumLineSpacing)
-        print("updatedIndex = \(updatedIndex) , updatedOffset = \(updatedOffset)")
         return CGPoint(x: updatedOffset, y: 0)
     }
 }

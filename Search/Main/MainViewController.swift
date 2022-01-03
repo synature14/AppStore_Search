@@ -134,7 +134,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         case let portaitCellVM as PortaitCellViewModel:
             let imageViewSize = portaitCellVM.imageViewSize
-//            return imageViewSize.height
             
             return scaledPortraitHeight(padding: 20*2,
                                         originalImageSize: imageViewSize) + 40

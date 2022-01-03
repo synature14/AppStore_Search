@@ -32,12 +32,11 @@ class SearchViewModel {
     }
     
     private func bindings() {
-        // 검토!
+        // searchBar - onEditing
         searchText
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] text in
                 print("#####  searchText - \(text)  ####")
-                // [RecentSearchCellViewModel] 갱신해서 tableView.reload해야함
                 self?.searchHistory(.keyword(text))
             })
             .disposed(by: disposeBag)
@@ -101,16 +100,12 @@ class SearchViewModel {
                     .compactMap { RecentSearchHistoryCellViewModel($0) }
                     
                 cellVMs.forEach { $0.delegate = self }
-                print("cellVMs: \(cellVMs)")
-                print("=== [SearchFilter: .all] recentSearchHistory emit====")
                 self.sections = [cellVMs]
             }
             
         case .keyword(let word):
             SYCoreDataManager.shared.find(word) { entities in
                 let cellVMs = entities.map { SearchingResultCellViewModel($0) }
-                print("==== keyword: \(word) searched =====")
-                
                 self.sections = cellVMs.count > 0 ? [cellVMs] : [[NoResultsCellViewModel()]]
             }
         }

@@ -109,7 +109,6 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { img in
                 imageView.image = img
-                print("downSampling 이미지 get = \(img.size)")
             })
             .disposed(by: disposeBag)
     }
