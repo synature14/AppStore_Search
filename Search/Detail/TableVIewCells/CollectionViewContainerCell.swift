@@ -51,28 +51,34 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
         case .iPhonePreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
-            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
             carouselLayout.sectionInset = sectionInset
-            let cellSize = cellSize(result.screenshotUrls.first ?? "")
+//            let cellSize = cellSize(result.screenshotUrls.first ?? "")
+            let spacing = CGFloat(10)
+            carouselLayout.minimumLineSpacing = spacing
             
-            carouselLayout.itemSize = CGSize(width: cellSize.width - sectionInset.left - sectionInset.right,
-                                             height: cellSize.height)
+            carouselLayout.itemSize = CGSize(width: collectionView.frame.width - sectionInset.left - sectionInset.right - spacing,
+                                             height: Constants.iPhonePreviewRowHeight)
             carouselLayout.itemCount = cellVM.items.count
-            carouselLayout.minimumLineSpacing = 10
             collectionView.collectionViewLayout = carouselLayout
             
+            // downSampling할 imageView사이즈 업데이트
+            cellVM.updateItemSizeForCell(carouselLayout.itemSize, .iPhonePreviewCell)
         case .iPadPreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
-            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
             carouselLayout.sectionInset = sectionInset
             
-            let cellSize = cellSize(result.screenshotUrls.first ?? "")
-            carouselLayout.itemSize = CGSize(width: cellSize.width - sectionInset.left - sectionInset.right,
-                                             height: cellSize.height)
+//            let cellSize = cellSize(result.screenshotUrls.first ?? "")
+            let spacing = CGFloat(10)
+            carouselLayout.minimumLineSpacing = spacing
+            carouselLayout.itemSize = CGSize(width: collectionView.frame.width - sectionInset.left - sectionInset.right - spacing,
+                                             height: Constants.iPadPreviewRowHeight)
             carouselLayout.itemCount = cellVM.items.count
-            carouselLayout.minimumLineSpacing = 10
             collectionView.collectionViewLayout = carouselLayout
+            // downSampling할 imageView사이즈 업데이트
+            cellVM.updateItemSizeForCell(carouselLayout.itemSize, .iPadPreviewCell)
         }
     }
     
@@ -111,21 +117,20 @@ extension CollectionViewContainerCell: UICollectionViewDataSource, UICollectionV
 }
 
 private extension CollectionViewContainerCell {
-    func cellSize(_ imageURL: String) -> CGSize {
-        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape() : scaledSizeForPortrait()
-        return cellSize
-    }
-    
-    // collectionView 좌우 패딩 = 20
-    func scaledSizeForPortrait() -> CGSize {
-        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
-        let imageViewScaledHeight = Constants.iPhonePreviewRowHeight
-        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-    }
-    
-    func scaledSizeForLandscape() -> CGSize {
-        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
-        let imageViewScaledHeight = Constants.iPadPreviewRowHeight
-        return CGSize(width: resizedWidth, height: imageViewScaledHeight)
-    }
+//    func cellSize(_ imageURL: String) -> CGSize {
+//        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape() : scaledSizeForPortrait()
+//        return cellSize
+//    }
+//
+//    // collectionView 좌우 패딩 = 20
+//    func scaledSizeForPortrait() -> CGSize {
+//        let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
+//        return CGSize(width: resizedWidth, height: collectionView.frame.height)
+//    }
+//
+//    func scaledSizeForLandscape() -> CGSize {
+//        let resizedWidth = (UIScreen.main.bounds.width - 20*2)
+////        let imageViewScaledHeight = Constants.iPadPreviewRowHeight
+//        return CGSize(width: resizedWidth, height: collectionView.frame.height)
+//    }
 }

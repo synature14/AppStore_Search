@@ -18,18 +18,15 @@ class PreviewCellViewModel: CollectionCellRepresentable {
     lazy var previewImage: Observable<UIImage> = {
         return ImageManager.shared.loadImage(imageURL)
             .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
-            .map { $0.downSampling() }
+            .map { $0.downSampling(self.itemSize) }
     }()
     
     private(set) var imageURL: String
-    var itemSize: CGSize {
-        get {
-            return imageURL.size
-        }
-    }
+    private(set) var itemSize: CGSize?
     
-    init(_ imageUrl: String) {
+    init(_ imageUrl: String, itemSize: CGSize? = nil) {
         self.imageURL = imageUrl
+        self.itemSize = itemSize
     }
     
     deinit {

@@ -93,18 +93,29 @@ class CollectionViewContainerCellViewModel: TableCellRepresentable {
         return items
     }
     
-    private func configiPhonePreviewCellVMs() -> [CollectionCellRepresentable] {
+    private func configiPhonePreviewCellVMs(_ imageViewSize: CGSize? = nil) -> [CollectionCellRepresentable] {
         let items: [CollectionCellRepresentable]? = searchResult?.screenshotUrls
-            .compactMap { PreviewCellViewModel($0) }
+            .compactMap { PreviewCellViewModel($0, itemSize: imageViewSize) }
             .compactMap { $0 as CollectionCellRepresentable }
         return items ?? []
     }
     
-    private func configiPadPreviewCellVMs() -> [CollectionCellRepresentable] {
+    private func configiPadPreviewCellVMs(_ imageViewSize: CGSize? = nil) -> [CollectionCellRepresentable] {
         let items: [CollectionCellRepresentable]? = searchResult?.ipadScreenshotUrls
-            .compactMap { PreviewCellViewModel($0) }
+            .compactMap { PreviewCellViewModel($0, itemSize: imageViewSize) }
             .compactMap { $0 as CollectionCellRepresentable }
         return items ?? []
+    }
+    
+    func updateItemSizeForCell(_ size: CGSize, _ type: PreviewCollectionCellType) {
+        switch type {
+        case .BadgeCell:
+            break
+        case .iPhonePreviewCell:
+            self.items = configiPhonePreviewCellVMs(size)
+        case .iPadPreviewCell:
+            self.items = configiPadPreviewCellVMs(size)
+        }
     }
 }
 
