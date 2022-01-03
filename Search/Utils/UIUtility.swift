@@ -12,6 +12,7 @@ class UIUtility {
     static let shared = UIUtility()
     private var disposeBag = DisposeBag()
     
+    
     deinit {
         self.disposeBag = DisposeBag()
     }

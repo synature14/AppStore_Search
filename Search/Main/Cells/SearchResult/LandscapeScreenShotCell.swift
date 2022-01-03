@@ -16,13 +16,13 @@ class LandscapeCellViewModel: TableCellRepresentable {
     
     private(set) var urls: [String]?
     var searchResult: SearchResult
-    let imageSize: CGSize
+    let imageViewSize: CGSize
     
     private var disposeBag = DisposeBag()
     
-    init(_ searchResult: SearchResult, imageSize: CGSize) {
+    init(_ searchResult: SearchResult, imageViewSize: CGSize) {
         self.searchResult = searchResult
-        self.imageSize = imageSize
+        self.imageViewSize = imageViewSize
         self.urls = searchResult.screenshotUrls
     }
 }
@@ -50,7 +50,13 @@ class LandscapeScreenShotCell: UITableViewCell, BindableTableViewCell {
     func bindCellVM(_ cellVM: TableCellRepresentable?) {
         guard let cellVM = cellVM as? LandscapeCellViewModel else { return }
         self.cellVM = cellVM
-        screenShotImageView.loadImage(cellVM.urls?.first ?? "",
-                            disposeBag)
+        
+        ImageManager.shared.loadImage(cellVM.urls?.first ?? "")
+            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+            .map { $0.downSampling() }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] image in
+                self?.screenShotImageView.image = image
+            }).disposed(by: disposeBag)
     }
 }

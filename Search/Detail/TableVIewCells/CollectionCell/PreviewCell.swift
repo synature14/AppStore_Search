@@ -14,8 +14,11 @@ class PreviewCellViewModel: CollectionCellRepresentable {
     }
     
     private var disposeBag = DisposeBag()
+    
     lazy var previewImage: Observable<UIImage> = {
-        UIUtility.shared.loadImage(imageURL)
+        return ImageManager.shared.loadImage(imageURL)
+            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+            .map { $0.downSampling() }
     }()
     
     private(set) var imageURL: String

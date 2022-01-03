@@ -12,6 +12,8 @@ import UIKit
 
 class AppInfoViewModel {
     private var disposeBag = DisposeBag()
+    
+    let presentLargPreviewVC = PublishSubject<LargeViewController>()     // 미리보기 이미지셀 클릭과 바인딩
     let updateCellVMs = PublishSubject<[[TableCellRepresentable]]>()
     private(set) var searchResult: SearchResult
     private(set) var sections: [[TableCellRepresentable]] = [] {
@@ -36,12 +38,12 @@ class AppInfoViewModel {
         let appIconBig = [AppIconBigCellViewModel(result)]
         
         let badges = [CollectionViewContainerCellViewModel(result,
-                                                           type: .BadgeCell)]
+                                                           type: .BadgeCell, self)]
         let 새로운기능Title = [TitleCellViewModel("새로운 기능", buttonTitle: "버전 기록")]
         let 미리보기 = [TitleCellViewModel("미리보기")]
         
         let screenShots = [CollectionViewContainerCellViewModel(result,
-                                                                type: .iPhonePreviewCell)]
+                                                                type: .iPhonePreviewCell, self)]
         let availableDevices = [AvailableDeviceScreenShotCellViewModel(ipadScreenShotUrls: result.ipadScreenshotUrls,
                                                                        supportedDevices: result.supportedDevices)]
         
@@ -67,7 +69,7 @@ class AppInfoViewModel {
     
     func showIpadScreenShotCell(at indexPath: IndexPath) {
         let availableIPhone = [AvailableDeviceScreenShotCellViewModel(.iPhone)]
-        let ipadScreenShots = [CollectionViewContainerCellViewModel(searchResult, type: .iPadPreviewCell)]
+        let ipadScreenShots = [CollectionViewContainerCellViewModel(searchResult, type: .iPadPreviewCell, self)]
         let availableIPad = [AvailableDeviceScreenShotCellViewModel(.iPad)]
         
         var prepareSections = self.sections
@@ -78,4 +80,16 @@ class AppInfoViewModel {
         sections = prepareSections
     }
     
+}
+
+extension AppInfoViewModel: CollectionViewContainerCellProtocol {
+    func showLargePreviewVC(_ type: PreviewCollectionCellType, items: [CollectionCellRepresentable]) {
+        let previewCellVMs = items.compactMap { vm in
+            return vm as? PreviewCellViewModel
+        }
+        
+        let largeVC = LargeViewController()
+        largeVC.vm = LargeViewModel(type: type, previewCellVMs)
+        self.presentLargPreviewVC.onNext(largeVC)
+    }
 }

@@ -8,10 +8,6 @@
 import UIKit
 import RxSwift
 
-protocol AvailableDeviceScreenShotCellVMProtocol {
-    
-}
-
 class AvailableDeviceScreenShotCellViewModel: TableCellRepresentable {
     var cellType: UITableViewCell.Type {
         AvailableDeviceScreenShotCell.self
@@ -32,7 +28,7 @@ class AvailableDeviceScreenShotCellViewModel: TableCellRepresentable {
         self.ipadScreenShotUrls = ipadScreenShotUrls
         self.supportedDevices = supportedDevices
         self.soleType = soleType
-        self.showUnfoldButton = soleType == nil
+        self.showUnfoldButton = soleType != nil
     }
 }
 

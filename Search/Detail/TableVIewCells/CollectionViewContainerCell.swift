@@ -9,104 +9,6 @@ import UIKit
 import RxSwift
 import RxRelay
 
-struct BadgeInfo {
-    var category: BadgeCategory = .평가
-    var result: SearchResult
-    
-    enum BadgeCategory {
-        case 평가
-        case 연령
-        case 카테고리
-        case 개발자
-        case 언어
-    }
-    
-    func typeToString() -> String {
-        switch category {
-        case .평가:
-            return "평가"
-        case .연령:
-            return "연령"
-        case .카테고리:
-            return "카테고리"
-        case .개발자:
-            return "개발자"
-        case .언어:
-            return "언어"
-        }
-    }
-}
-
-class CollectionViewContainerCellViewModel: TableCellRepresentable {
-    enum ViewAction {
-        case tapped
-    }
-    
-    enum CollectionViewCellType {
-        case BadgeCell
-        case iPhonePreviewCell
-        case iPadPreviewCell
-    }
-    
-    var cellType: UITableViewCell.Type {
-        CollectionViewContainerCell.self
-    }
-    
-    private(set) var searchResult: SearchResult?
-    private(set) var items: [CollectionCellRepresentable] = [] {
-        didSet {
-            updateCellVMs.onNext(items)
-        }
-    }
-    let updateCellVMs = PublishSubject<[CollectionCellRepresentable]>()
-    
-    private(set) var type: CollectionViewCellType
-    
-    init(_ searchResult: SearchResult, type: CollectionViewCellType) {
-        self.searchResult = searchResult
-        self.type = type
-        
-        switch type {
-        case .BadgeCell:
-            self.items = self.configBadgeCellVMs()
-        case .iPhonePreviewCell:
-            self.items = self.configiPhonePreviewCellVMs()
-        case .iPadPreviewCell:
-            self.items = self.configiPadPreviewCellVMs()
-        }
-    }
-    
-    private func configBadgeCellVMs() -> [CollectionCellRepresentable] {
-        guard let searchResult = self.searchResult else { return [] }
-        var items: [CollectionCellRepresentable] = []
-        let 평가 = BadgeInfo(category: .평가, result: searchResult)
-        let 연령 = BadgeInfo(category: .연령, result: searchResult)
-        let 카테고리 = BadgeInfo(category: .카테고리, result: searchResult)
-        let 개발자 = BadgeInfo(category: .개발자, result: searchResult)
-        let 언어 = BadgeInfo(category: .언어, result: searchResult)
-        
-        let vms = [평가, 연령, 카테고리, 개발자, 언어].map { BadgeCellViewModel($0) }
-        items = vms
-        
-        return items
-    }
-    
-    private func configiPhonePreviewCellVMs() -> [CollectionCellRepresentable] {
-        let items: [CollectionCellRepresentable]? = searchResult?.screenshotUrls
-            .compactMap { PreviewCellViewModel($0) }
-            .compactMap { $0 as CollectionCellRepresentable }
-        return items ?? []
-    }
-    
-    private func configiPadPreviewCellVMs() -> [CollectionCellRepresentable] {
-        let items: [CollectionCellRepresentable]? = searchResult?.ipadScreenshotUrls
-            .compactMap { PreviewCellViewModel($0) }
-            .compactMap { $0 as CollectionCellRepresentable }
-        return items ?? []
-    }
-}
-
-
 class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -149,19 +51,27 @@ class CollectionViewContainerCell: UITableViewCell, BindableTableViewCell {
         case .iPhonePreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
+            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            carouselLayout.sectionInset = sectionInset
             let cellSize = cellSize(result.screenshotUrls.first ?? "")
-            carouselLayout.itemSize = CGSize(width: cellSize.width-3,
-                                                 height: cellSize.height-3)
+            
+            carouselLayout.itemSize = CGSize(width: cellSize.width - sectionInset.left - sectionInset.right,
+                                             height: cellSize.height)
             carouselLayout.itemCount = cellVM.items.count
+            carouselLayout.minimumLineSpacing = 10
             collectionView.collectionViewLayout = carouselLayout
             
         case .iPadPreviewCell:
             // layout 교체
             let carouselLayout = CarouselLayout()
+            let sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            carouselLayout.sectionInset = sectionInset
+            
             let cellSize = cellSize(result.screenshotUrls.first ?? "")
-            carouselLayout.itemSize = CGSize(width: cellSize.width-2,
-                                                 height: cellSize.height-2)
+            carouselLayout.itemSize = CGSize(width: cellSize.width - sectionInset.left - sectionInset.right,
+                                             height: cellSize.height)
             carouselLayout.itemCount = cellVM.items.count
+            carouselLayout.minimumLineSpacing = 10
             collectionView.collectionViewLayout = carouselLayout
         }
     }
@@ -185,30 +95,37 @@ extension CollectionViewContainerCell: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedItem = cellVM?.items[indexPath.item] else { return }
+        guard let cellVM = cellVM else { return }
+        let selectedItem = cellVM.items[indexPath.item]
         
-        let badge = selectedItem as? BadgeCellViewModel
-        badge?.badgeInfo?.category
+        switch selectedItem {
+        case let badge as BadgeCellViewModel:
+            badge.badgeInfo?.category
+        case _ as PreviewCellViewModel:
+            cellVM.delegate?.showLargePreviewVC(cellVM.type, items: cellVM.items)
+        default:
+            break
+        }
+        
     }
 }
 
 private extension CollectionViewContainerCell {
     func cellSize(_ imageURL: String) -> CGSize {
-        let originalSize = imageURL.size
-        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape() : scaledSizeForPortrait()
         return cellSize
     }
     
     // collectionView 좌우 패딩 = 20
-    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
+    func scaledSizeForPortrait() -> CGSize {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        let imageViewScaledHeight = Constants.iPhonePreviewRowHeight
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
     
-    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
+    func scaledSizeForLandscape() -> CGSize {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2)
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        let imageViewScaledHeight = Constants.iPadPreviewRowHeight
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
 }

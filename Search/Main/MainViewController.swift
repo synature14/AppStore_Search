@@ -78,7 +78,9 @@ private extension MainViewController {
         tableView.delegate = self
         
         tableView.register(cells: [
-            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self, PortaitScreenShotCell.self, LandscapeScreenShotCell.self, AppIconCell.self, ActivityViewCell.self
+            RecentSearchHistoryCell.self, SearchingResultCell.self, NoResultsCell.self,
+            PortaitScreenShotCell.self, LandscapeScreenShotCell.self,
+            AppIconCell.self, ActivityViewCell.self, EmptyResultCell.self
         ])
         
         // 검색어 request에 대한 응답값으로 tableView 리로드
@@ -119,21 +121,26 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         case _ as ActivityViewModel:                // activityIndicatorView 띄우는 셀
             return UIScreen.main.bounds.height / 3
-            
+        
         case _ as NoResultsCellViewModel:           // 해당되는 검색어 히스토리가 없을 때 띄우는 셀
             return UIScreen.main.bounds.height / 3
             
+        case _ as EmptyResultCellViewModel:         // 검색 request에 대한 응답이 0개일때
+            let naviBarHeight = navigationController?.navigationBar.frame.height ?? 0
+            return tableView.frame.height - naviBarHeight
+            
         case _ as AppIconCellViewModel:
             return 65.0
-            
+        
         case let portaitCellVM as PortaitCellViewModel:
-            let imageSize = portaitCellVM.imageSize
+            let imageViewSize = portaitCellVM.imageViewSize
+//            return imageViewSize.height
             
             return scaledPortraitHeight(padding: 20*2,
-                                        originalImageSize: imageSize) + 40
+                                        originalImageSize: imageViewSize) + 40
             
         case let landscapeCellVM as LandscapeCellViewModel:
-            let imageSize = landscapeCellVM.imageSize
+            let imageSize = landscapeCellVM.imageViewSize
             return scaledLandscapeHeight(padding: 20*2,
                                          originalImageSize: imageSize) + 30
             

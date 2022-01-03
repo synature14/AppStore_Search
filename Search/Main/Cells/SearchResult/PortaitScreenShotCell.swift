@@ -5,6 +5,7 @@
 //  Created by Suvely on 2021/12/29.
 //
 
+import Foundation
 import UIKit
 import RxSwift
 import RxRelay
@@ -15,11 +16,10 @@ class PortaitCellViewModel: TableCellRepresentable {
     }
     
     var searchResult: SearchResult
-    let imageSize: CGSize
+    let imageViewSize: CGSize
     var screenShotTrailingConstraint: CGFloat = 0.0
     
     lazy var screenShotUrls: [String] = {
-        // MARK: 깜짝 놀랐쥬?? 임시 코드 ~
         var count = searchResult.screenshotUrls.count
         if count > 3 {
             count = 3
@@ -30,9 +30,9 @@ class PortaitCellViewModel: TableCellRepresentable {
     
     private var disposeBag = DisposeBag()
     
-    init(_ result: SearchResult, imageSize: CGSize) {
+    init(_ result: SearchResult, imageViewSize: CGSize) {
         self.searchResult = result
-        self.imageSize = imageSize
+        self.imageViewSize = imageViewSize
         bindings()
     }
     
@@ -81,9 +81,8 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
         
         let urls = vm.screenShotUrls
         
-        // MARK: kingFisher 내부 로직 문서 보기
-        // Core Data 써서 image caching 하기. LRU or 다른 알고리즘
-        self.screenShotImageView.loadImage(urls[0], self.disposeBag)
+        // MARK: kingFisher 내부 로직 문서 참조 -> Disk 캐싱과 Memory 캐싱 두가지 사용
+        loadImage(urls[0], imageView: screenShotImageView)
         
         switch urls.count {
         case 1:
@@ -91,16 +90,32 @@ class PortaitScreenShotCell: UITableViewCell, BindableTableViewCell {
             screenShotImageView02.isHidden = true
         case 2:
             self.screenShotImageView01.isHidden = false
-            self.screenShotImageView01.loadImage(urls[1], self.disposeBag)
+            loadImage(urls[1], imageView: screenShotImageView01)
         case 3:
             self.screenShotImageView01.isHidden = false
-            self.screenShotImageView01.loadImage(urls[1], self.disposeBag)
+            loadImage(urls[1], imageView: screenShotImageView01)
             
             self.screenShotImageView02.isHidden = false
-            self.screenShotImageView02.loadImage(urls[2], self.disposeBag)
+            loadImage(urls[2], imageView: screenShotImageView02)
         default:
             break
         }
+    }
+    
+    private func loadImage(_ url: String, imageView: UIImageView) {
+        guard let vm = self.vm else {
+            return
+        }
+        
+        ImageManager.shared.loadImage(url)
+            .observeOn(SerialDispatchQueueScheduler(internalSerialQueueName: Constants.previewImageSerialQueue))
+            .map { $0.downSampling() }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { img in
+                imageView.image = img
+                print("downSampling 이미지 get = \(img.size)")
+            })
+            .disposed(by: disposeBag)
     }
 }
 

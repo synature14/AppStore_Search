@@ -50,6 +50,12 @@ private extension AppInfoViewController {
             .subscribe(onNext: { [weak self] cellVMs in
                 self?.tableView.reloadData()
             }).disposed(by: disposeBag)
+        
+        viewModel?.presentLargPreviewVC
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { largeVC in
+                self.present(largeVC, animated: true)
+            }).disposed(by: disposeBag)
 
     }
 }
@@ -168,28 +174,28 @@ private extension AppInfoViewController {
     }
     
     func cellSize(_ imageURL: String) -> CGSize {
-        let originalSize = imageURL.size
-        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape(originalSize) : scaledSizeForPortrait(originalSize)
+        let cellSize = imageURL.isLandscape ? scaledSizeForLandscape() : scaledSizeForPortrait()
         return cellSize
     }
     
     // collectionView 좌우 패딩 = 20
-    func scaledSizeForPortrait(_ originalImageSize: CGSize) -> CGSize {
+    func scaledSizeForPortrait() -> CGSize {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2) * 0.76
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        let imageViewScaledHeight = Constants.iPhonePreviewRowHeight
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
     
-    func scaledSizeForLandscape(_ originalImageSize: CGSize) -> CGSize {
+    func scaledSizeForLandscape() -> CGSize {
         let resizedWidth = (UIScreen.main.bounds.width - 20*2)
-        let imageViewScaledHeight = originalImageSize.height * resizedWidth / originalImageSize.width
+        let imageViewScaledHeight = Constants.iPadPreviewRowHeight
         return CGSize(width: resizedWidth, height: imageViewScaledHeight)
     }
 }
 
 extension AppInfoViewController: AppIconBigCellVMProtocol {
     func didShareButtonTapped(_ downloadURL: String) {
-        let vc = UIActivityViewController(activityItems: [URL(string: downloadURL)], applicationActivities: nil)
+        guard let url = URL(string: downloadURL) else { return }
+        let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         vc.excludedActivityTypes = [.addToReadingList, .assignToContact]
         self.present(vc, animated: true, completion: nil)
     }

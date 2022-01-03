@@ -18,7 +18,7 @@ class SearchViewModel {
     private var disposeBag = DisposeBag()
     private var requestKeywordDisposeBag = DisposeBag()
     let searchText = PublishSubject<String>()
-    let requestKeyword = PublishSubject<String>()
+    let requestKeyword = BehaviorRelay<String>(value: "")
     
     private(set) var sections: [[TableCellRepresentable]] = [] {
         didSet {
@@ -48,6 +48,13 @@ class SearchViewModel {
     
     private func configureCellVMs(_ results: [SearchResult]) -> [[TableCellRepresentable]] {
         var section: [[TableCellRepresentable]] = []
+        
+        // 검색결과가 없는 경우
+        if results.isEmpty {
+            return [[EmptyResultCellViewModel(searchText: requestKeyword.value)]]
+        }
+        
+        // 검색 결과 mapping
         for result in results {
             var cellVMs: [TableCellRepresentable] = []
             
@@ -56,10 +63,10 @@ class SearchViewModel {
             
             let representableImageUrl = result.screenshotUrls.first ?? ""
             if representableImageUrl.isLandscape == true {
-                let landscapeVM = LandscapeCellViewModel(result, imageSize: representableImageUrl.size)
+                let landscapeVM = LandscapeCellViewModel(result, imageViewSize: representableImageUrl.size)
                 cellVMs.append(landscapeVM)
             } else {
-                let portraitVM = PortaitCellViewModel(result, imageSize: representableImageUrl.size)
+                let portraitVM = PortaitCellViewModel(result, imageViewSize: representableImageUrl.size)
                 cellVMs.append(portraitVM)
             }
             section.append(cellVMs)
@@ -70,6 +77,7 @@ class SearchViewModel {
     
     private func bindRequestKeyword() {
         requestKeyword
+            .filter { $0.count > 0 }
             .do(onNext: { [weak self] searchTextValue in
                 SYCoreDataManager.shared.save(searchTextValue)
                 self?.sections = [[ActivityViewModel()]]
@@ -111,7 +119,7 @@ class SearchViewModel {
     func search(_ text: String) {
         self.requestKeywordDisposeBag = DisposeBag()    // 이전에 서칭해서 생성된 stream을 삭제
         bindRequestKeyword()        // 다시 바인딩
-        requestKeyword.onNext(text)
+        requestKeyword.accept(text)
     }
 }
 

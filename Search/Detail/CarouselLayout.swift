@@ -20,7 +20,6 @@ class CarouselLayout: UICollectionViewFlowLayout {
     private func setupLayout() {
         self.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         self.scrollDirection = .horizontal
-        self.minimumLineSpacing = 10
         self.collectionView?.decelerationRate = .init(rawValue: 0.4)
     }
     

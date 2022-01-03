@@ -74,11 +74,17 @@ class AppIconCell: UITableViewCell, BindableTableViewCell {
         // 평점 3.2136 라면
         let floatAverageRating = averageRating
         let filledCnt = Int(floatAverageRating)                    // 3
+        
         let unFilledRate = averageRating - CGFloat(filledCnt)    // 0.2136
         
         for i in 0..<filledCnt {
             sortedRatingViews[i].progress = 1
         }
+        
+        if filledCnt == 5 {
+            return
+        }
+        
         for i in filledCnt..<(filledCnt+1) {
             sortedRatingViews[i].progress = unFilledRate
         }
