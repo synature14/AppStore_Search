@@ -39,24 +39,3 @@ class MemoryStorage {
         print("[DELETE] From Memory")
     }
 }
-
-
-//struct CacheStoreResult {
-//    enum CacheType {
-//        case none
-//        case disk
-//        case memory
-//        
-//        var cached: Bool {
-//            switch self {
-//            case .memory, .disk:
-//                return true
-//            case .none:
-//                return false
-//            }
-//        }
-//    }
-//    
-//    let memoryCacheReuslt: Result<(), Never>
-//    let diskCacheResult: Result<(), SYMemoryError>
-//}

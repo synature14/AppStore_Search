@@ -10,12 +10,12 @@ import RxSwift
 
 extension UIImageView {
 
-    func loadImage(_ url: String, _ disposeBag: DisposeBag) {
-        ImageManager.shared.loadImage(url)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] img in
-                self?.image = img
-            }).disposed(by: disposeBag)
-    }
+//    func loadImage(_ url: String, _ disposeBag: DisposeBag) {
+//        ImageManager.shared.loadImage(url)
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] img in
+//                self?.image = img
+//            }).disposed(by: disposeBag)
+//    }
     
 }
